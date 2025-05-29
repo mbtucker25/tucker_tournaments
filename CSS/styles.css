@@ -1302,23 +1302,60 @@ label {
   border: 2px solid #12b76a;
 }
 
-.form-message.error,
 #team-name-warning {
-  color: #ac0101; /* Material red or choose your brand red */
+  display: none;
+}
+
+/* Don't include display: none in .form-message.error */
+.form-message.error {
+  /* shared styles */
+  color: #ac0101;
+  font-weight: 600;
   border-radius: .5rem;
   border-left: 4px solid #ac0101;
-  border-right: 4px solid #ac0101;;
+  border-right: 4px solid #ac0101;
   background-color: #f35d5d62;
-  font-size: 0.85rem;
-  font-weight: 700;
-  display: none;
+  font-size: 0.75rem;
+  padding: 0.5rem 1rem;
+  animation: fadeIn 0.3s ease;
+}
+
+#sponsor-form #sponsor-form-message.form-message.error {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.form-message.error:not(#sponsor-form-message) {
   margin-top: -1.75rem;
   margin-bottom: -1rem;
-  padding: 2px 6px;
 }
 
 #team-name-warning.visible {
   display: inline;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+#sponsor-form #sponsor-form-message.form-message.error {
+  max-width: 100%;
+  width: 100%;
+  margin-top: 1rem;      /* ✅ space below the logo input */
+  margin-bottom: 1rem;   /* ✅ space above the button */
+  padding: 0.5rem 1rem;
+  font-size: 0.75rem;
+  background-color: #f35d5d62;
+  color: #ac0101;
+  font-weight: 600;
+  border-left: 4px solid #ac0101;
+  border-right: 4px solid #ac0101;
+  border-radius: 0.5rem;
+  text-align: left;
+  text-indent: -1.25rem;      /* 👈 pulls first line back */
+  padding-left: 2.25rem;     /* 👈 pushes all lines to the right */
+  line-height: 1.6;
 }
 
 /* 📦 Sponsorship Modals */
@@ -1330,6 +1367,15 @@ label {
   margin: 1rem;
   max-width: 900px;
 }
+
+.price {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+  gap: .75rem; /* 👈 this gives spacing between $50 and the icon */
+  padding-right: .5rem; /* 👈 this gives spacing between the icon and the text */
+}
+
 
 .center-row {
   grid-column: span 1;
@@ -1460,7 +1506,7 @@ label {
   width: 80%;
   border: 2px solid var(--color-secondary);
   border-radius: 0.5rem;
-  padding: .5rem;
+  padding: .25rem;
   background: var(--color-light);
   box-shadow: 2px 2px 6px var(--shadow-dark), -2px -2px 6px var(--shadow-light);
 }
@@ -1468,36 +1514,36 @@ label {
 .sponsor-heading {
   font-family: var(--font-display);
   font-size: 1.25rem;
-  padding: 0.25rem;
+  padding: 0.5rem;
   color: var(--color-light);
   display: flex;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
 }
 
 /* Sponsorship Gradient Ribbon Colors */
 .sponsor-heading.platinum {
   background: #4d4d4d;
-  background: linear-gradient(90deg,rgba(77, 77, 77, 1) 10%, rgba(188, 196, 190, 1) 65%, rgba(125, 122, 122, 1) 100%);
+  background: linear-gradient(90deg,rgba(77, 77, 77, 1) 10%, rgb(168, 173, 169) 65%, rgba(125, 122, 122, 1) 100%);
 }
 .sponsor-heading.gold {
   background: #AE7C2B;
-  background: linear-gradient(90deg, rgba(174, 124, 43, 1) 10%, rgba(242, 222, 122, 1) 65%, rgba(174, 124, 43, 1) 100%);
+  background: linear-gradient(90deg, rgba(174, 124, 43, 1) 10%, rgb(206, 188, 99) 65%, rgba(174, 124, 43, 1) 100%);
 }
 .sponsor-heading.silver {
-  background: linear-gradient(to right, #ccc5c5 10%, #d6d6d6 65%, #A9A9A9 100%);
+  background: linear-gradient(to right, #9e9b9b 10%, #b8b8b8 65%, #9e9b9b 100%);
 }
 
 .sponsor-heading.bronze {
 background: #804A00;
-background: linear-gradient(90deg,rgba(128, 74, 0, 1) 10%, rgba(176, 141, 87, 1) 65%, rgba(156, 122, 60, 1) 100%);
+background: linear-gradient(90deg,rgba(128, 74, 0, 1) 10%, rgb(168, 133, 81) 65%, rgba(128, 74, 0, 1) 100%);
 }
 
 .sponsor-heading.hole {
 background: #804A00;
-background: linear-gradient(90deg,rgb(5, 119, 34) 10%, rgb(24, 214, 39) 65%, rgb(4, 167, 26) 100%);
+background: linear-gradient(90deg,rgb(5, 119, 34) 10%, rgb(38, 141, 47) 65%, rgb(5, 119, 34) 100%);
 }
 
 /* Match folded triangle ends */
@@ -1512,13 +1558,18 @@ background: linear-gradient(90deg,rgb(5, 119, 34) 10%, rgb(24, 214, 39) 65%, rgb
 
 .sponsor-description {
   display: none;
-  margin-top: 1rem;
+  margin-top: .75rem;
   animation: slideDown 0.3s ease-in-out forwards;
 }
 
 .sponsor-option.active .sponsor-description {
   display: block;
   margin-left: 3rem;
+}
+
+.sponsor-option.active .tier-check-icon {
+  color: var(--color-light); /* Example: green checkmark for selected */
+  font-size: 120%;
 }
 
 @keyframes slideDown {

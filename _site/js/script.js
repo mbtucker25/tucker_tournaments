@@ -1,5 +1,8 @@
 // ─── Constants ───────────────────────────────────────────────
-const SHIRT_PRICE = 15;
+let selectedTier = null;
+// ─── Supabase Config ─────────────────────────────────────────
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJnYXJrYmJuZmRydnRqcnRraWFtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDcyNjg2NjAsImV4cCI6MjA2Mjg0NDY2MH0.MEbIQT4xkannZiUCdFnBc69czp_bew3UK7uva_-Ta-g';
+
 
 // ─── Utilities ────────────────────────────────────────────────
 
@@ -26,67 +29,49 @@ function formatPhoneInput() {
   });
 }
 
-async function populateTeamDropdown() {
-  const select = document.getElementById('golfer-team');
-  if (!select) return;
-
-  select.innerHTML = '';
-
-  const freeAgentOption = document.createElement('option');
-  freeAgentOption.value = '__free_agent__';
-  freeAgentOption.textContent = 'No Team (Free Agent)';
-  select.appendChild(freeAgentOption);
-
-  try {
-    const teamRes = await fetch('https://bgarkbbnfdrvtjrtkiam.functions.supabase.co/get-teams');
-    const teams = await teamRes.json();
-
-    for (const team of teams) {
-      if (team.name === '__free_agent__') continue;
-
-      const statusRes = await fetch(`https://bgarkbbnfdrvtjrtkiam.functions.supabase.co/get-team-status?team=${encodeURIComponent(team.name)}`);
-      if (!statusRes.ok) continue;
-      const status = await statusRes.json();
-
-      if (!status.isFull) {
-        const option = document.createElement('option');
-        option.value = team.name;
-        option.textContent = team.name;
-        select.appendChild(option);
-      }
-    }
-  } catch (err) {
-    console.error('Error populating team dropdown:', err);
-  }
+function getTierAmount(tier) {
+  const prices = {
+    Platinum: 550,
+    Gold: 350,
+    Silver: 150,
+    Bronze: 50,
+    Hole: 75,
+  };
+  return prices[tier] || 0;
 }
 
-async function checkTeamNameExists(name) {
-  const teamWarning = document.getElementById('team-name-warning');
-  if (!name) {
-    teamWarning.classList.remove('visible');
-    return false;
-  }
-
-  try {
-    const res = await fetch('https://bgarkbbnfdrvtjrtkiam.functions.supabase.co/get-teams');
-    const teams = await res.json();
-    const exists = teams.some(team => team.name.toLowerCase() === name.toLowerCase());
-    teamWarning.classList.toggle('visible', exists);
-    return exists;
-  } catch (err) {
-    console.error('Team name check failed:', err);
-    teamWarning.classList.remove('visible');
-    return false;
-  }
+async function logToSupabase(context, message) {
+  await fetch('https://bgarkbbnfdrvtjrtkiam.supabase.co/rest/v1/debug_logs', {
+    method: 'POST',
+    headers: {
+      'apikey': SUPABASE_ANON_KEY,
+      'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+      'Content-Type': 'application/json',
+      'Prefer': 'return=minimal'
+    },
+    body: JSON.stringify({ context, message })
+  });
 }
 
-function getGolfer(i) {
-  const first = document.getElementById(`player${i}-first`)?.value.trim();
-  const last = document.getElementById(`player${i}-last`)?.value.trim();
-  const email = document.getElementById(`player${i}-email`)?.value.trim();
-  const phone = document.getElementById(`player${i}-phone`)?.value.trim();
-  const shirtSize = document.getElementById(`golfer${i}-shirt-size`)?.value || '';
-  return (first || last || email || phone || shirtSize) ? { first, last, email, phone, shirtSize } : null;
+function resetAndCloseModal(modalId) {
+  const modal = document.getElementById(modalId);
+  if (!modal) return;
+  modal.setAttribute('hidden', true);
+
+  const form = modal.querySelector('form');
+  if (form) form.reset();
+
+  const messageBox = modal.querySelector('.form-message');
+  if (messageBox) {
+    messageBox.innerText = '';
+    messageBox.classList.remove('error', 'success');
+    messageBox.setAttribute('hidden', true);
+  }
+
+  const teamList = document.getElementById('team-members-list');
+  const teamBox = document.getElementById('team-members-inline-display');
+  if (teamList) teamList.innerHTML = '';
+  if (teamBox) teamBox.setAttribute('hidden', true);
 }
 
 function generateGolferFieldsets() {
@@ -127,40 +112,78 @@ function generateGolferFieldsets() {
           <div class="select-wrapper">
             <div class="select">
               <select id="golfer${i}-shirt-size" required>
-                <option value="" disabled selected>-- T-Shirt Size --</option>${options}
+                <option value="" disabled selected>-- T-Shirt Size --</option>
+                ${options}
               </select>
             </div>
           </div>
         </div>
-      </div>
-    `;
+      </div>`;
   }
 }
 
-// ─── Modal Reset Utility ───────────────────────────────
-function resetAndCloseModal(modalId) {
-  const modal = document.getElementById(modalId);
-  if (!modal) return;
-  modal.setAttribute('hidden', true);
-
-  const form = modal.querySelector('form');
-  if (form) form.reset();
-
-  const messageBox = modal.querySelector('.form-message');
-  if (messageBox) {
-    messageBox.innerText = '';
-    messageBox.classList.remove('error', 'success');
-    messageBox.setAttribute('hidden', true);
+async function checkTeamNameExists(name) {
+  const teamWarning = document.getElementById('team-name-warning');
+  if (!name) {
+    teamWarning.classList.remove('visible');
+    return false;
   }
 
-  // Clear team member list
-  const teamList = document.getElementById('team-members-list');
-  const teamBox = document.getElementById('team-members-inline-display');
-  if (teamList) teamList.innerHTML = '';
-  if (teamBox) teamBox.setAttribute('hidden', true);
+  try {
+    const res = await fetch('https://bgarkbbnfdrvtjrtkiam.functions.supabase.co/get-teams');
+    const teams = await res.json();
+    const exists = teams.some(team => team.name.toLowerCase() === name.toLowerCase());
+    teamWarning.classList.toggle('visible', exists);
+    return exists;
+  } catch (err) {
+    console.error('Team name check failed:', err);
+    teamWarning.classList.remove('visible');
+    return false;
+  }
 }
 
-// ─── Form Handlers ────────────────────────────────────────────
+async function populateTeamDropdown() {
+  const select = document.getElementById('golfer-team');
+  if (!select) return;
+
+  select.innerHTML = '';
+
+  const freeAgentOption = document.createElement('option');
+  freeAgentOption.value = '__free_agent__';
+  freeAgentOption.textContent = 'No Team (Free Agent)';
+  select.appendChild(freeAgentOption);
+
+  try {
+    const teamRes = await fetch('https://bgarkbbnfdrvtjrtkiam.functions.supabase.co/get-teams');
+    const teams = await teamRes.json();
+
+    for (const team of teams) {
+      if (team.name === '__free_agent__') continue;
+
+      const statusRes = await fetch(`https://bgarkbbnfdrvtjrtkiam.functions.supabase.co/get-team-status?team=${encodeURIComponent(team.name)}`);
+      if (!statusRes.ok) continue;
+      const status = await statusRes.json();
+
+      if (!status.isFull) {
+        const option = document.createElement('option');
+        option.value = team.name;
+        option.textContent = team.name;
+        select.appendChild(option);
+      }
+    }
+  } catch (err) {
+    console.error('Error populating team dropdown:', err);
+  }
+}
+
+function getGolfer(i) {
+  const first = document.getElementById(`player${i}-first`)?.value.trim();
+  const last = document.getElementById(`player${i}-last`)?.value.trim();
+  const email = document.getElementById(`player${i}-email`)?.value.trim();
+  const phone = document.getElementById(`player${i}-phone`)?.value.trim();
+  const shirtSize = document.getElementById(`golfer${i}-shirt-size`)?.value || '';
+  return (first || last || email || phone || shirtSize) ? { first, last, email, phone, shirtSize } : null;
+}
 
 function handleFormSubmit() {
   const form = document.getElementById('team-registration-form');
@@ -250,17 +273,13 @@ function handleFormSubmit() {
   });
 }
 
-async function logToSupabase(context, message) {
-  await fetch('https://bgarkbbnfdrvtjrtkiam.supabase.co/rest/v1/debug_logs', {
-    method: 'POST',
-    headers: {
-      'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJnYXJrYmJuZmRydnRqcnRraWFtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDcyNjg2NjAsImV4cCI6MjA2Mjg0NDY2MH0.MEbIQT4xkannZiUCdFnBc69czp_bew3UK7uva_-Ta-g',
-      'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJnYXJrYmJuZmRydnRqcnRraWFtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDcyNjg2NjAsImV4cCI6MjA2Mjg0NDY2MH0.MEbIQT4xkannZiUCdFnBc69czp_bew3UK7uva_-Ta-g',
-      'Content-Type': 'application/json',
-      'Prefer': 'return=minimal'
-    },
-    body: JSON.stringify({ context, message })
-  });
+function getGolfer(i) {
+  const first = document.getElementById(`player${i}-first`)?.value.trim();
+  const last = document.getElementById(`player${i}-last`)?.value.trim();
+  const email = document.getElementById(`player${i}-email`)?.value.trim();
+  const phone = document.getElementById(`player${i}-phone`)?.value.trim();
+  const shirtSize = document.getElementById(`golfer${i}-shirt-size`)?.value || '';
+  return (first || last || email || phone || shirtSize) ? { first, last, email, phone, shirtSize } : null;
 }
 
 function handleSingleGolferSubmit() {
@@ -324,94 +343,267 @@ function handleSingleGolferSubmit() {
   });
 }
 
+function handleFormSubmit() {
+  const form = document.getElementById('team-registration-form');
+  const teamNameInput = document.getElementById('team-name');
+  if (!form || !teamNameInput) return;
+
+  teamNameInput.addEventListener('input', debounce(e => {
+    checkTeamNameExists(e.target.value.trim());
+  }, 500));
+
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+
+    const teamName = teamNameInput.value.trim();
+    if (!teamName || await checkTeamNameExists(teamName)) {
+      alert("Please enter a valid, unique team name.");
+      return;
+    }
+
+    const captain = {
+      first: document.getElementById('captain-first')?.value.trim(),
+      last: document.getElementById('captain-last')?.value.trim(),
+      email: document.getElementById('captain-email')?.value.trim(),
+      phone: document.getElementById('captain-phone')?.value.trim(),
+      shirtSize: document.getElementById('captain-shirt-size')?.value
+    };
+
+    if (!captain.first || !captain.last || !captain.email || !captain.phone) {
+      alert("Please complete all required Team Captain fields.");
+      return;
+    }
+
+    const golfers = [captain];
+    for (let i = 2; i <= 4; i++) {
+      const golfer = getGolfer(i);
+      if (golfer) golfers.push(golfer);
+    }
+
+    try {
+      const res = await fetch('https://bgarkbbnfdrvtjrtkiam.supabase.co/functions/v1/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          newTeamName: teamName,
+          golfer1: golfers[0],
+          golfer2: golfers[1],
+          golfer3: golfers[2],
+          golfer4: golfers[3]
+        })
+      });
+
+      const json = await res.json();
+      const successOverlay = document.getElementById('success-overlay');
+      const successMsg = document.getElementById('success-message-text');
+
+      if (res.ok) {
+        resetAndCloseModal('modal-register-team');
+        const golferNamesHtml = golfers
+          .filter(g => g?.first || g?.last)
+          .map(g => `<li><i class="fa-solid fa-golf-ball-tee success-message-icons"></i> ${g.first || ''} ${g.last || ''}</li>`)
+          .join('');
+
+        successMsg.innerHTML = `
+          <div class="success-icon-wrapper">
+            <i class="fa-solid fa-circle-check success-check-icon"></i>
+          </div>
+          <h2>You have successfully registered:</h2>
+          <div class="success-message-text team-name">${teamName}</div>
+          <p class="golfers-label"><strong>Registered Golfers:</strong></p>
+          <ul class="success-golfer-list">${golferNamesHtml}</ul>
+        `;
+        successOverlay.removeAttribute('hidden');
+      } else {
+        throw new Error(json.error || 'Something went wrong');
+      }
+    } catch (err) {
+      console.error(err);
+      const messageBox = document.getElementById('form-message');
+      messageBox.innerText = `❌ Submission failed. Please try again later.`;
+      messageBox.className = 'form-message error';
+      messageBox.removeAttribute('hidden');
+    }
+  });
+
+  document.getElementById('cancel-form')?.addEventListener('click', () => {
+    resetAndCloseModal('modal-register-team');
+  });
+}
+
 function handleSponsorFormSubmit() {
   const sponsorCards = document.querySelectorAll('.sponsor-card');
   const sponsorBtn = document.getElementById('sponsor-submit-btn');
-  let selectedTier = null;
 
   sponsorCards.forEach(card => {
     card.addEventListener('click', () => {
-      if (card.classList.contains('selected')) {
-        card.classList.remove('selected');
+      const isAlreadySelected = card.classList.contains('selected');
+      sponsorCards.forEach(c => c.classList.remove('selected')); // Deselect all
+
+      if (isAlreadySelected) {
         selectedTier = null;
         sponsorBtn.innerText = 'Select a Tier';
-        sponsorBtn.disabled = true;
       } else {
-        sponsorCards.forEach(c => c.classList.remove('selected'));
         card.classList.add('selected');
         selectedTier = card.dataset.tier;
         sponsorBtn.innerText = `Become a ${selectedTier} Sponsor`;
-        sponsorBtn.disabled = false;
       }
     });
   });
 
-sponsorBtn?.addEventListener("click", (e) => {
-  e.preventDefault(); // 🛑 Prevent form from submitting to the page URL
+  sponsorBtn?.addEventListener("click", async (e) => {
+    console.log("💡 Sponsor submit button clicked");
+    e.preventDefault();
 
-  if (!selectedTier) {
-    console.warn("No tier selected.");
-    logToSupabase("⚠️ Attempted submission with no tier selected.");
-    return;
-  }
+    const messageBox = document.getElementById('sponsor-form-message');
+    if (messageBox) {
+      messageBox.innerText = '';
+      messageBox.className = 'form-message';
+      messageBox.setAttribute('hidden', true);
+    }
 
-  const form = document.getElementById("sponsor-form");
-  if (!form) {
-    console.error("Sponsor form element not found.");
-    logToSupabase("❌ Sponsor form element not found.");
-    return;
-  }
+    const form = document.getElementById("sponsor-form");
+    if (!form) {
+      console.error("Sponsor form not found.");
+      await logToSupabase("SponsorForm", "❌ Sponsor form not found.");
+      return;
+    }
 
-  const formData = new FormData(form);
-  formData.append("tier", selectedTier);
-  formData.append("tier_amount", getTierAmount(selectedTier));
-  formData.append("pay_status", "unpaid");
+    const missingFields = [];
 
-  console.log("🟡 Submitting sponsor form...");
-  logToSupabase("🟡 Sponsor form submitted.");
+    if (!selectedTier) {
+      missingFields.push("Sponsorship Tier");
+    }
 
-  fetch("https://bgarkbbnfdrvtjrtkiam.supabase.co/functions/v1/register-sponsor", {
-    method: "POST",
-    body: formData,
-    mode: "cors"
-  })
-    .then(async (res) => {
+    const requiredFields = [
+      { field: "company-name", label: "Company Name" },
+      { field: "sponsor-first-name", label: "First Name" },
+      { field: "sponsor-last-name", label: "Last Name" },
+      { field: "sponsor-email", label: "Email" },
+      { field: "sponsor-phone", label: "Phone Number" }
+    ];
+
+    requiredFields.forEach(({ field, label }) => {
+      if (!form.elements[field]?.value.trim()) {
+        missingFields.push(label);
+      }
+    });
+
+    if (missingFields.length > 0) {
+      const message = `❌ Please complete all required field(s):<br>*${missingFields.join(', *')}`;
+      console.warn(message);
+
+      messageBox.innerHTML = message;
+
+      if (messageBox) {
+        messageBox.innerHTML= message;
+        messageBox.className = 'form-message error';
+        messageBox.removeAttribute('hidden');
+        messageBox?.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+
+      await logToSupabase("SponsorForm", `⚠️ Missing fields: ${missingFields.join(', ')}`);
+      return;
+    }
+
+    try {
+      // Initialize Supabase client
+      const supabase = window.supabase.createClient(
+        'https://bgarkbbnfdrvtjrtkiam.supabase.co',
+        SUPABASE_ANON_KEY
+      );
+
+      // Handle file upload
+      let logo_url = null;
+      const fileInput = document.getElementById("sponsor-logo");
+      const file = fileInput?.files?.[0];
+
+      if (file) {
+        const filePath = `sponsor-logos/${Date.now()}_${file.name}`;
+        const { error: uploadError } = await supabase.storage
+          .from('sponsor-logos')
+          .upload(filePath, file);
+
+        if (uploadError) {
+          console.error("❌ Logo upload failed:", uploadError.message);
+          await logToSupabase("SponsorForm", `❌ Logo upload failed: ${uploadError.message}`);
+        } else {
+          const { data } = supabase.storage.from('sponsor-logos').getPublicUrl(filePath);
+          logo_url = data.publicUrl;
+          await logToSupabase("SponsorForm", `🖼️ Logo uploaded: ${logo_url}`);
+        }
+      }
+
+      const payload = {
+        company_name: form.elements["company-name"].value,
+        first_name: form.elements["sponsor-first-name"].value,
+        last_name: form.elements["sponsor-last-name"].value,
+        email: form.elements["sponsor-email"].value,
+        phone: form.elements["sponsor-phone"].value,
+        tier: selectedTier,
+        tier_amount: getTierAmount(selectedTier),
+        pay_status: "pending",
+        logo_url: logo_url || null,
+      };
+
+      await logToSupabase("SponsorForm", `📦 Submitting JSON: ${JSON.stringify(payload)}`);
+
+      const res = await fetch("https://bgarkbbnfdrvtjrtkiam.supabase.co/functions/v1/register-sponsor", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+
       const responseText = await res.text();
+      const successOverlay = document.getElementById('success-overlay');
+      const successMsg = document.getElementById('success-message-text');
 
       if (res.ok) {
-        console.log("✅ Server response:", responseText);
-        logToSupabase("✅ Sponsor registered successfully.");
-        alert(`✅ Thank you for becoming a ${selectedTier} Sponsor!`);
+        console.log("✅ Sponsor registered:", responseText);
+        await logToSupabase("SponsorForm", "✅ Sponsor registration successful.");
+
         resetAndCloseModal("modal-sponsor");
-        sponsorCards.forEach((c) => c.classList.remove("selected"));
-        sponsorBtn.innerText = "Select Sponsorship Option";
-        sponsorBtn.disabled = true;
+
+        successMsg.innerHTML = `
+          <div class="success-icon-wrapper">
+            <i class="fa-solid fa-circle-check success-check-icon"></i>
+          </div>
+          <div class="success-message-text team-name">Thank You!</div>
+          <p class="golfers-label">
+            You’ve successfully registered as a ${selectedTier} Sponsor.
+            <br><br>
+            Your support is invaluable to us and helps make this event possible.<br><br>
+            We’ll follow up with you shortly via email.
+          </p>
+        `;
+        successOverlay.removeAttribute('hidden');
+
+        // Reset UI
+        sponsorCards.forEach(c => c.classList.remove("selected"));
+        sponsorBtn.innerText = "Register as  Sponsor!";
+        selectedTier = null;
+
       } else {
-        console.error("❌ Server returned error status:", res.status);
-        logToSupabase(`❌ Server error: ${res.status} - ${responseText}`);
-        alert("❌ Sponsor registration failed. Check logs.");
+        console.error("❌ Error submitting:", responseText);
+        await logToSupabase("SponsorForm", `❌ Server error: ${responseText}`);
+        if (messageBox) {
+          messageBox.innerText = `❌ There was an issue submitting your sponsorship. Please try again shortly.`;
+          messageBox.className = 'form-message error';
+          messageBox.removeAttribute('hidden');
+        }
       }
-    })
-    .catch((err) => {
-      console.error("🔥 Fetch failed:", err);
-      logToSupabase(`🔥 Network error: ${err.message}`);
-      alert("❌ Submission failed. Check logs.");
-    });
-});
 
-  function getTierAmount(tier) {
-    const prices = {
-      Platinum: 550,
-      Gold: 350,
-      Silver: 150,
-      Bronze: 50,
-      Hole: 75,
-    };
-    return prices[tier] || 0;
-  }
+    } catch (err) {
+      console.error("🔥 Network error:", err);
+      await logToSupabase("SponsorForm", `🔥 Network error: ${err.message}`);
+      if (messageBox) {
+        messageBox.innerText = `❌ Network error. Please check your connection and try again.`;
+        messageBox.className = 'form-message error';
+        messageBox.removeAttribute('hidden');
+      }
+    }
+  });
 }
-
-// ─── Sponsor Tier Toggle + Radio-like Logic ───────────────────────────
 
 function initSponsorTierCollapsibles() {
   const sponsorOptions = document.querySelectorAll('.sponsor-option');
@@ -426,13 +618,31 @@ function initSponsorTierCollapsibles() {
         const isSelected = option.classList.contains('active');
 
         // Clear all selections
-        sponsorOptions.forEach(o => o.classList.remove('active'));
+        sponsorOptions.forEach(o => {
+          o.classList.remove('active');
+          
+          // 🔄 Reset icons to fa-circle
+          const icon = o.querySelector('.tier-check-icon');
+          if (icon) {
+            icon.classList.remove('fa-circle-check');
+            icon.classList.add('fa-circle');
+          }
+        });
 
         if (!isSelected) {
           option.classList.add('active');
           currentlySelected = option;
+          selectedTier = option.getAttribute('data-tier'); // ✅ Update global
+
+          // ✅ Change selected icon to fa-circle-check
+          const icon = option.querySelector('.tier-check-icon');
+          if (icon) {
+            icon.classList.remove('fa-circle');
+            icon.classList.add('fa-circle-check');
+          }
         } else {
           currentlySelected = null;
+          selectedTier = null; // ✅ Clear global
         }
 
         updateSponsorSubmitButton();
@@ -452,21 +662,21 @@ function initSponsorTierCollapsibles() {
   }
 }
 
+// ─── DOMContentLoaded Bootstrap ───────────────────────────────
+
 document.addEventListener('DOMContentLoaded', () => {
   generateGolferFieldsets();
   formatPhoneInput();
   populateTeamDropdown();
   handleFormSubmit();
   handleSingleGolferSubmit();
-  initSponsorTierCollapsibles();
   handleSponsorFormSubmit();
+  initSponsorTierCollapsibles();
 
-  // ✅ Success overlay dismiss
   document.getElementById('success-ok-btn')?.addEventListener('click', () => {
     document.getElementById('success-overlay')?.setAttribute('hidden', true);
   });
 
-  // ✅ Open modals from CTA buttons
   document.querySelectorAll('.cta-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const modalId = btn.dataset.modal;
@@ -475,7 +685,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // ✅ Close buttons inside modals
   document.querySelectorAll('[data-close]').forEach(btn => {
     btn.addEventListener('click', () => {
       const modal = btn.closest('.modal-overlay');
@@ -483,33 +692,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // ✅ Close modal on click outside content
   document.querySelectorAll('.modal-overlay').forEach(overlay => {
     overlay.addEventListener('click', e => {
       if (e.target === overlay && overlay?.id) resetAndCloseModal(overlay.id);
     });
   });
-
-  // ✅ Sponsorship Tier Selection Logic
-  const sponsorCards = document.querySelectorAll('.sponsor-card');
-  const sponsorBtn = document.getElementById('sponsor-submit-btn');
-  let selectedTier = null;
-
-  sponsorCards.forEach(card => {
-    card.addEventListener('click', () => {
-      if (card.classList.contains('selected')) {
-        card.classList.remove('selected');
-        selectedTier = null;
-        sponsorBtn.innerText = 'Select a Tier';
-        sponsorBtn.disabled = true;
-      } else {
-        sponsorCards.forEach(c => c.classList.remove('selected'));
-        card.classList.add('selected');
-        selectedTier = card.dataset.tier;
-        sponsorBtn.innerText = `Become a ${selectedTier} Sponsor`;
-        sponsorBtn.disabled = false;
-      }
-    });
-  });
 });
-
