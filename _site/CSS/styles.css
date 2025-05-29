@@ -1376,9 +1376,87 @@ label {
   padding-right: .5rem; /* 👈 this gives spacing between the icon and the text */
 }
 
-
 .center-row {
   grid-column: span 1;
+}
+
+/* Match volunteer modal to success overlay */
+#modal-volunteer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+}
+
+#modal-volunteer .modal-content {
+  position: relative;
+  background: var(--color-light);
+  border-radius: 12px;
+  padding-top: 4rem;
+  overflow: visible;
+  max-width: 400px;
+  width: auto;
+  box-shadow: 4px 4px 8px var(--color-primary), -4px -4px 8px var(--color-secondary);
+  background: linear-gradient(to right, var(--color-primary), #6a11cb);
+  animation: fadeInUp 0.5s ease-out;
+  color: var(--color-light);
+  text-align: center;
+}
+
+#modal-volunteer .modal-content a {
+  color: var(--color-secondary); /* or any color you want */
+  text-decoration: underline; /* optional */
+}
+
+.volunteer-icon-wrapper {
+  position: absolute;
+  top: -2rem; /* adjust how much it overlaps */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10001;
+  background: linear-gradient(to right, #f1ad1a, #e9650d); /* optional: circular backdrop */
+  border-radius: 50%;
+  padding: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.volunteer-check-icon {
+  font-size: 3rem;
+  padding: .5rem;
+}
+
+.volunteer-btn-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.volunteer-btn {
+  color: var(--color-primary);
+  background: linear-gradient(to bottom, var(--color-secondary), #e6e5e7);
+  font-weight: bold;
+  padding: .75rem 2rem;
+  text-align: center;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+  text-align: center;
+  max-width: 80px;
+  width: auto;
+}
+
+/* Optional hover effect */
+.volunteer-btn:hover {
+  transform: translateY(-3px) translateX(-1px);
+  background: linear-gradient(to bottom, #e6e5e7, var(--color-secondary));
+  box-shadow: 1px 2px 3px var(--color-light);
 }
 
 /* Center the two items in second row */
@@ -1569,7 +1647,8 @@ background: linear-gradient(90deg,rgb(5, 119, 34) 10%, rgb(38, 141, 47) 65%, rgb
 
 .sponsor-option.active .tier-check-icon {
   color: var(--color-light); /* Example: green checkmark for selected */
-  font-size: 120%;
+  transform: scale(1.2);
+  animation: bounce 2s ease-in-out;
 }
 
 @keyframes slideDown {

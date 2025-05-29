@@ -676,6 +676,9 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('success-ok-btn')?.addEventListener('click', () => {
     document.getElementById('success-overlay')?.setAttribute('hidden', true);
   });
+  document.getElementById('volunteer-ok-btn')?.addEventListener('click', () => {
+    document.getElementById('modal-volunteer')?.setAttribute('hidden', true);
+  });
 
   document.querySelectorAll('.cta-btn').forEach(btn => {
     btn.addEventListener('click', () => {
