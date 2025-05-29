@@ -623,6 +623,41 @@ body {
 }
 
 /*──────────────────────────────────────────────────────────────────────────*/
+/*                            ADMIN                                         */
+/*──────────────────────────────────────────────────────────────────────────*/
+/* Center all table cell content for admin tables */
+.admin-table th,
+.admin-table td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.admin-table tfoot th {
+  text-align: right;
+}
+
+#admin-link {
+  display: none;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  z-index: 9999;
+}
+
+#total-tier-amount,
+#total-amount-paid {
+  text-align: center;
+}
+
+.back-to-home {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 9999;
+  font-weight: bold;
+}
+
+/*──────────────────────────────────────────────────────────────────────────*/
 /*                            RESPONSIVE                                   */
 /*──────────────────────────────────────────────────────────────────────────*/
 @media (max-width: 1024px) {

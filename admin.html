@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Admin - Team & Sponsor List</title>
+  <link rel="stylesheet" href="CSS/styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+</head>
+<body>
+<a href="index.html" style="position:fixed;top:10px;left:10px;z-index:9999;font-weight:bold;">&larr; Back to Home Page</a>
+  <main class="main-content">
+    <h1>Complete Foursomes</h1>
+    <table class="admin-table" id="full-teams-table" border="1" cellpadding="6">
+    <thead>
+        <tr>
+        <th>Team Name</th>
+        <th>Golfer Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>T-Shirt Size</th>
+        <th>Payment Status</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+    </table>
+
+    <h1>Partial Teams (&lt;4 Golfers)</h1>
+    <table class="admin-table" id="partial-teams-table" border="1" cellpadding="6">
+    <thead>
+        <tr>
+        <th>Team Name</th>
+        <th>Golfer Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>T-Shirt Size</th>
+        <th>Payment Status</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+    </table>
+
+    <h1>Free Agents</h1>
+    <table class="admin-table" id="free-agents-table" border="1" cellpadding="6">
+    <thead>
+        <tr>
+        <th>Golfer Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>T-Shirt Size</th>
+        <th>Payment Status</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+    </table>
+
+    <h1>Sponsors</h1>
+    <table class="admin-table" id="sponsors-table" border="1" cellpadding="6">
+    <thead>
+        <tr>
+        <th>Company Name</th>
+        <th>Contact Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Tier</th>
+        <th>Payment Status</th>
+        <th>Tier Amount</th>
+        <th>Amount Raised</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+    <tfoot>
+        <tr>
+        <th colspan="6">Totals:</th>
+        <th id="total-tier-amount"></th>
+        <th id="total-amount-paid"></th>
+        </tr>
+    </tfoot>
+    </table>
+  </main>
+  <script src="js/admin.js"></script>
+</body>
+</html>

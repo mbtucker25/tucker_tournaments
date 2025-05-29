@@ -18,6 +18,15 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
+<a id="admin-link" href="admin.html">Admin</a>
+<script>
+  // Show the admin link when user presses Ctrl+Shift+A
+  document.addEventListener('keydown', function(e) {
+    if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'z') {
+      document.getElementById('admin-link').style.display = 'block';
+    }
+  });
+</script>
 <body>
   <!-- SIDEBAR -->
   <aside class="sidebar">
