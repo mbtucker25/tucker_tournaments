@@ -160,7 +160,6 @@ body {
 }
 
 .details-athlete__event p {
-  text-indent: 2em;
   margin-bottom: 1rem;
   font-size: .75rem;
   line-height: 1.5;
@@ -190,7 +189,6 @@ body {
 }
 
 .athlete__bio p {
-  text-indent: 2em;
   margin-bottom: 1rem;
   font-size: .75rem;
   line-height: 1.5;
@@ -323,76 +321,13 @@ body {
 }
 
 .details__text p {
-  text-indent: 2em;
+
   margin-top: .25rem;
   margin-bottom: .5rem;
   font-size: 1rem;
   line-height: 1.5;
 }
 
-.details__pricing {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 2rem;
-}
-
-.detailspricing__cards {
-  display: flex;
-  justify-content: center; /* ✅ centers items */
-  align-items: stretch;
-  margin-top: 2rem;
-  gap: 1.5rem;
-  flex-wrap: wrap; /* Optional: allow wrapping on small screens */
-}
-
-.detailspricing__card {
-  display: flex;
-  flex: 1 1 280px;
-  width: 280px;
-  max-width: 280px;
-  border-radius: .5rem;
-  overflow: hidden;
-  background: var(--color-light);
-  box-shadow:
-    4px 4px 8px var(--color-primary),
-   -4px -4px 8px var(--color-secondary);
-}
-
-.detailspricing__card:hover {
-  box-shadow:
-    3px 3px 6px rgba(0,0,0,0.08),
-   -3px -3px 6px rgba(255,255,255,0.7);
-}
-
-.detailspricing__card__header {
-  flex: 0 0 40%;
-  background: var(--color-primary);
-  color: var(--color-light);
-  padding: 1rem;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1rem;
-  border-top-left-radius: .5rem;
-  border-bottom-left-radius: .5rem;
-}
-
-.detailspricing__card__body {
-  flex: 1;
-  padding: .75rem;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  font-size: 1rem;
-  color: var(--color-dark);
-  border-top-right-radius: .5rem;
-  border-bottom-right-radius: .5rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
 
 /*──────────────────────────────────────────────────────────────────────────*/
 /*                        SCHEDULE (CALENDAR-STYLE)                        */
@@ -406,8 +341,8 @@ body {
 .schedule__card {
   display: flex;
   flex: 1 1 380px;
-  width: 380px;
-  max-width: 380px;
+  width: 320px;
+  max-width: 320px;
   border-radius: .5rem;
   overflow: hidden;
   background: var(--color-light);
@@ -439,7 +374,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  font-size: 1rem;
+  font-size: .75rem;
   color: var(--color-dark);
   border-top-right-radius: .5rem;
   border-bottom-right-radius: .5rem;
@@ -635,6 +570,44 @@ body {
 }
 .sponsors__grid img:hover {
   transform: scale(1.05);
+}
+
+/* Only style tier labels inside the sponsors grid */
+.sponsors__grid .sponsor-tier-label {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-top: 0.25rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-align: center;
+  border-radius: 0.5rem;
+  padding: 0.25em 0.75em;
+  display: inline-block;
+  background: #f7f5f2;
+  color: var(--color-primary);
+  box-shadow: 2px 2px 6px var(--shadow-dark), -2px -2px 6px var(--shadow-light);
+}
+
+/* Sponsors Grid Tier Labels - Match Sponsorship Ribbon Colors */
+.sponsors__grid .sponsor-tier-platinum {
+  background: linear-gradient(90deg,rgba(77, 77, 77, 1) 10%, rgb(168, 173, 169) 65%, rgba(125, 122, 122, 1) 100%);
+  color: #fff;
+}
+.sponsors__grid .sponsor-tier-gold {
+  background: linear-gradient(90deg, rgba(174, 124, 43, 1) 10%, rgb(206, 188, 99) 65%, rgba(174, 124, 43, 1) 100%);
+  color: #fff;
+}
+.sponsors__grid .sponsor-tier-silver {
+  background: linear-gradient(to right, #9e9b9b 10%, #b8b8b8 65%, #9e9b9b 100%);
+  color: #333;
+}
+.sponsors__grid .sponsor-tier-bronze {
+  background: linear-gradient(90deg,rgba(128, 74, 0, 1) 10%, rgb(168, 133, 81) 65%, rgba(128, 74, 0, 1) 100%);
+  color: #fff;
+}
+.sponsors__grid .sponsor-tier-hole {
+  background: linear-gradient(90deg,rgb(5, 119, 34) 10%, rgb(38, 141, 47) 65%, rgb(5, 119, 34) 100%);
+  color: #fff;
 }
 
 /*──────────────────────────────────────────────────────────────────────────*/

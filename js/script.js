@@ -662,6 +662,68 @@ function initSponsorTierCollapsibles() {
   }
 }
 
+async function loadSponsors() {
+  const SUPABASE_URL = 'https://bgarkbbnfdrvtjrtkiam.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJnYXJrYmJuZmRydnRqcnRraWFtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDcyNjg2NjAsImV4cCI6MjA2Mjg0NDY2MH0.MEbIQT4xkannZiUCdFnBc69czp_bew3UK7uva_-Ta-g';
+
+  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  // Adjust table name and column names as needed
+  const { data, error } = await supabase
+    .from('sponsors')
+    .select('company_name,logo_url, tier')
+    .order('created_at', { ascending: false });
+
+  if (error) {
+    console.error('Error fetching sponsors:', error);
+    return;
+  }
+
+  const grid = document.getElementById('sponsors-grid');
+  if (!grid) return;
+
+  grid.innerHTML = ''; // Clear any existing content
+
+  data.forEach(sponsor => {
+    if (sponsor.logo_url) {
+      const div = document.createElement('div');
+      div.style.display = 'flex';
+      div.style.flexDirection = 'column';
+      div.style.alignItems = 'center';
+      div.style.justifyContent = 'center';
+
+      const img = document.createElement('img');
+      img.src = sponsor.logo_url;
+      img.alt = sponsor.company_name;
+      img.style.maxWidth = '180px';
+      img.style.maxHeight = '180px';
+      img.style.objectFit = 'contain';
+
+      const label = document.createElement('div');
+      label.textContent = sponsor.company_name;
+      label.style.marginTop = '0.5rem';
+      label.style.fontWeight = 'bold';
+      label.style.color = 'var(--color-primary)';
+      label.style.textAlign = 'center';
+
+      const tier = document.createElement('div');
+      tier.textContent = sponsor.tier ? sponsor.tier + ' Sponsor' : '';
+      tier.className = 'sponsor-tier-label sponsor-tier-' + (sponsor.tier || '').toLowerCase();
+      tier.style.fontSize = '0.95rem';
+      tier.style.fontWeight = '600';
+      tier.style.marginTop = '0.25rem';
+      tier.style.textTransform = 'uppercase';
+      tier.style.letterSpacing = '1px';
+      tier.style.textAlign = 'center';
+
+      div.appendChild(img);
+      div.appendChild(tier);
+      div.appendChild(label);
+      grid.appendChild(div);
+    }
+  });
+}
+
 // ─── DOMContentLoaded Bootstrap ───────────────────────────────
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -672,6 +734,7 @@ document.addEventListener('DOMContentLoaded', () => {
   handleSingleGolferSubmit();
   handleSponsorFormSubmit();
   initSponsorTierCollapsibles();
+  loadSponsors();
 
   document.getElementById('success-ok-btn')?.addEventListener('click', () => {
     document.getElementById('success-overlay')?.setAttribute('hidden', true);
