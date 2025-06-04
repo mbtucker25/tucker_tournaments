@@ -724,6 +724,89 @@ async function loadSponsors() {
   });
 }
 
+function initGalleryFeatures() {
+  // Show More / Less for Gallery
+  const galleryGrid = document.getElementById('js-gallery');
+  const toggleBtn = document.getElementById('js-toggle-gallery');
+  if (galleryGrid && toggleBtn) {
+    toggleBtn.addEventListener('click', () => {
+      galleryGrid.classList.toggle('expanded');
+      toggleBtn.textContent = galleryGrid.classList.contains('expanded') ? 'Show less' : 'Show more';
+    });
+  }
+
+  // Lightbox for Gallery Images
+  // Create modal elements if not present
+  if (!document.getElementById('lightbox-modal')) {
+    const modal = document.createElement('div');
+    modal.id = 'lightbox-modal';
+    modal.className = 'lightbox-modal hidden';
+    modal.innerHTML = `
+      <div id="lightbox-backdrop" class="lightbox-backdrop"></div>
+      <div class="lightbox-content">
+        <button id="lightbox-close" class="lightbox-close" aria-label="Close">&times;</button>
+        <button id="lightbox-prev" class="lightbox-nav lightbox-prev" aria-label="Previous">&#8592;</button>
+        <img id="lightbox-image" src="" alt="" />
+        <button id="lightbox-next" class="lightbox-nav lightbox-next" aria-label="Next">&#8594;</button>
+      </div>
+    `;
+    document.body.appendChild(modal);
+  }
+
+  const images = Array.from(document.querySelectorAll('#js-gallery img'));
+  const lightboxModal = document.getElementById('lightbox-modal');
+  const lightboxImage = document.getElementById('lightbox-image');
+  const lightboxClose = document.getElementById('lightbox-close');
+  const lightboxPrev = document.getElementById('lightbox-prev');
+  const lightboxNext = document.getElementById('lightbox-next');
+  const lightboxBackdrop = document.getElementById('lightbox-backdrop');
+  let currentIndex = 0;
+
+  function showLightbox(idx) {
+    if (!images[idx]) return;
+    currentIndex = idx;
+    lightboxImage.src = images[idx].src;
+    lightboxImage.alt = images[idx].alt || '';
+    lightboxModal.classList.remove('hidden');
+  }
+
+  images.forEach((img, idx) => {
+    img.style.cursor = 'pointer';
+    img.addEventListener('click', () => showLightbox(idx));
+  });
+
+  function closeLightbox() {
+    lightboxModal.classList.add('hidden');
+    lightboxImage.src = '';
+  }
+
+  function showPrev() {
+    if (images.length === 0) return;
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    showLightbox(currentIndex);
+  }
+
+  function showNext() {
+    if (images.length === 0) return;
+    currentIndex = (currentIndex + 1) % images.length;
+    showLightbox(currentIndex);
+  }
+
+  if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+  if (lightboxBackdrop) lightboxBackdrop.addEventListener('click', closeLightbox);
+  if (lightboxPrev) lightboxPrev.addEventListener('click', showPrev);
+  if (lightboxNext) lightboxNext.addEventListener('click', showNext);
+
+  // Keyboard navigation for lightbox
+  document.addEventListener('keydown', (e) => {
+    if (lightboxModal && !lightboxModal.classList.contains('hidden')) {
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') showPrev();
+      if (e.key === 'ArrowRight') showNext();
+    }
+  });
+}
+
 // ─── DOMContentLoaded Bootstrap ───────────────────────────────
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -735,6 +818,7 @@ document.addEventListener('DOMContentLoaded', () => {
   handleSponsorFormSubmit();
   initSponsorTierCollapsibles();
   loadSponsors();
+  initGalleryFeatures();
 
   document.getElementById('success-ok-btn')?.addEventListener('click', () => {
     document.getElementById('success-overlay')?.setAttribute('hidden', true);
