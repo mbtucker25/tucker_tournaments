@@ -111,7 +111,7 @@ function generateGolferFieldsets() {
           </div>
           <div class="select-wrapper">
             <div class="select">
-              <select id="golfer${i}-shirt-size" required>
+              <select id="golfer${i}-shirt-size">
                 <option value="" disabled selected>-- T-Shirt Size --</option>
                 ${options}
               </select>
@@ -324,6 +324,7 @@ function handleSingleGolferSubmit() {
               ? "You've been registered as a free agent. You’ll be assigned to a team on event day."
               : `You've been added to:<br><span class="team-name">${teamName}</span>`
           }</strong></p>
+          <p class="golfers-label">Registration fees can be paid via check or cash at check-in. <br><br> Checks should be made payable to <strong>Tucker Tournaments</strong>.<br></p>
         `;
         successOverlay.removeAttribute('hidden');
       } else {
@@ -412,6 +413,7 @@ function handleFormSubmit() {
           <div class="success-message-text team-name">${teamName}</div>
           <p class="golfers-label"><strong>Registered Golfers:</strong></p>
           <ul class="success-golfer-list">${golferNamesHtml}</ul>
+          <p class="golfers-label">Registration fees can be paid via check or cash at check-in. <br> Checks should be made payable to <strong>Tucker Tournaments</strong>.<br></p>
         `;
         successOverlay.removeAttribute('hidden');
       } else {
@@ -573,7 +575,10 @@ function handleSponsorFormSubmit() {
             You’ve successfully registered as a ${selectedTier} Sponsor.
             <br><br>
             Your support is invaluable to us and helps make this event possible.<br><br>
-            We’ll follow up with you shortly via email.
+            We’ll follow up with you shortly via email.<br><br>
+          </p>
+          <p>
+            Checks can be made payable to: <b>Tucker Tournaments</b><br>
           </p>
         `;
         successOverlay.removeAttribute('hidden');
@@ -678,6 +683,21 @@ async function loadSponsors() {
     console.error('Error fetching sponsors:', error);
     return;
   }
+
+    // Define tier order
+  const tierOrder = ['Platinum', 'Gold', 'Silver', 'Bronze', 'Hole'];
+
+  // Sort sponsors by tier, then by created_at (already sorted by created_at)
+  data.sort((a, b) => {
+    const aIdx = tierOrder.indexOf(a.tier);
+    const bIdx = tierOrder.indexOf(b.tier);
+    // If same tier, keep original order (created_at desc)
+    if (aIdx === bIdx) return 0;
+    // Sponsors with unknown tier go last
+    if (aIdx === -1) return 1;
+    if (bIdx === -1) return -1;
+    return aIdx - bIdx;
+  });
 
   const grid = document.getElementById('sponsors-grid');
   if (!grid) return;
@@ -847,4 +867,38 @@ document.addEventListener('DOMContentLoaded', () => {
       if (e.target === overlay && overlay?.id) resetAndCloseModal(overlay.id);
     });
   });
+
+  const teamSelect = document.getElementById('golfer-team');
+if (teamSelect) {
+  teamSelect.addEventListener('change', async (e) => {
+    const selectedTeam = e.target.value;
+    const teamList = document.getElementById('team-members-list');
+    const teamBox = document.getElementById('team-members-inline-display');
+
+    if (!teamList || !teamBox) return;
+
+    if (selectedTeam === '__free_agent__') {
+      teamBox.hidden = true;
+      return;
+    }
+
+    try {
+      const res = await fetch(`https://bgarkbbnfdrvtjrtkiam.supabase.co/functions/v1/get-team-members?team=${encodeURIComponent(selectedTeam)}`);
+      const { golfers } = await res.json();
+
+      if (golfers?.length) {
+        teamList.innerHTML = golfers
+          .map(g => `<li>${g.first_name || ''} ${g.last_name || ''}</li>`)
+          .join('');
+        teamBox.hidden = false;
+      } else {
+        teamList.innerHTML = `<li>No golfers yet.</li>`;
+        teamBox.hidden = false;
+      }
+    } catch (err) {
+      console.error('Error fetching team members:', err);
+      teamBox.hidden = true;
+    }
+  });
+}
 });

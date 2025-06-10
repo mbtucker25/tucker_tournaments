@@ -5,7 +5,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>David Tucker Memorial Golf Classic</title>
+  <title>Tucker Tournaments</title>
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
   <meta
     name="description"
     content="Join us July 19, 2025 for the David Tucker Memorial Golf Classic—a charity scramble supporting children battling cancer."
@@ -28,32 +29,36 @@
   });
 </script>
 <body>
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
-    <div id="last-updated" class="last-updated"></div>
-    <div class="sidebar__logo">
-      <img
-        src="images/DavidTuckerLogo_Purple_(1024x1024).png"
-        alt="DT Memorial Golf Classic"
-      />
+  <!-- Header: Small event logo and title -->
+  <header class="site-header">
+    <div class="header__logo-title">
+      <img src="images/TuckerTournaments-header.png" alt="Header Image" class="header__logo company" />
     </div>
-    <nav class="sidebar__nav" aria-label="Main navigation">
-    </nav>
-  </aside>
+    <!-- (Optional) Navigation here -->
+  </header>
 
+  <!-- Hero/Banner Section: Both logos -->
+<section class="hero-banner">
+  <img src="images/TuckerTournaments-LogoOnly.png" alt="Company Logo" class="hero__logo company" />
+  <div class="hero__text">
+    <div class="details__text">
+      <p>
+        Tucker Tournaments was created to carry on the spirit of David Tucker—a man whose kindness, strength, and quiet generosity touched everyone he met. Helping others wasn’t a mission he set out on; it was simply part of who he was.      </p>
+      <p>
+        David coached kids at every level, from youth leagues to high school teams, and led a Special Olympics group through his workplace. He didn’t do it for recognition. He did it because that’s who he was—someone who showed up, gave back, and lifted people up without needing a reason.      </p>
+      <p>
+        Even as he faced lung cancer, David kept his focus on others, especially the kids he mentored. That selflessness never left him. He continued to encourage, support, and inspire—just as he always had.      </p>
+      <p>
+        Tucker Tournaments was created in that same spirit. Through events like the David Tucker Memorial Golf Classic, we raise funds to support children facing serious health challenges. The money goes straight to families—helping cover medical bills, fulfill special wishes, and give kids a reason to smile in the middle of something hard.
+      </p>
+      <p>
+        It’s not just about honoring David. It’s about doing what he did—quietly, consistently, and with heart.
+      </p>
+    </div>
+  </div>
+</section>
   <!-- MAIN CONTENT -->
   <main class="main-content">
-    <!-- HERO BANNER -->
-    <section class="hero-card neumorphic">
-      <div class="hero-card__image-wrapper">
-        <img src="images/banner.jpg" alt="Golf course at sunrise" class="hero-card__image" />
-        <div class="hero-card__overlay"></div>
-        <div class="hero-card__text">
-          <h1 class="hero-card__title">David Tucker Memorial Golf Classic</h1>
-          <p class="hero-card__subtitle">Saturday, July 19, 2025</p>
-        </div>
-      </div>
-    </section>
       
     <!-- EVENT DETAILS + ATHLETE -->
     <section class="section details-athlete-container">
@@ -62,13 +67,13 @@
         <div class="neumorphic details-athlete__athlete">
           <h2 class="section__title">About This Year’s Athlete</h2>
           <div class="athlete__content">
-            <img
-              src="images/athlete.png"
-              alt="Photo of [Child’s Name]"
-              class="athlete__photo"
-            />
             <div class="athlete__bio">
               <h3 class="athlete__name">Luke Turpin</h3>
+              <div class="athlete__gallery">
+                <img src="images/athletes/current/LukeTurpin1.jpg" alt="Luke Turpin photo 1" class="athlete__gallery-img" />
+                <img src="images/athletes/current/LukeTurpin2.jpg" alt="Luke Turpin photo 2" class="athlete__gallery-img" />
+                <img src="images/athletes/current/LukeTurpin3.jpg" alt="Luke Turpin photo 3" class="athlete__gallery-img" />
+              </div>
               <p>
                 Luke, 8 years old, was diagnosed with T cell acute lymphoblastic leukemia on October 24, 2024. He seemed healthy at first, but swollen lymph nodes prompted his pediatrician to order blood tests. The results came back fast and devastating. Luke had leukemia and was rushed to Riley Hospital for immediate treatment.
 
@@ -84,24 +89,37 @@
           </div>
         </div>
     
-        <div class="neumorphic details-athlete__event">
-          <h2 class="section__title">Event Details</h2>
-          <p>
-            The David Tucker Memorial Golf Classic celebrates the life and legacy of David Tucker, a man who stood tall not just in height at six feet eleven inches, but in character, compassion, and dedication to others. David was a Brownsburg High School graduate, a gifted athlete, and a four-year varsity basketball player. He was also a devoted husband, father, brother, and friend who faced lung cancer with remarkable strength and courage until his passing in 2021.
-          </p>
-          <p>
-            David's impact on others is undeniable. His smile, warmth, and generosity left a lasting impression on everyone who knew him. He gave his energy to coaching kids at every level—from youth leagues to high school—and led a Special Olympics team through his employer. His lessons reached far beyond sports. He showed young people how to grow into themselves, give back to others, and appreciate each day. Many of those he mentored are now pursuing their own goals, shaped by his encouragement and belief in them.
-          </p>
-          <p>
-            Helping others was always at the heart of David’s life, especially children and families across Indiana. Even while fighting cancer, he stayed focused on the kids he coached and inspired. His selflessness never faded.
-          </p>
-          <p>
-            Tucker Tournaments was created to honor that spirit and carry forward David’s mission. The annual Golf Classic is more than a tribute—it is a way to continue his work by supporting children facing serious health challenges. Proceeds from the tournament go directly to kids battling cancer or recovering from treatment. The funds help ease the burden of medical bills or bring a special wish to life. In doing so, the event brings hope to families, just as David did every day of his life.
-          </p>
-          <p>
-            Join us for a great day on the course and help make a lasting difference.
-          </p>
-        </div>
+<div class="neumorphic details-athlete__event">
+  <h2 class="section__title">Event Details</h2>
+  <div class="eventdetails__content">
+    <div class="eventdetails__left">
+      <img src="images/DavidTuckerLogo_Blue_(1024x1024).png" alt="David Tucker Memorial Golf Classic Logo" class="eventdetails__photo"/>
+    </div>
+    <div class="eventdetails__bio">
+      <h3 class="eventdetails__name">David Tucker Memorial Golf Classic</h3>
+      <dl class="eventdetails__list">
+        <dt>Date:</dt>
+        <dd>Saturday, July 19, 2025</dd>
+        <dt>Check-in Time:</dt>
+        <dd>9:00 AM</dd>
+        <dt>Shotgun Start Time:</dt>
+        <dd>10:00 AM</dd>
+        <dt>Format:</dt>
+        <dd>4-Person Scramble<br>Includes green fees, cart, and a chance to win prizes.</dd>
+        <dt>Location</dt>
+        <dd>Pittsboro Golf Course<br>2227 E. US 136, Pittsboro, IN 46167</dd>
+      </dl>
+      <!-- Google Map Embed -->
+      <div class="eventdetails__map">
+        <iframe
+          src="https://www.google.com/maps?q=2227+E+US+136,+Pittsboro,+IN+46167&output=embed"
+          class="eventdetails__map-iframe"
+          title="Map showing the location of Pittsboro Golf Course"
+        ></iframe>
+      </div>
+    </div>
+  </div>
+</div>
       </div>
     </section>
     
@@ -466,24 +484,26 @@
       </div>
     </section>
 
-    <!-- CONTESTS & PRIZES -->
     <section class="section contests neumorphic">
       <h2 class="section__title">Contests &amp; Prizes</h2>
-      <div class="contests__grid">
-        <div class="contest">
+      <p>
+        Winners of each contest will receive a <strong>$50 Gift Card</strong> to TopGolf.  
+      </p>
+      <p>
+        Prizes will be awarded during the post-tournament awards ceremony.
+      </p>
+
+      <div class="contests__flex-container">
+        <!-- Contest 1 -->
+        <div class="contest-card">
           <img src="images/contest-longest-drive.png" alt="Longest Drive" />
           <h3>Longest Drive</h3>
-          <p>Win a custom trophy &amp; $100 Pro Shop gift card</p>
         </div>
-        <div class="contest">
+
+        <!-- Contest 2 -->
+        <div class="contest-card">
           <img src="images/contest-closest-pin.png" alt="Closest to the Pin" />
           <h3>Closest to the Pin</h3>
-          <p>$50 driving range tokens</p>
-        </div>
-        <div class="contest">
-          <img src="images/contest-hole-in-one.png" alt="Hole-in-One" />
-          <h3>Hole-in-One</h3>
-          <p>Sponsored Car Giveaway*</p>
         </div>
       </div>
     </section>
@@ -503,27 +523,6 @@
       </div>
       <button class="gallery__toggle" id="js-toggle-gallery">Show more</button>
     </section> 
-    
-        <!-- EVENT SCHEDULE -->
-      <h2 class="section__title">Event Schedule</h2>
-      <div class="schedule__cards">
-        <div class="schedule__card">
-          <div class="schedule__card__header">9:00 AM</div>
-          <div class="schedule__card__body">Golfer/Team Check-in</div>
-        </div>
-        <div class="schedule__card">
-          <div class="schedule__card__header">10:00 AM</div>
-          <div class="schedule__card__body">Shotgun Start</div>
-        </div>
-        <div class="schedule__card">
-          <div class="schedule__card__header">1:00 PM</div>
-          <div class="schedule__card__body">Lunch</div>
-        </div>
-        <div class="schedule__card">
-          <div class="schedule__card__header">4:00 PM</div>
-          <div class="schedule__card__body">White Castle Sliders For All</div>
-        </div>
-      </div>
 
     <!-- FAQ -->
     <section class="section faq neumorphic">
