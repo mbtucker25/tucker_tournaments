@@ -6,8 +6,11 @@
   --color-secondary: #A2AAAD;
   --color-dark:      #302E2C;
   --color-light:     #F7F5F2;
+  --color-accent-hover: #E1E6ED;
+  --color-accent-alt: #EBEBE7;
+  --color-checkin-highlight: rgba(50, 226, 6, 0.452);
   --font-sans:       'Open Sans', sans-serif;
-  --font-display:    'Bebas Neue', cursive;
+  --font-display:    'Open Sans', sans-serif;
   --shadow-dark:     rgba(0,0,0,0.2);
   --shadow-light:    rgba(255,255,255,0.7);
 }
@@ -45,12 +48,14 @@ body {
   margin: 0;
   padding: 0;
   line-height: 1.6;
+  justify-content: center;
 }
 
 .main-content {
   margin: 2rem auto;
   width: 100%;
-  max-width: 1480px;
+  align-content: center;
+  max-width: 1024px;
   padding: 3rem 1rem;
   display: flex;
   flex-direction: column;
@@ -59,7 +64,6 @@ body {
 }
 
 h1 {
-  font-family: 'Bebas Neue', cursive, sans-serif;
   font-size: 2.2rem;
   color: var(--color-primary);
   margin-bottom: 1rem;
@@ -68,82 +72,8 @@ h1 {
 }
 
 /*──────────────────────────────────────────────────────────────────────────*/
-/* ADMIN TABLES */
+/* BACK-TO-HOME BUTTON */
 /*──────────────────────────────────────────────────────────────────────────*/
-
-.admin-table {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
-  background: var(--color-light);
-  box-shadow: 0 2px 8px var(--shadow-dark);
-  overflow: hidden;
-  margin-bottom: 2rem;
-  font-size: 1rem;
-  border: 4px double var(--color-primary); /* Double-line border */
-}
-
-.admin-table th,
-.admin-table td {
-  text-align: left;
-  vertical-align: middle;
-  padding: 0.75rem 0.5rem;
-  border: 4px double var(--color-secondary); /* Double-line row border */
-}
-
-.admin-table th {
-  background: var(--color-primary);
-  color: var(--color-light);
-  font-weight: 700;
-  font-size: 1rem;
-  letter-spacing: 0.5px;
-  border: 4px double var(--color-secondary); /* Stronger double border under header */
-}
-
-.admin-table tfoot th {
-  text-align: right;
-  background: var(--color-light);
-  color: var(--color-primary);
-  font-size: 1rem;
-  font-weight: bold;
-  border: 4px double var(--color-primary);
-}
-
-/* Save/Edit Buttons */
-.save-btn, .edit-btn {
-  background: var(--color-primary);
-  color: var(--color-light);
-  border: none;
-  border-radius: 0.3rem;
-  padding: 0.3rem 0.8rem;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background 0.2s;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.1rem;
-}
-
-.save-btn:hover, .edit-btn:hover {
-  background: var(--color-secondary);
-  color: var(--color-primary);
-}
-
-.fa-floppy-disk, .fa-pen-to-square {
-  font-size: 1rem;
-}
-
-/* Totals row */
-.admin-table tfoot th {
-  text-align: right;
-  background: var(--color-light);
-  color: var(--color-primary);
-  font-size: 1rem;
-  font-weight: bold;
-  border: 4px double var(--color-secondary);
-}
-
-/* Back to Home link */
 .back-to-home {
   position: fixed;
   font-size: small;
@@ -159,27 +89,177 @@ h1 {
   box-shadow: 0 2px 8px var(--shadow-dark);
   transition: background 0.2s, color 0.2s;
 }
+
 .back-to-home:hover {
   background: var(--color-primary);
   color: var(--color-light);
 }
 
-.inline-select {
-  width: 100%;
-  padding: 0.2em 0.5em;
-  font-size: 1rem;
-  text-align: center;
-  border-radius: 0.3em;
-  border: 1px solid var(--color-secondary);
-  background: var(--color-light);
+
+/*──────────────────────────────────────────────────────────────────────────*/
+/* ✅ Admin + Check-in Table Shared Style System */
+/*──────────────────────────────────────────────────────────────────────────*/
+
+.admin-table {
+    table-layout: fixed;
+    width: 100%;
+    background: var(--color-light);
+    border-collapse: separate;
+    border-spacing: 0;
+    box-shadow:
+        4px 4px 8px var(--color-primary),
+    -4px -4px 8px var(--color-secondary);
+    overflow: hidden;
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+    }
+
+.admin-table th,
+.admin-table td {
+  text-align: left;
+  vertical-align: middle;
+  padding: 0.25rem;
+  font-weight: 500;
 }
 
-/* Responsive */
+.admin-table th {
+  background: var(--color-primary);
+  color: var(--color-light);
+  border: 4px double var(--color-secondary);
+  font-family: var(--font-display);
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.admin-table td {
+  border: 4px double var(--color-primary);
+}
+
+.admin-table tfoot th {
+  background: var(--color-light);
+  color: var(--color-primary);
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: right;
+}
+
+/* Alternating table rows */
+.admin-table tbody tr:nth-child(even) {
+  background-color: var(--color-accent-alt);
+}
+
+.admin-table tbody tr:nth-child(odd) {
+  background-color: var(--color-light);
+}
+
+.admin-table tbody tr:hover {
+  background-color: var(--color-accent-hover);
+  transition: background 0.2s ease-in-out;
+}
+
+.admin-table td:nth-child(1),
+.admin-table th:nth-child(1),
+.admin-table td:nth-child(5),
+.admin-table th:nth-child(5) {
+  text-align: center;
+}
+
+/* Checkbox column - narrow */
+.admin-table th:nth-child(1),
+.admin-table td:nth-child(1) {
+  width: 124px;
+}
+
+/* Team name - wider */
+.admin-table th:nth-child(2),
+.admin-table td:nth-child(2) {
+  width: 200px;
+}
+
+/* Golfer name */
+.admin-table th:nth-child(3),
+.admin-table td:nth-child(3),
+.admin-table th:nth-child(4),
+.admin-table td:nth-child(4) {
+  width: 140px;
+}
+
+.admin-table th:nth-child(5),
+.admin-table td:nth-child(5) {
+  width: 124px;
+}
+
+
+/* Optional highlight: checked-in row */
+.admin-table tr.checked-in-row {
+  background-color: var(--color-checkin-highlight) !important;
+  transition: background-color 0.3s ease !important;
+}
+
+/*──────────────────────────────────────────────────────────────────────────*/
+/* ✅ Checkbox Styling (check-in specific) */
+/*──────────────────────────────────────────────────────────────────────────*/
+.checked-in-checkbox {
+  width: 1rem;
+  height: 1rem;
+  display: inline-block;
+  vertical-align: middle;
+  accent-color: var(--color-primary);
+  cursor: pointer;
+}
+
+/*──────────────────────────────────────────────────────────────────────────*/
+/* ✅ Shared Save Button System */
+/*──────────────────────────────────────────────────────────────────────────*/
+.save-table-btn,
+.save-btn,
+.edit-btn {
+  background: var(--color-primary);
+  color: var(--color-light);
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.6rem 1.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow:
+    2px 2px 6px var(--color-primary),
+   -2px -2px 6px var(--color-secondary);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.save-table-btn:hover:enabled,
+.save-btn:hover:enabled,
+.edit-btn:hover:enabled {
+  background: var(--color-secondary);
+  color: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+.save-table-btn:disabled,
+.save-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Button Container */
+.table-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+/*──────────────────────────────────────────────────────────────────────────*/
+/* ✅ Responsive Table Handling */
+/*──────────────────────────────────────────────────────────────────────────*/
 @media (max-width: 900px) {
   .main-content {
     padding: 1rem;
   }
-  .admin-table th, .admin-table td {
+  .admin-table th,
+  .admin-table td {
     font-size: 0.95rem;
     padding: 0.5rem 0.25rem;
   }
@@ -189,31 +269,15 @@ h1 {
   .main-content {
     padding: 0.5rem;
   }
-  .admin-table th, .admin-table td {
+  .admin-table th,
+  .admin-table td {
     font-size: 0.85rem;
     padding: 0.3rem 0.1rem;
   }
   h1 {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
   }
 }
-
-/* Hide scrollbars for table if needed */
-.admin-table {
-  overflow-x: auto;
-}
-
-/* Optional: highlight row after save */
-.admin-table tr.saved-row {
-  background: var(--color-light) !important;
-  transition: background 1s;
-}
-
-.currency-cell {
-  text-align: right !important;
-  font-variant-numeric: tabular-nums !important;  /* optional: aligns numbers better */
-}
-
-.edit-cell {
- text-align: center !important;
-}
+/*──────────────────────────────────────────────────────────────────────────*/
+/*                            END OF STYLES                                */
+/*──────────────────────────────────────────────────────────────────────────*/
