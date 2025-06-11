@@ -102,6 +102,12 @@ body {
   z-index: 1;
 }
 
+@media (max-width: 400px) {
+  .main-content {
+    padding: 0.25rem;
+  }
+}
+
 /*──────────────────────────────────────────────────────────────────────────*/
 /*                            NEUMORPHIC CARD                              */
 /*──────────────────────────────────────────────────────────────────────────*/
@@ -960,6 +966,11 @@ justify-self: center;
   .schedule__card__header { font-size: 0.8rem; }
   .schedule__card__body { font-size: 0.8rem; }
 }
+
+@media (max-width: 350px) {
+  .section__title { font-size: 1.1rem; }
+}
+
 @media (max-width: 480px) {
   .details__pricing {
     flex-direction: column;
@@ -2313,5 +2324,12 @@ input[type="tel"]:focus {
   }
   .modal-footer.right-align {
     justify-content: center;
+  }
+}
+
+@media (max-width: 400px) {
+  .modal-content, .modal-content.team-form, .modal-content.wide {
+    padding: 1rem !important;
+    max-width: 98vw;
   }
 }
