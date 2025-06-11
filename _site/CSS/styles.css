@@ -231,7 +231,7 @@ body {
   align-items: center;
   background: var(--color-light);
   padding: 1.5rem;
-justify-self: center;
+  justify-self: center;
   margin-left: 1rem;
   margin-right: 1rem;
   box-shadow: 0 4px 24px var(--color-primary);
@@ -331,6 +331,21 @@ justify-self: center;
   font-size: 1rem;
   font-weight: 600;
   text-shadow: 1px 1px 4px rgba(0,0,0,0.4);
+}
+
+@media (max-width: 600px) {
+  .hero-banner {
+    padding: 1rem 0.25rem 0.5rem 0.25rem;
+  }
+  .hero__logo.company {
+    max-width: 120px;
+    width: 60vw;
+    margin-bottom: 0.5rem;
+  }
+  .hero__text {
+    max-width: 100%;
+    font-size: 0.95rem;
+  }
 }
 
 /*──────────────────────────────────────────────────────────────────────────*/
