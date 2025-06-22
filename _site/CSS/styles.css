@@ -171,7 +171,7 @@ body {
 
 .athlete__bio p {
   margin-bottom: 1rem;
-  font-size: .75rem;
+  font-size: .85rem;
   line-height: 1.5;
 }
 
@@ -198,6 +198,35 @@ body {
   box-shadow: 0 2px 8px rgba(72, 45, 140, 0.08);
 }
 
+@media (max-width: 700px) {
+  .athlete__gallery {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+    justify-content: center;
+  }
+  .athlete__gallery-img {
+    flex: 0 0 auto;
+    width: 70vw;
+    height: auto;
+    max-width: 120px;
+    border-radius: 0.8rem;
+    margin: 0;
+  }
+  .athlete-description {
+    font-size: 0.98rem;
+    padding: 0 0.5rem;
+    line-height: 1.6;
+    text-align: left;
+  }
+  .athlete-name {
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+  }
+}
+
 /*──────────────────────────────────────────────────────────────────────────*/
 /*                            SECTION TITLES                                */
 /*──────────────────────────────────────────────────────────────────────────*/
@@ -207,6 +236,14 @@ body {
   color: var(--color-primary);
   text-align: center;
   margin-bottom: 0;
+}
+
+@media (max-width: 700px) {
+  .section__title {
+    font-size: 2rem;
+    padding: 0 0.5rem;
+    margin-bottom: 0.5rem;
+  }
 }
 
 /*──────────────────────────────────────────────────────────────────────────*/
@@ -335,16 +372,30 @@ body {
 
 @media (max-width: 600px) {
   .hero-banner {
-    padding: 1rem 0.25rem 0.5rem 0.25rem;
+    flex-direction: column;
+    padding: 1rem 0.5rem;
+
+    max-width: 90vw;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
   }
   .hero__logo.company {
+    margin-bottom: 1rem;
     max-width: 120px;
     width: 60vw;
-    margin-bottom: 0.5rem;
+    height: auto;
   }
   .hero__text {
     max-width: 100%;
     font-size: 0.95rem;
+    padding: 0.25rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .hero__text {
+    font-size: 0.85rem;
+    padding: 0 0.1rem;
   }
 }
 
@@ -530,10 +581,30 @@ body {
   padding: 0 0 0.5rem 0;
 }
 
+.details__text { 
+  text-align: left;
+}
+
+.details__text p {
+  margin-top: .25rem;
+  margin-bottom: .5rem;
+  font-size: .85rem;
+  line-height: 1.5;
+  color: var(--color-primary);
+}
+
 @media (max-width: 900px) {
   .eventdetails__content {
     flex-direction: column;
     align-items: stretch;
+  }
+    .eventdetails_name {
+    text-align: center;
+  }
+    .eventdetails__photo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
   }
   .eventdetails__left {
     flex-direction: row;
@@ -547,16 +618,10 @@ body {
   }
 }
 
-.details__text { 
-  text-align: left;
-}
-
-.details__text p {
-  margin-top: .25rem;
-  margin-bottom: .5rem;
-  font-size: .85rem;
-  line-height: 1.5;
-  color: var(--color-primary);
+@media (max-width: 600px) {
+  .eventdetails__name {
+    text-align: center;
+  }
 }
 
 
@@ -1001,11 +1066,58 @@ body {
   }
   .athlete__bio {
     max-width: 100%;
+    text-align: left;
   }
 }
 @media (max-width: 768px) {
   .lightbox-nav.left { left: 0.5rem; }
   .lightbox-nav.right { right: 0.5rem; }
+}
+
+@media (max-width: 700px) {
+  .modal-content.wide {
+    max-width: 95vw;
+    width: 100%;
+    padding: 0.5rem !important;
+  }
+  .sponsor-modal-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.25rem;
+    grid-template-columns: none !important;
+    align-items: center;
+  }
+  .sponsor-options-column,
+  .sponsor-form-column {
+    width: 100%;
+    max-width: 90%;
+  }
+    .sponsor-form-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .sponsor-option {
+    width: 100%;
+    margin: 0 auto .5rem auto;
+  }
+  .sponsor-form-column .card.neumorphic {
+    padding: 1rem;
+        margin-left: auto;
+    margin-right: auto;
+    /* Optionally set a max-width for better appearance */
+    max-width: 500px;
+    width: 100%;
+  }
+  .sponsor-heading {
+    font-size: .75rem;
+    padding: 1rem;
+  }
+  .form-field input,
+  .form-field select {
+    font-size: 0.85rem;
+    padding: 0.25rem;
+  }
 }
 
 form {
@@ -1444,9 +1556,27 @@ label {
   padding: 0 .1rem;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 700px) {
   .cta-grid {
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .cta-card {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    font-size: 0.95rem;
+  }
+    .cta-card h2,
+  .cta-card .cta-title {
+    font-size: 1.2rem;
+  }
+  .cta-card .cta-price {
+    font-size: 1.1rem;
+  }
+  .cta-card button {
+    font-size: 1rem;
   }
 }
 
@@ -1666,6 +1796,15 @@ label {
   max-width: 900px;
 }
 
+@media (max-width: 700px) {
+  .sponsor-form-column .card.neumorphic {
+    margin: 0.5rem auto 1.5rem auto;
+    max-width: 98vw;
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
 .price {
   display: inline-flex;
   align-items: center;
@@ -1790,10 +1929,22 @@ label {
   margin-bottom: 0.1rem; /* reduce from default */
 }
 
+/* Only target rows inside Sponsor Contact Info */
+.sponsor-contact-info .form-field.company-name {
+  margin-bottom: 0.1rem; /* reduce from default */
+}
+
 .sponsor-contact-info .form-grid-two,
 .sponsor-contact-info .form-grid-email-phone {
   gap: 0.25rem 1rem; /* tighter vertical and horizontal spacing */
   margin-bottom: 0.5rem; /* reduce bottom margin between grids */
+}
+
+@media (max-width: 700px) {
+  .sponsor-contact-info .form-field.company-name {
+    margin-top: 3.5rem;   /* or your preferred value */
+    margin-bottom: 0.1rem;
+  }
 }
 
 @media (max-width: 600px) {
@@ -1868,6 +2019,7 @@ label {
   flex-direction: column;
   align-items: center;
   gap: .25rem;
+  margin-top: 2rem;
 }
 
 .sponsor-options-column {

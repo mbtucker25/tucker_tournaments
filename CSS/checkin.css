@@ -1,0 +1,242 @@
+/*──────────────────────────────────────────────────────────────────────────*/
+/*                            BRAND VARIABLES                              */
+/*──────────────────────────────────────────────────────────────────────────*/
+:root {
+  --color-primary:   #384360;
+  --color-secondary: #A2AAAD;
+  --color-dark:      #302E2C;
+  --color-light:     #F7F5F2;
+  --color-accent-hover: #E1E6ED;
+  --color-accent-alt: #EBEBE7;
+  --color-checkin-highlight: rgba(50, 226, 6, 0.452);
+  --font-sans:       'Open Sans', sans-serif;
+  --font-display:    'Open Sans', sans-serif;
+  --shadow-dark:     rgba(0,0,0,0.2);
+  --shadow-light:    rgba(255,255,255,0.7);
+}
+
+/*──────────────────────────────────────────────────────────────────────────*/
+/*                            RESET & BASE                                 */
+/*──────────────────────────────────────────────────────────────────────────*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html, body {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+body {
+
+  background: var(--color-light);
+  color: var(--color-dark);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+}
+
+/*──────────────────────────────────────────────────────────────────────────*/
+/* checkin PAGE BASE STYLES */
+/*──────────────────────────────────────────────────────────────────────────*/
+
+body {
+  background: var(--color-light);
+  color: var(--color-dark);
+  font-family: 'Open Sans', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  justify-content: center;
+}
+
+.main-content {
+  margin: 2rem auto;
+  width: 100%;
+  align-content: center;
+  max-width: 1200px;
+  padding: 3rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  z-index: 1;
+}
+
+h1 {
+  font-size: 2.2rem;
+  color: var(--color-primary);
+  margin-bottom: 1rem;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+/*──────────────────────────────────────────────────────────────────────────*/
+/* BACK-TO-HOME BUTTON */
+/*──────────────────────────────────────────────────────────────────────────*/
+.back-to-home {
+  position: fixed;
+  font-size: small;
+  top: 10px;
+  left: 10px;
+  z-index: 9999;
+  font-weight: bold;
+  color: var(--color-primary);
+  background: var(--color-light);
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  box-shadow: 0 2px 8px var(--shadow-dark);
+  transition: background 0.2s, color 0.2s;
+}
+
+.back-to-home:hover {
+  background: var(--color-primary);
+  color: var(--color-light);
+}
+
+
+/*──────────────────────────────────────────────────────────────────────────*/
+/* ✅ checkin + Check-in Table Shared Style System */
+/*──────────────────────────────────────────────────────────────────────────*/
+
+.checkin-table {
+    table-layout: fixed;
+    width: 100%;
+    background: var(--color-light);
+    border-collapse: separate;
+    border-spacing: 0;
+    box-shadow:
+        4px 4px 8px var(--color-primary),
+    -4px -4px 8px var(--color-secondary);
+    overflow: hidden;
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+    }
+
+.checkin-table th,
+.checkin-table td {
+  text-align: left;
+  vertical-align: middle;
+  padding: 0.25rem;
+  font-weight: 500;
+}
+
+.checkin-table th {
+  background: var(--color-primary);
+  color: var(--color-light);
+  border: 4px double var(--color-secondary);
+  font-family: var(--font-display);
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.checkin-table td {
+  border: 4px double var(--color-primary);
+}
+
+.checkin-table tfoot th {
+  background: var(--color-light);
+  color: var(--color-primary);
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: right;
+}
+
+/* Alternating table rows */
+.checkin-table tbody tr:nth-child(even) {
+  background-color: var(--color-accent-alt);
+}
+
+.checkin-table tbody tr:nth-child(odd) {
+  background-color: var(--color-light);
+}
+
+.checkin-table tbody tr:hover {
+  background-color: var(--color-accent-hover);
+  transition: background 0.2s ease-in-out;
+}
+
+.checkin-table td:nth-child(1),
+.checkin-table th:nth-child(1),
+.checkin-table td:nth-child(5),
+.checkin-table th:nth-child(5) {
+  text-align: center;
+}
+
+/* Checkbox column - narrow */
+.checkin-table th:nth-child(1),
+.checkin-table td:nth-child(1) {
+  width: 124px;
+}
+
+/* Team name - wider */
+.checkin-table th:nth-child(2),
+.checkin-table td:nth-child(2) {
+  width: 200px;
+}
+
+/* Golfer name */
+.checkin-table th:nth-child(3),
+.checkin-table td:nth-child(3),
+.checkin-table th:nth-child(4),
+.checkin-table td:nth-child(4) {
+  width: 240px;
+}
+
+.checkin-table th:nth-child(5),
+.checkin-table td:nth-child(5) {
+  width: 124px;
+}
+
+
+/* Optional highlight: checked-in row */
+.checkin-table tr.checked-in-row {
+  background-color: var(--color-checkin-highlight) !important;
+  transition: background-color 0.3s ease !important;
+}
+
+/*──────────────────────────────────────────────────────────────────────────*/
+/* ✅ Checkbox Styling (check-in specific) */
+/*──────────────────────────────────────────────────────────────────────────*/
+.checked-in-checkbox {
+  width: 1rem;
+  height: 1rem;
+  display: inline-block;
+  vertical-align: middle;
+  accent-color: var(--color-primary);
+  cursor: pointer;
+}
+
+
+/*──────────────────────────────────────────────────────────────────────────*/
+/* ✅ Responsive Table Handling */
+/*──────────────────────────────────────────────────────────────────────────*/
+@media (max-width: 900px) {
+  .main-content {
+    padding: 1rem;
+  }
+  .checkin-table th,
+  .checkin-table td {
+    font-size: 0.95rem;
+    padding: 0.5rem 0.25rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .main-content {
+    padding: 0.5rem;
+  }
+  .checkin-table th,
+  .checkin-table td {
+    font-size: 0.85rem;
+    padding: 0.3rem 0.1rem;
+  }
+  h1 {
+    font-size: 1.5rem;
+  }
+}
+/*──────────────────────────────────────────────────────────────────────────*/
+/*                            END OF STYLES                                */
+/*──────────────────────────────────────────────────────────────────────────*/
