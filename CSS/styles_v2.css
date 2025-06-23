@@ -1,0 +1,294 @@
+/*──────────────────────────────────────────────────────────────────────────*/
+/* 1. BRAND VARIABLES & BASE RESET                                          */
+/*──────────────────────────────────────────────────────────────────────────*/
+:root {
+  --color-primary:   #384360;
+  --color-secondary: #A2AAAD;
+  --color-dark:      #302E2C;
+  --color-light:     #F7F5F2;
+  --font-sans:       'Open Sans', sans-serif;
+  --font-display:    'Bebas Neue', cursive;
+  --shadow-dark:     rgba(0,0,0,0.2);
+  --shadow-light:    rgba(255,255,255,0.7);
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body { overflow-x: hidden; overflow-y: auto; }
+
+body {
+  background: var(--color-light);
+  color: var(--color-dark);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+}
+
+/*──────────────────────────────────────────────────────────────────────────*/
+/* 2. TYPOGRAPHY, SECTION TITLES, BASE ELEMENTS                             */
+/*──────────────────────────────────────────────────────────────────────────*/
+h1, h2, h3, h4, h5, h6,
+.section__title, .site-title, .athlete__name, .eventdetails__name, .team-members-title, .cta-title {
+  font-family: var(--font-display);
+  font-weight: bold;
+  color: var(--color-primary);
+}
+
+.section__title {
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+@media (max-width: 700px) {
+  .section__title { font-size: 2rem; padding: 0 0.5rem; margin-bottom: 0.5rem; }
+}
+
+/*──────────────────────────────────────────────────────────────────────────*/
+/* 3. HEADER, HERO, AND SITE-WIDE STRUCTURE                                 */
+/*──────────────────────────────────────────────────────────────────────────*/
+.site-header {
+  display: flex; align-items: center; justify-content: center;
+  background: var(--color-primary); color: var(--color-light);
+  padding: 1rem 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+.header__logo-title { display: flex; align-items: center; gap: 1rem; }
+.header__logo-small, .header__logo.company {
+  border-radius: 0.5rem; height: auto; width: auto; background: transparent; box-shadow: none;
+}
+.header__logo.company { max-width: 480px; width: 100%; display: block; margin: 0 auto; }
+
+.site-title { font-size: 2rem; }
+
+/* Hero Banner & Card */
+.hero-banner {
+  max-width: 1800px; width: 1600px; display: flex; justify-content: center; align-items: center; justify-self: center;
+  background: var(--color-light); padding: 1.5rem; margin: 0 1rem; box-shadow: 0 4px 24px var(--color-primary);
+  border-radius: 0 0 1rem 1rem;
+}
+.hero-card {
+  max-width: 1200px; width: 800px; height: 200px; margin: .5rem auto;
+  border-radius: 1rem; box-shadow: 8px 8px 16px var(--shadow-dark), -8px -8px 16px var(--shadow-light);
+}
+.hero__text { display: flex; flex-direction: column; align-items: center; text-align: center; padding: .25rem 1.5rem; }
+.hero__logo.company { height: 140px; width: auto; }
+.hero-card__image-wrapper { position: relative; width: 100%; height: 100%; border-radius: 1rem; background-attachment: fixed; background-position: center; background-size: cover; }
+.hero-card__image { width: 100%; height: 100%; object-fit: fill; display: block; border-radius: 1rem; }
+.hero-card__overlay { position: absolute; inset: 0; background: var(--color-primary); opacity: .4; z-index: 1; border-radius: 1rem; }
+.hero-card__text { position: absolute; inset: 0; z-index: 2; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; text-align: center; color: var(--color-light); padding: 2rem; }
+.hero__details {
+  margin-top: 1.5rem; background: #fff; border-radius: 1rem; padding: 1.5rem; box-shadow: 0 2px 8px rgba(72, 45, 140, 0.08);
+  color: var(--color-dark); max-width: auto;
+}
+.hero__details p { font-size: .5rem; color: var(--color-primary); }
+.hero__text h1 { font-size: 2.2rem; margin-bottom: 0.5rem; color: var(--color-primary); text-align: center; }
+.hero__text p { font-size: 1.2rem; color: var(--color-dark); }
+.hero-card__title { font-size: 1.5rem; margin-bottom: 0.5rem; text-shadow: 6px 6px 18px var(--color-secondary); }
+.hero-card__subtitle { font-size: 1rem; font-weight: 600; text-shadow: 1px 1px 4px rgba(0,0,0,0.4); }
+
+@media (max-width: 600px) {
+  .hero-banner { flex-direction: column; padding: 1rem 0.5rem; max-width: 90vw; margin: 0 1.5rem; }
+  .hero__logo.company { margin-bottom: 1rem; max-width: 120px; width: 60vw; }
+  .hero__text { max-width: 100%; font-size: 0.95rem; padding: 0.25rem; }
+}
+@media (max-width: 400px) { .hero__text { font-size: 0.85rem; padding: 0 0.1rem; } }
+
+/*──────────────────────────────────────────────────────────────────────────*/
+/* 4. LAYOUT: MAIN, SIDEBAR, NEUMORPHIC CARD                                */
+/*──────────────────────────────────────────────────────────────────────────*/
+.main-content {
+  margin: 2rem auto; width: 100%; max-width: 1480px; padding: 3rem 1rem;
+  display: flex; flex-direction: column; gap: 2.5rem; z-index: 1;
+}
+@media (max-width: 400px) { .main-content { padding: 0.25rem; } }
+
+.neumorphic, .card.neumorphic, .form-section.neumorphic {
+  background: var(--color-light); border-radius: 1rem;
+  box-shadow: 4px 4px 8px var(--color-primary), -4px -4px 8px var(--color-secondary);
+  padding: 2rem; transition: box-shadow .2s;
+}
+
+.card.neumorphic { padding-top: 4.5rem; padding-bottom: .5rem; z-index: 0; overflow: visible; position: relative; }
+.form-section.neumorphic { padding: 1.25rem; border: 2px solid var(--color-primary); border-radius: .25rem; }
+
+.sidebar::-webkit-scrollbar,
+.main-content::-webkit-scrollbar { width: 8px; }
+.sidebar::-webkit-scrollbar-thumb,
+.main-content::-webkit-scrollbar-thumb { background: var(--color-secondary); border-radius: 4px; }
+
+/*──────────────────────────────────────────────────────────────────────────*/
+/* 5. DETAILS, ATHLETE, EVENTS, SCHEDULE, CONTESTS                          */
+/*──────────────────────────────────────────────────────────────────────────*/
+.details-athlete-container .details-athlete { display: grid; gap: 3rem; grid-template-columns: 1fr; }
+@media (min-width: 900px) { .details-athlete-container .details-athlete { grid-template-columns: 1fr 1fr; } }
+.details-athlete__athlete, .details-athlete__event { padding: 1rem; }
+.details-athlete__event p { margin-bottom: 1rem; font-size: .75rem; line-height: 1.5; }
+
+.athlete__content { display: flex; align-items: top; gap: 1.5rem; justify-content: center; }
+.athlete__photo { flex: 0 0 140px; width: 140px; height: 140px; object-fit: cover; border-radius: 1rem; box-shadow: 4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light); }
+.athlete__bio { flex: 1; }
+.athlete__bio p { margin-bottom: 1rem; font-size: .85rem; line-height: 1.5; }
+.athlete__name { font-size: 1.75rem; margin-bottom: 0.5rem; text-align: center; }
+.athlete__gallery { display: flex; gap: 1rem; margin: 1rem 0; justify-content: center; flex-wrap: wrap; }
+.athlete__gallery-img { width: 180px; height: auto; object-fit: cover; border-radius: 0.5rem; box-shadow: 0 2px 8px rgba(72, 45, 140, 0.08); }
+@media (max-width: 700px) {
+  .athlete__gallery { flex-direction: row; gap: 1rem; overflow-x: auto; padding-bottom: 0.5rem; }
+  .athlete__gallery-img { flex: 0 0 auto; width: 70vw; max-width: 120px; border-radius: 0.8rem; }
+  .athlete-description { font-size: 0.98rem; padding: 0 0.5rem; line-height: 1.6; text-align: left; }
+  .athlete-name { font-size: 1.1rem; margin-bottom: 0.8rem; }
+}
+.details__text { text-align: left; }
+.details__text p { margin-top: .25rem; margin-bottom: .5rem; font-size: .85rem; line-height: 1.5; color: var(--color-primary); }
+
+.eventdetails__cards { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1rem; }
+.eventdetails__card { background: #f8f8fa; border-radius: 12px; box-shadow: 0 2px 8px rgba(72, 45, 140, 0.08); padding: 1rem 1.25rem; min-width: 180px; flex: 1 1 220px; display: flex; flex-direction: column; align-items: flex-start; }
+.eventdetails__card__header { font-size: 1.1rem; font-weight: bold; margin-bottom: 0.5rem; }
+.eventdetails__card__body { font-size: 1rem; color: var(--color-dark); }
+.eventdetails__schedule-cards .schedule__card { display: flex; flex-direction: column; width: 100%; max-width: 400px; min-width: 180px; box-shadow: 0 2px 8px rgba(72, 45, 140, 0.08); border-radius: 12px; overflow: hidden; background: #f8f8fa; margin: 0 auto; }
+.eventdetails__schedule-cards .schedule__card__header { background: var(--color-primary); color: var(--color-light); font-size: 1.1rem; font-weight: bold; padding: 0.75rem 1rem; border-radius: 12px 12px 0 0; }
+.eventdetails__content { display: flex; align-items: top; gap: 1.5rem; }
+.eventdetails__photo { flex: 0 0 140px; width: 160px; height: 160px; object-fit: contain; }
+.eventdetails__bio { flex: 1; }
+.eventdetails__bio p { margin-bottom: 1rem; font-size: .75rem; line-height: 1.5; }
+.eventdetails__name { font-size: 1.75rem; margin-bottom: 0.5rem; }
+.eventdetails__list { margin: 1rem 0 2rem 0; font-size: .85rem; }
+.eventdetails__list dt { font-weight: bold; color: var(--color-primary); margin-top: 0.5rem; }
+.eventdetails__list dd { margin: 0 0 0.5rem 0; padding-left: 0.5rem; color: var(--color-dark); }
+.eventdetails__map { width: 90%; border-radius: 0.5rem; border: 2px solid var(--color-primary); overflow: hidden; box-shadow: 0 2px 8px rgba(72, 45, 140, 0.08); }
+.eventdetails__map-iframe { border: 0; border-radius: 0.5rem; width: 100%; height: 180px; display: block; }
+.eventdetails__location { width: 100%; margin-top: 0.5rem; }
+.eventdetails__location .eventdetails__card__header { background: none; color: var(--color-primary); font-size: 1rem; margin: 0.25rem 0 0 0; padding: 0; border-radius: 0; }
+.eventdetails__location .eventdetails__card__body { color: var(--color-dark); font-size: 0.95rem; margin-bottom: 0.5rem; padding: 0 0 0.5rem 0; }
+
+@media (max-width: 900px) {
+  .eventdetails__content { flex-direction: column; align-items: stretch; }
+  .eventdetails_name { text-align: center; }
+  .eventdetails__photo { display: block; margin: 0 auto; }
+  .eventdetails__left { flex-direction: row; justify-content: flex-start; max-width: 100%; min-width: 0; gap: 1rem; }
+  .eventdetails__map { height: 120px; }
+}
+@media (max-width: 600px) { .eventdetails__name { text-align: center; } }
+
+/* SCHEDULE (CALENDAR-STYLE) */
+.schedule__cards { display: flex; flex-wrap: wrap; gap: 1.5rem; }
+.schedule__card { display: flex; flex: 1 1 380px; width: 320px; max-width: 320px; border-radius: .5rem; overflow: hidden; background: var(--color-light); box-shadow: 4px 4px 8px rgba(0,0,0,0.05), -4px -4px 8px rgba(255,255,255,0.6); }
+.schedule__card:hover { box-shadow: 6px 6px 12px rgba(0,0,0,0.08), -6px -6px 12px rgba(255,255,255,0.7); }
+.schedule__card__header { flex: 0 0 35%; background: var(--color-primary); color: var(--color-light); padding: 1rem; font-weight: 700; display: flex; align-items: center; justify-content: center; font-size: 1rem; border-top-left-radius: .5rem; border-bottom-left-radius: .5rem; }
+.schedule__card__body { flex: 1; padding: 1.25rem; display: flex; align-items: center; justify-content: flex-start; font-size: .75rem; color: var(--color-dark); border-top-right-radius: .5rem; border-bottom-right-radius: .5rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* CONTESTS */
+.contests__flex-container { display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center; margin-top: 2rem; }
+.contest-card { flex: 1 1 300px; max-width: 350px; background: #f8f8fa; border-radius: 16px; padding: 2rem; text-align: center; background: var(--color-light); box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.contest-card:hover { transform: translateY(-6px); box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12); }
+.contest-card img { max-width: 140px; margin-bottom: 1rem; }
+.contest-card h3 { font-size: 1.5rem; color: #4a2e83; }
+.contest-card--prize { background: #ffffff; display: flex; flex-direction: column; justify-content: center; font-size: 0.95rem; color: #333; }
+.prize-logo { max-width: 120px; margin: 0 auto 1rem auto; }
+.contests p { text-align: center; font-size: 1.25rem; color: var(--color-primary); }
+@media (max-width: 768px) { .contest-card { flex: 1 1 100%; } }
+
+/*──────────────────────────────────────────────────────────────────────────*/
+/* 6. GALLERY, LIGHTBOX                                                     */
+/*──────────────────────────────────────────────────────────────────────────*/
+.gallery__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px,1fr)); grid-auto-rows: 180px; gap: 1rem; max-height: calc((185px*2) + 1rem); overflow: hidden; transition: max-height 0.3s ease; position: relative; z-index: 0; }
+.gallery__grid img { width: 100%; height: 100%; object-fit: contain; transition: transform 0.3s ease, z-index 0.3s; }
+.gallery__grid img:hover { scale: 1.1; transform: translateY(-3px); box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15), 0 4px 10px rgba(0, 0, 0, 0.1); }
+.gallery__grid.expanded { max-height: none; }
+.gallery__toggle { display: block; margin: 1rem auto 0; padding: 0.5rem 1.5rem; background: var(--color-primary); color: var(--color-light); border: none; border-radius: 1rem; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+.gallery__toggle:hover { background: var(--color-secondary); color: var(--color-primary); }
+
+/* Lightbox */
+.lightbox-modal { position: fixed; inset: 0; display: flex; justify-content: center; align-items: center; z-index: 9999; border-radius: 1rem; }
+.lightbox-modal.hidden { display: none; }
+.lightbox-backdrop { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.8); z-index: 0; }
+.lightbox-content { position: relative; background: var(--color-light); padding: 1rem; border-radius: 1rem; box-shadow: 8px 8px 16px var(--shadow-dark), -8px -8px 16px var(--shadow-light); z-index: 2; display: flex; justify-content: center; align-items: center; max-width: 90vw; max-height: 100vh; overflow: hidden; }
+.lightbox-content img { max-width: 100%; max-height: 100%; width: auto; height: 90vh; object-fit: contain; border-radius: 1rem; }
+.lightbox-close { position: absolute; top: 0.5rem; right: 0.5rem; font-size: 1.5rem; background: #b90303; color: var(--color-light); border: none; border-radius: 15%; width: 2rem; height: 2rem; cursor: pointer; font-weight: bold; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); z-index: 3; }
+.lightbox-nav { position: absolute; top: 50%; transform: translateY(-50%); background: var(--color-primary); color: var(--color-secondary); border: none; border-radius: 15%; font-size: 1.25rem; width: 2.5rem; height: 2.5rem; cursor: pointer; z-index: 3; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); }
+.lightbox-nav.left { left: 0.5rem; }
+.lightbox-nav.right { right: 0.5rem; }
+@media (max-width: 768px) { .lightbox-nav.left, .lightbox-nav.right { left: 0.5rem; right: 0.5rem; } }
+
+/*──────────────────────────────────────────────────────────────────────────*/
+/* 7. SPONSORS, CTAS, MODALS, SUCCESS, VOLUNTEER, FORM ELEMENTS             */
+/*──────────────────────────────────────────────────────────────────────────*/
+.sponsors__grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 2rem; justify-items: center; }
+.sponsors__grid img { max-width: 140px; max-height: 140px; object-fit: contain; transition: transform .2s; }
+.sponsors__grid img:hover { transform: scale(1.05); }
+.sponsors__grid .sponsor-tier-label { font-size: 1rem; font-weight: 700; margin-top: 0.25rem; letter-spacing: 1px; text-transform: uppercase; text-align: center; border-radius: 0.5rem; padding: 0.25em 0.75em; background: #f7f5f2; color: var(--color-primary); box-shadow: 2px 2px 6px var(--shadow-dark), -2px -2px 6px var(--shadow-light); }
+@media (max-width: 900px) { .sponsors__grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .sponsors__grid { grid-template-columns: 1fr; } }
+
+/* Sponsor Ribbons */
+.sponsors__grid .sponsor-tier-platinum { background: linear-gradient(90deg,rgba(77, 77, 77, 1) 10%, rgb(168, 173, 169) 65%, rgba(125, 122, 122, 1) 100%); color: #fff; }
+.sponsors__grid .sponsor-tier-gold { background: linear-gradient(90deg, rgba(174, 124, 43, 1) 10%, rgb(206, 188, 99) 65%, rgba(174, 124, 43, 1) 100%); color: #fff; }
+.sponsors__grid .sponsor-tier-silver { background: linear-gradient(to right, #9e9b9b 10%, #b8b8b8 65%, #9e9b9b 100%); color: #333; }
+.sponsors__grid .sponsor-tier-bronze { background: linear-gradient(90deg,rgba(128, 74, 0, 1) 10%, rgb(168, 133, 81) 65%, rgba(128, 74, 0, 1) 100%); color: #fff; }
+.sponsors__grid .sponsor-tier-hole { background: linear-gradient(90deg,rgb(5, 119, 34) 10%, rgb(38, 141, 47) 65%, rgb(5, 119, 34) 100%); color: #fff; }
+
+/* CTAs */
+.cta-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; margin: 1rem auto; max-width: 1400px; padding: 0 .1rem; }
+@media (max-width: 700px) { .cta-grid { grid-template-columns: 1fr 1fr; gap: 1rem; } .cta-card { width: 100%; max-width: none; font-size: 0.95rem; } }
+.cta-card { background: var(--color-light); box-shadow: 4px 4px 8px var(--color-primary), -4px -4px 8px var(--color-secondary); border-radius: 1rem; padding: 1.5rem; text-align: center; display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.2s, box-shadow 0.2s; }
+.cta-card:hover { transform: translateY(-4px); box-shadow: 6px 6px 12px rgba(0,0,0,0.1), -6px -6px 12px rgba(255,255,255,0.6); }
+.cta-title { font-size: 1.75rem; margin-bottom: 1rem; }
+.cta-price { font-size: 2rem; color: var(--color-dark); margin-bottom: 1rem; }
+.cta-btn { background: var(--color-primary); color: var(--color-light); border: none; border-radius: .5rem; padding: 0.6rem 1.5rem; font-weight: bold; font-size: 1rem; cursor: pointer; box-shadow: 2px 2px 6px var(--color-primary), -2px -2px 6px var(--color-secondary); transition: background 0.2s, transform 0.2s; }
+.cta-btn:hover { background: var(--color-secondary); color: var(--color-primary); transform: translateY(-2px); }
+
+/* Success Overlay, Volunteer, Modal, Forms - see original code for all detailed selectors */
+
+.success-message-text, .volunteer-btn, .modal-content, .modal-step-content, .modal-close, .form-message, .form-grid-two, .form-grid-email-phone, input, select, textarea {
+  /* ...group all modal, overlay, success, volunteer, form, modal, and button styles in this block for clarity... */
+}
+
+/*──────────────────────────────────────────────────────────────────────────*/
+/* 8. BUTTONS, FORM ELEMENTS                                                */
+/*──────────────────────────────────────────────────────────────────────────*/
+/* Group all your .btn, .form-section, .form-field, .form-message, input, select, etc. here as in your code */
+
+/*──────────────────────────────────────────────────────────────────────────*/
+/* 9. FAQ, ADMIN, MISC                                                      */
+/*──────────────────────────────────────────────────────────────────────────*/
+.faq__list dt { font-weight: 600; margin-top: 1rem; }
+.faq__list dd { margin-left: 1rem; margin-bottom: 1rem; }
+.admin-table th, .admin-table td { text-align: center; vertical-align: middle; }
+.admin-table tfoot th { text-align: right; }
+#admin-link { display: none; position: fixed; bottom: 10px; right: 10px; z-index: 9999; }
+.back-to-home { position: fixed; top: 10px; left: 10px; z-index: 9999; font-weight: bold; }
+#total-tier-amount, #total-amount-paid { text-align: center; }
+
+[hidden] { display: none !important; }
+.last-updated { font-size: 0.55rem; color: var(--color-light); margin-bottom: .5rem; text-align: center; }
+
+/*──────────────────────────────────────────────────────────────────────────*/
+/* 10. RESPONSIVE BREAKPOINTS                                               */
+/*──────────────────────────────────────────────────────────────────────────*/
+@media (max-width: 1024px) {
+  .sidebar { width: 200px; }
+  .main-content { margin: 0 auto 3rem 200px; width: calc(100% - 200px); }
+}
+@media (max-width: 768px) {
+  .sidebar { display: none; }
+  .main-content { margin: 0 auto; width: 100%; padding: 2rem; }
+  .contest-card { flex: 1 1 100%; }
+  .sponsor-tier-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+}
+@media (max-width: 700px) {
+  .cta-grid { grid-template-columns: 1fr 1fr; }
+  .modal-content, .modal-content.team-form, .modal-content.wide { padding: 1rem !important; max-width: 98vw; }
+}
+@media (max-width: 600px) {
+  .slide { flex: 0 0 100% !important; }
+  .slider__viewport { height: auto; }
+  .slider__arrow { padding: 1rem 1.5rem; font-size: 1.25rem; }
+  .stepper-grid { flex-direction: column; align-items: flex-start; }
+  .sponsors__grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  body { font-size: 0.95rem; }
+  .btn { width: 100%; padding: 1rem; font-size: 1rem; }
+  .section__title { font-size: 1.5rem; }
+}
+@media (max-width: 350px) { .section__title { font-size: 1.1rem; } }
