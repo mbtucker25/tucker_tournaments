@@ -26,12 +26,17 @@ html, body {
   overflow-x: hidden;
   overflow-y: auto;
 }
+html {
+  scroll-behavior: smooth;
+  font-size: 16px; /* Base font size */
+}
 body {
 
   background: var(--color-light);
   color: var(--color-dark);
   font-family: var(--font-sans);
   line-height: 1.6;
+  font-size: 1rem;
 }
 
 /*──────────────────────────────────────────────────────────────────────────*/
@@ -157,9 +162,10 @@ body {
 }
 .athlete__photo {
   flex: 0 0 140px;
-  width: 140px;
-  height: 140px;
-  object-fit: cover;
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
   border-radius: 1rem;
   box-shadow:
     4px 4px 8px var(--shadow-dark),
@@ -191,9 +197,11 @@ body {
   flex-wrap: wrap;
 }
 .athlete__gallery-img {
-  width: 180px;
+  max-width: 260px;
+  max-height: 260px;
+  width: auto;
   height: auto;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 0.5rem;
   box-shadow: 0 2px 8px rgba(72, 45, 140, 0.08);
 }
@@ -250,9 +258,9 @@ body {
 /*                            HERO BANNER                                  */
 /*──────────────────────────────────────────────────────────────────────────*/
 .hero-card {
-  max-width: 1200px;
-  width: 800px;
-  height: 200px;
+  max-width: 100vw;
+  width: 90vw;
+  height: auto;
   margin: .5rem auto;
   border-radius: 1rem;
   box-shadow: 
@@ -261,8 +269,8 @@ body {
 }
 
 .hero-banner {
-  max-width: 1800px;
-  width: 1600px;
+  max-width: 100%;
+  width: 90vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -285,6 +293,7 @@ body {
 
 .hero__logo.company {
   height: 140px;
+  max-width: 100%;
   width: auto;
 }
 
@@ -694,7 +703,8 @@ body {
 
 .contest-card {
   flex: 1 1 300px;
-  max-width: 350px;
+  max-width: 100%;
+  width: 60vw;
   background: #f8f8fa;
   border-radius: 16px;
   padding: 2rem;
@@ -1178,6 +1188,9 @@ legend {
 }
 
 input, select, textarea {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   font-size: .75rem;
   font-family: var(--font-sans);
   border-radius: 0.5rem;
@@ -1564,7 +1577,7 @@ label {
   }
   .cta-card {
     width: 100%;
-    max-width: none;
+    max-width: 90vw;
     margin: 0;
     font-size: 0.95rem;
   }
@@ -1649,13 +1662,13 @@ label {
 }
 
 .modal-content {
-    margin: auto;
+  margin: auto;
   flex-grow: 1;
   min-height: 0;
   background: var(--color-light);
   border-radius: 1rem;
-  max-width: auto;
-  width: auto;
+  max-width: 100%;
+  width: 90vw;
   overflow-y: visible;
   overflow-x: hidden;
   box-shadow:
@@ -2505,6 +2518,17 @@ input[type="tel"]:focus {
 @media (max-width: 400px) {
   .modal-content, .modal-content.team-form, .modal-content.wide {
     padding: 1rem !important;
+    max-width: 98vw;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-content,
+  .modal-content.wide {
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+    box-sizing: border-box;
+    width: 98vw;
     max-width: 98vw;
   }
 }

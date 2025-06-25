@@ -705,43 +705,52 @@ async function loadSponsors() {
   grid.innerHTML = ''; // Clear any existing content
 
   data.forEach(sponsor => {
-    if (sponsor.logo_url) {
-      const div = document.createElement('div');
-      div.style.display = 'flex';
-      div.style.flexDirection = 'column';
-      div.style.alignItems = 'center';
-      div.style.justifyContent = 'center';
+    // Determine which logo to show
+    const tier = (sponsor.tier || '').toLowerCase();
+    let imgSrc = sponsor.logo_url;
+    if (!imgSrc) {
+      // Use the default tier image (tier names might be mixed case, so normalize to lowercase)
 
-      const img = document.createElement('img');
-      img.src = sponsor.logo_url;
-      img.alt = sponsor.company_name;
-      img.style.maxWidth = '180px';
-      img.style.maxHeight = '180px';
-      img.style.objectFit = 'contain';
-
-      const label = document.createElement('div');
-      label.textContent = sponsor.company_name;
-      label.style.marginTop = '0.5rem';
-      label.style.fontWeight = 'bold';
-      label.style.color = 'var(--color-primary)';
-      label.style.textAlign = 'center';
-
-      const tier = document.createElement('div');
-      tier.textContent = sponsor.tier ? sponsor.tier + ' Sponsor' : '';
-      tier.className = 'sponsor-tier-label sponsor-tier-' + (sponsor.tier || '').toLowerCase();
-      tier.style.fontSize = '0.95rem';
-      tier.style.fontWeight = '600';
-      tier.style.marginTop = '0.25rem';
-      tier.style.textTransform = 'uppercase';
-      tier.style.letterSpacing = '1px';
-      tier.style.textAlign = 'center';
-
-      div.appendChild(img);
-      div.appendChild(tier);
-      div.appendChild(label);
-      grid.appendChild(div);
+      imgSrc = `images/sponsors/missing_${tier}.png`;
     }
+
+    // Create sponsor card as before
+    const div = document.createElement('div');
+    div.style.display = 'flex';
+    div.style.flexDirection = 'column';
+    div.style.alignItems = 'center';
+    div.style.justifyContent = 'center';
+
+    const img = document.createElement('img');
+    img.src = imgSrc;
+    img.alt = sponsor.company_name;
+    img.style.maxWidth = '180px';
+    img.style.maxHeight = '180px';
+    img.style.objectFit = 'contain';
+
+    const label = document.createElement('div');
+    label.textContent = sponsor.company_name;
+    label.style.marginTop = '0.5rem';
+    label.style.fontWeight = 'bold';
+    label.style.color = 'var(--color-primary)';
+    label.style.textAlign = 'center';
+
+    const tierLabel = document.createElement('div');
+    tierLabel.textContent = sponsor.tier ? sponsor.tier + ' Sponsor' : '';
+    tierLabel.className = 'sponsor-tier-label sponsor-tier-' + tier;
+    tierLabel.style.fontSize = '0.95rem';
+    tierLabel.style.fontWeight = '600';
+    tierLabel.style.marginTop = '0.25rem';
+    tierLabel.style.textTransform = 'uppercase';
+    tierLabel.style.letterSpacing = '1px';
+    tierLabel.style.textAlign = 'center';
+
+    div.appendChild(img);
+    div.appendChild(tierLabel);
+    div.appendChild(label);
+    grid.appendChild(div);
   });
+
 }
 
 function initGalleryFeatures() {
