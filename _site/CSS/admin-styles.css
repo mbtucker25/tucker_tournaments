@@ -1,0 +1,339 @@
+/*──────────────────────────────────────────────────────────────────────────*/
+/*                            BRAND VARIABLES                              */
+/*──────────────────────────────────────────────────────────────────────────*/
+:root {
+  --color-primary:   #384360;
+  --color-secondary: #A2AAAD;
+  --color-dark:      #302E2C;
+  --color-light:     #F7F5F2;
+  --color-accent-hover: #E1E6ED;
+  --color-accent-alt: #EBEBE7;
+  --color-edited-cell: #fff3c4;
+  --font-sans:       'Open Sans', sans-serif;
+  --font-display:    'Open Sans', sans-serif;
+  --shadow-dark:     rgba(0,0,0,0.2);
+  --shadow-light:    rgba(255,255,255,0.7);
+}
+
+/*──────────────────────────────────────────────────────────────────────────*/
+/*                            RESET & BASE                                 */
+/*──────────────────────────────────────────────────────────────────────────*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html, body {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+body {
+  background: var(--color-light);
+  color: var(--color-dark);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+}
+
+/*──────────────────────────────────────────────────────────────────────────*/
+/* ADMIN PAGE BASE STYLES */
+/*──────────────────────────────────────────────────────────────────────────*/
+
+body {
+  background: var(--color-light);
+  color: var(--color-dark);
+  font-family: 'Open Sans', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  justify-content: center;
+}
+
+.main-content {
+  margin: 2rem auto;
+  width: 100%;
+  align-content: center;
+  max-width: 1200px;
+  padding: 3rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  z-index: 1;
+}
+
+h1 {
+  font-size: 2.2rem;
+  color: var(--color-primary);
+  margin-bottom: 1rem;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+/*──────────────────────────────────────────────────────────────────────────*/
+/* BACK-TO-HOME BUTTON */
+/*──────────────────────────────────────────────────────────────────────────*/
+.back-to-home {
+  position: fixed;
+  font-size: small;
+  top: 10px;
+  left: 10px;
+  z-index: 9999;
+  font-weight: bold;
+  color: var(--color-primary);
+  background: var(--color-light);
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  box-shadow: 0 2px 8px var(--shadow-dark);
+  transition: background 0.2s, color 0.2s;
+}
+.back-to-home:hover {
+  background: var(--color-primary);
+  color: var(--color-light);
+}
+
+/*──────────────────────────────────────────────────────────────────────────*/
+/* ✅ Admin Table Base (minimal shared) */
+/*──────────────────────────────────────────────────────────────────────────*/
+.admin-table {
+  table-layout: fixed;
+  width: 100%;
+  background: var(--color-light);
+  border-collapse: separate;
+  border-spacing: 0;
+  box-shadow:
+      4px 4px 8px var(--color-primary),
+  -4px -4px 8px var(--color-secondary);
+  overflow: hidden;
+  font-size: 0.95rem;
+  margin-bottom: 2rem;
+}
+
+/*──────────────────────────────────────────────────────────────────────────*/
+/* ✅ Full Teams Table Styles */
+/*──────────────────────────────────────────────────────────────────────────*/
+.full-teams-table th,
+.full-teams-table td {
+  text-align: left;
+  vertical-align: middle;
+  padding: 0.25rem;
+  font-weight: 500;
+}
+.full-teams-table th {
+  background: var(--color-primary);
+  color: var(--color-light);
+  border: 4px double var(--color-secondary);
+  font-family: var(--font-display);
+  font-size: .85rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.full-teams-table td {
+  border: 4px double var(--color-primary);
+}
+/* Column widths for full teams */
+.full-teams-table th:nth-child(1),
+.full-teams-table td:nth-child(1) { width: 180px; text-align: center; }
+.full-teams-table th:nth-child(2),
+.full-teams-table td:nth-child(2) { width: 120px; }
+.full-teams-table th:nth-child(3),
+.full-teams-table td:nth-child(3) { width: 120px; }
+.full-teams-table th:nth-child(4),
+.full-teams-table td:nth-child(4) { width: 180px; }
+.full-teams-table th:nth-child(5),
+.full-teams-table td:nth-child(5) { width: 120px; }
+.full-teams-table th:nth-child(6),
+.full-teams-table td:nth-child(6) { width: 140px; text-align: center;}
+.full-teams-table th:nth-child(7),
+.full-teams-table td:nth-child(7) { width: 140px; text-align: center;}
+
+/*──────────────────────────────────────────────────────────────────────────*/
+/* ✅ Partial Teams Table Styles */
+/*──────────────────────────────────────────────────────────────────────────*/
+.partial-teams-table th,
+.partial-teams-table td {
+  text-align: left;
+  vertical-align: middle;
+  padding: 0.25rem;
+  font-weight: 500;
+}
+.partial-teams-table th {
+  background: #fffbe7;
+  color: #b8860b;
+  border: 4px double var(--color-secondary);
+  font-family: var(--font-display);
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.partial-teams-table td {
+  border: 4px double var(--color-primary);
+}
+/* Column widths for partial teams */
+.partial-teams-table th:nth-child(1),
+.partial-teams-table td:nth-child(1) { width: 60px; text-align: center; }
+/* ...repeat for each column as needed... */
+
+/*──────────────────────────────────────────────────────────────────────────*/
+/* ✅ Free Agents Table Styles */
+/*──────────────────────────────────────────────────────────────────────────*/
+.free-agents-table th,
+.free-agents-table td {
+  text-align: left;
+  vertical-align: middle;
+  padding: 0.25rem;
+  font-weight: 500;
+}
+.free-agents-table th {
+  background: #f9eaea;
+  color: #a94442;
+  border: 4px double var(--color-secondary);
+  font-family: var(--font-display);
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.free-agents-table td {
+  border: 4px double var(--color-primary);
+}
+/* Column widths for free agents */
+.free-agents-table th:nth-child(1),
+.free-agents-table td:nth-child(1) { width: 60px; text-align: center; }
+/* ...repeat for each column as needed... */
+
+/*──────────────────────────────────────────────────────────────────────────*/
+/* ✅ Sponsors Table Styles */
+/*──────────────────────────────────────────────────────────────────────────*/
+.sponsors-table th,
+.sponsors-table td {
+  text-align: left;
+  vertical-align: middle;
+  padding: 0.25rem;
+  font-weight: 500;
+}
+.sponsors-table th {
+  background: #f3f3fa;
+  color: #4b3869;
+  border: 4px double var(--color-secondary);
+  font-family: var(--font-display);
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.sponsors-table td {
+  border: 4px double var(--color-primary);
+}
+/* Column widths for sponsors */
+.sponsors-table th:nth-child(1),
+.sponsors-table td:nth-child(1) { width: 60px; text-align: center; }
+/* ...repeat for each column as needed... */
+
+/*──────────────────────────────────────────────────────────────────────────*/
+/* Highlight edited cells (shared) */
+.admin-table td.edited-cell {
+  background-color: var(--color-edited-cell) !important;
+  transition: background-color 0.2s;
+}
+
+/*──────────────────────────────────────────────────────────────────────────*/
+/* ✅ Shared Save/Edit Button System */
+/*──────────────────────────────────────────────────────────────────────────*/
+.save-table-btn,
+.edit-table-btn,
+.edit-btn {
+  background: var(--color-primary);
+  color: var(--color-light);
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.6rem 1.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow:
+    2px 2px 6px var(--color-primary),
+   -2px -2px 6px var(--color-secondary);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.save-table-btn:hover:enabled,
+.edit-table-btn:hover:enabled,
+.edit-btn:hover:enabled {
+  background: var(--color-secondary);
+  color: var(--color-primary);
+  transform: translateY(-2px);
+}
+.save-table-btn:disabled,
+.edit-table-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+/* Button Container */
+.table-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+/*──────────────────────────────────────────────────────────────────────────*/
+/* ✅ Admin Table Drop-down Controls */
+/*──────────────────────────────────────────────────────────────────────────*/
+.admin-table select,
+.full-teams-table select,
+.partial-teams-table select,
+.free-agents-table select,
+.sponsors-table select {
+  padding: 0.2rem;
+  font-size: .85rem;
+  border: 2px solid var(--color-secondary);
+  border-radius: 0.4rem;
+  background: var(--color-light);
+  color: var(--color-dark);
+  appearance: none;
+  cursor: pointer;
+  width: 100px;
+  transition: border-color 0.2s;
+}
+
+.admin-table select:disabled {
+  background: var(--color-light);
+  color: var(--color-secondary);
+  cursor: not-allowed;
+  border-style: solid;
+}
+
+.admin-table select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+/*──────────────────────────────────────────────────────────────────────────*/
+/* ✅ Responsive Table Handling */
+/*──────────────────────────────────────────────────────────────────────────*/
+@media (max-width: 900px) {
+  .main-content {
+    padding: 1rem;
+  }
+  .admin-table th,
+  .admin-table td {
+    font-size: 0.95rem;
+    padding: 0.5rem 0.25rem;
+  }
+}
+@media (max-width: 600px) {
+  .main-content {
+    padding: 0.5rem;
+  }
+  .admin-table th,
+  .admin-table td {
+    font-size: 0.85rem;
+    padding: 0.3rem 0.1rem;
+  }
+  h1 {
+    font-size: 1.5rem;
+  }
+}
+/*──────────────────────────────────────────────────────────────────────────*/
+/*                            END OF STYLES                                */
+/*──────────────────────────────────────────────────────────────────────────*/

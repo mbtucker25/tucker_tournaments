@@ -28,14 +28,17 @@ html, body {
   overflow-x: hidden;
   overflow-y: auto;
 }
-						  
+html {
+  scroll-behavior: smooth;
+  font-size: 16px; /* Base font size */
+}
 body {
 
   background: var(--color-light);
   color: var(--color-dark);
   font-family: var(--font-sans);
   line-height: 1.6;
-				  
+  font-size: 1rem;
 }
 
 /*──────────────────────────────────────────────────────────────────────────*/
@@ -106,12 +109,6 @@ body {
   z-index: 1;
 }
 
-@media (max-width: 400px) {
-  .main-content {
-    padding: 0.25rem;
-  }
-}
-
 /*──────────────────────────────────────────────────────────────────────────*/
 /*                            NEUMORPHIC CARD                              */
 /*──────────────────────────────────────────────────────────────────────────*/
@@ -133,11 +130,7 @@ body {
   gap: 3rem;
   grid-template-columns: 1fr;
 }
-@media (min-width: 900px) {
-  .details-athlete-container .details-athlete {
-    grid-template-columns: 1fr 1fr;
-  }
-}
+
 .details-athlete__athlete,
 .details-athlete__event {
   padding: 1rem;
@@ -238,20 +231,12 @@ body {
 /*                            SECTION TITLES                                */
 /*──────────────────────────────────────────────────────────────────────────*/
 .section__title {
-  font-family: var(--font-display);
-  font-size: 3rem;
-  color: var(--color-primary);
-  text-align: center;
-  margin-bottom: 0;
-}
-
-@media (max-width: 700px) {
-  .section__title {
-    font-size: 2rem;
-    padding: 0 0.5rem;
-    margin-bottom: 0.5rem;
-  }
-}
+	  font-family: var(--font-display);
+	  font-size: 3rem;
+	  color: var(--color-primary);
+	  text-align: center;
+	  margin-bottom: 0;
+	}
 
 /*──────────────────────────────────────────────────────────────────────────*/
 /*                            HERO BANNER                                  */
@@ -601,38 +586,6 @@ body {
   color: var(--color-primary);
 }
 
-@media (max-width: 900px) {
-  .eventdetails__content {
-    flex-direction: column;
-    align-items: stretch;
-  }
-    .eventdetails_name {
-    text-align: center;
-  }
-    .eventdetails__photo {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .eventdetails__left {
-    flex-direction: row;
-    justify-content: flex-start;
-    max-width: 100%;
-    min-width: 0;
-    gap: 1rem;
-  }
-  .eventdetails__map {
-    height: 120px;
-  }
-}
-
-@media (max-width: 600px) {
-  .eventdetails__name {
-    text-align: center;
-  }
-}
-
-
 /*──────────────────────────────────────────────────────────────────────────*/
 /*                        SCHEDULE (CALENDAR-STYLE)                        */
 /*──────────────────────────────────────────────────────────────────────────*/
@@ -748,12 +701,6 @@ body {
   line-height: normal; 
   padding-bottom: .5rem;
   color: var(--color-primary);
-}
-
-@media (max-width: 768px) {
-  .contest-card {
-    flex: 1 1 100%;
-  }
 }
 
 /*──────────────────────────────────────────────────────────────────────────*/
@@ -936,17 +883,6 @@ body {
   box-shadow: 2px 2px 6px var(--shadow-dark), -2px -2px 6px var(--shadow-light);
 }
 
-@media (max-width: 900px) {
-  .sponsors__grid {
-    grid-template-columns: repeat(2, 1fr); /* 2 columns on tablets */
-  }
-}
-@media (max-width: 600px) {
-  .sponsors__grid {
-    grid-template-columns: 1fr; /* 1 column on mobile */
-  }
-}
-
 /* Sponsors Grid Tier Labels - Match Sponsorship Ribbon Colors */
 .sponsors__grid .sponsor-tier-platinum {
   background: linear-gradient(90deg,rgba(77, 77, 77, 1) 10%, rgb(168, 173, 169) 65%, rgba(125, 122, 122, 1) 100%);
@@ -1014,119 +950,6 @@ body {
   left: 10px;
   z-index: 9999;
   font-weight: bold;
-}
-
-/*──────────────────────────────────────────────────────────────────────────*/
-/*                            RESPONSIVE                                   */
-/*──────────────────────────────────────────────────────────────────────────*/
-@media (max-width: 1024px) {
-  .sidebar { width: 200px; }
-  .main-content {
-    margin: 0 auto 3rem 200px;
-    width: calc(100% - 200px);
-  }
-}
-@media (max-width: 768px) {
-  .sidebar { display: none; }
-  .main-content {
-    margin: 0 auto;
-    width: 100%;
-    padding: 2rem;
-  }
-
-}
-@media (max-width: 600px) {
-  .slide { flex: 0 0 100% !important; }
-  .slider__viewport { height: auto; }
-  .slider__arrow {
-    padding: 1rem 1.5rem;
-    font-size: 1.25rem;
-  }
-}
-@media (max-width: 480px) {
-  body { font-size: 0.95rem; }
-  .btn {
-    width: 100%;
-    padding: 1rem;
-    font-size: 1rem;
-  }
-  .section__title { font-size: 1.5rem; }
-  .hero__title { font-size: 2rem; }
-  .schedule__card__header { font-size: 0.8rem; }
-  .schedule__card__body { font-size: 0.8rem; }
-}
-
-@media (max-width: 350px) {
-  .section__title { font-size: 1.1rem; }
-}
-
-@media (max-width: 480px) {
-  .details__pricing {
-    flex-direction: column;
-    gap: 1rem;
-    align-items: center;
-  }
-}
-@media (max-width: 600px) {
-  .athlete__content {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-  .athlete__bio {
-    max-width: 100%;
-    text-align: left;
-  }
-}
-@media (max-width: 768px) {
-  .lightbox-nav.left { left: 0.5rem; }
-  .lightbox-nav.right { right: 0.5rem; }
-}
-
-@media (max-width: 700px) {
-  .modal-content.wide {
-    max-width: 95vw;
-    width: 100%;
-    padding: 0.5rem !important;
-  }
-  .sponsor-modal-grid {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 0.25rem;
-    grid-template-columns: none !important;
-    align-items: center;
-  }
-  .sponsor-options-column,
-  .sponsor-form-column {
-    width: 100%;
-    max-width: 100%;
-  }
-    .sponsor-form-column {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .sponsor-option {
-    width: 100%;
-    margin: 0 auto .5rem auto;
-  }
-  .sponsor-form-column .card.neumorphic {
-    padding: 1rem;
-        margin-left: auto;
-    margin-right: auto;
-    /* Optionally set a max-width for better appearance */
-    max-width: 500px;
-    width: 100%;
-  }
-  .sponsor-heading {
-    font-size: .75rem;
-    padding: 1rem;
-  }
-  .form-field input,
-  .form-field select {
-    font-size: 0.85rem;
-    padding: 0.25rem;
-  }
 }
 
 form {
@@ -1361,8 +1184,6 @@ select option:hover {
   margin-left: -2rem;
 }
 
-
-
 /* GRID LAYOUTS */
 .grid-row {
   display: grid;
@@ -1566,30 +1387,6 @@ label {
   margin: 1rem auto;
   max-width: 1400px;
   padding: 0 .1rem;
-}
-
-@media (max-width: 700px) {
-  .cta-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-  }
-  .cta-card {
-    width: 100%;
-    max-width: 90vw;
-    margin: 0;
-    font-size: 0.95rem;
-  }
-    .cta-card h2,
-  .cta-card .cta-title {
-    font-size: 1.2rem;
-  }
-  .cta-card .cta-price {
-    font-size: 1.1rem;
-  }
-  .cta-card button {
-    font-size: 1rem;
-  }
 }
 
 .cta-card {
@@ -1809,15 +1606,6 @@ label {
   max-width: 900px;
 }
 
-@media (max-width: 700px) {
-  .sponsor-form-column .card.neumorphic {
-    margin: 0.5rem auto 1.5rem auto;
-    max-width: 98vw;
-    width: 100%;
-    box-sizing: border-box;
-  }
-}
-
 .price {
   display: inline-flex;
   align-items: center;
@@ -1914,16 +1702,6 @@ label {
   grid-column-start: 2; /* start in column 2 */
 }
 
-@media (max-width: 768px) {
-  .sponsor-tier-grid {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  }
-
-  .center-row:first-of-type {
-    grid-column-start: auto; /* reset on small screens */
-  }
-}
-
 .card.neumorphic.sponsor-company-card {
   width: auto !important;
   max-width: 600px !important;
@@ -1951,28 +1729,6 @@ label {
 .sponsor-contact-info .form-grid-email-phone {
   gap: 0.25rem 1rem; /* tighter vertical and horizontal spacing */
   margin-bottom: 0.5rem; /* reduce bottom margin between grids */
-}
-
-@media (max-width: 700px) {
-  .sponsor-modal-grid {
-    grid-template-columns: 1fr !important; /* Stack columns */
-    gap: 1.5rem;
-    margin: 0; /* Remove large margins for mobile */
-    width: 90%;
-    justify-self: center;
-  }
-  .sponsor-form-column, .sponsor-options-column {
-    width: 80%;
-    max-width: 80%;
-  }
-  .card.neumorphic {
-    padding: 1rem;
-  }
-  .sponsor-contact-info {
-    margin-top: 4rem;
-    padding: 0;
-    gap: 1rem;
-  }
 }
 
 .sponsor-card {
@@ -2098,7 +1854,7 @@ background: linear-gradient(90deg,rgb(5, 119, 34) 10%, rgb(38, 141, 47) 65%, rgb
 .sponsor-heading.platinum::before { border-color: transparent #4B0082 transparent transparent; }
 .sponsor-heading.platinum::after  { border-color: transparent #7B68EE transparent transparent; }
 
-.ssponsor-heading.gold::before { border-color: transparent #FFD700 transparent transparent; }
+.sponsor-heading.gold::before { border-color: transparent #FFD700 transparent transparent; }
 .sponsor-heading.gold::after  { border-color: transparent #FFA500 transparent transparent; }
 
 .sponsor-heading.silver::before { border-color: transparent #C0C0C0 transparent transparent; }
@@ -2151,22 +1907,6 @@ background: linear-gradient(90deg,rgb(5, 119, 34) 10%, rgb(38, 141, 47) 65%, rgb
   max-width: 968px;
   width: 95%;
   padding: 3rem;
-}
-
-/* === Responsive: Stack vertically on small screens === */
-@media (max-width: 600px) {
-  .stepper-grid {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .stepper-grid .step {
-    width: 75%;
-  }
-
-  .stepper-grid .step::after {
-    margin-left: auto;
-  }
 }
 
 /* ───── Grid 2: Team Name ───── */
@@ -2427,19 +2167,6 @@ input[type="tel"]:focus {
   z-index: 2;
 }
 
-@media (max-width: 500px) {
-  .section-heading {
-    font-size: 1rem;
-    padding: 1rem;
-  }
-  .section-heading-main {
-    font-size: 1.05rem;
-  }
-  .section-heading small {
-    font-size: 0.7rem;
-  }
-}
-
 /* ───── Icon Spacing ───── */
 .icon-spacing {
   margin-right: .25rem;
@@ -2489,65 +2216,115 @@ input[type="tel"]:focus {
   text-align: center; /* or left/right depending on layout */
 }
 
-/* ───── Responsive Adjustments ───── */
+/*──────────────────────────────────────────────────────────────────────────*/
+/*                        RESPONSIVE ADJUSTMENTS                           */
+/*──────────────────────────────────────────────────────────────────────────*/
+
+/* 1. XL DESKTOP TO TABLET: Reduce grid columns for cta, gallery, sponsors, etc. */
+@media (max-width: 1200px) {
+  .cta-grid { grid-template-columns: repeat(2, 1fr); }
+  .gallery__grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+  .sponsors__grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* 2. LARGE TABLET: Stack grids & cards, shrink max-width */
+@media (max-width: 992px) {
+  .main-content { max-width: 98vw; padding: 2rem 0.5rem; }
+  .cta-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  .sponsors__grid { grid-template-columns: repeat(2, 1fr); }
+  .gallery__grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
+  .eventdetails__cards, .schedule__cards, .contests__flex-container {
+    flex-direction: column; gap: 1rem;
+  }
+  .details-athlete-container .details-athlete { gap: 1.5rem; }
+}
+
+/* 3. TABLET: Further stack grids, reduce padding & font size */
+@media (max-width: 900px) {
+  .main-content { max-width: 100vw; padding: 1.5rem 0.25rem; }
+  .cta-grid, .sponsor-tier-grid { grid-template-columns: 1fr; }
+  .sponsors__grid { grid-template-columns: repeat(2, 1fr); }
+  .gallery__grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); }
+  .site-header { flex-direction: column; padding: 0.7rem 0.5rem; }
+  .site-title { font-size: 1.4rem; }
+  .section__title { font-size: 2.1rem; }
+  .modal-content.team-form, .modal-content.wide { padding: 2rem; }
+}
+
+/* 4. LARGE MOBILE / SMALL TABLET */
+@media (max-width: 800px) {
+  .main-content { padding: 1rem 0.1rem; }
+  .cta-card, .contest-card, .neumorphic, .card.neumorphic { padding: 1rem; }
+  .cta-title, .cta-price { font-size: 1.2rem; }
+  .gallery__grid { grid-auto-rows: 120px; }
+  .section__title, .hero__text h1 { font-size: 1.5rem; }
+  .hero__details { padding: 1rem; }
+  .athlete__name, .eventdetails__name { font-size: 1.2rem; }
+}
+
+/* 5. MOBILE: Stack everything, shrink gaps, reduce image sizes */
 @media (max-width: 700px) {
-  .stepper-grid {
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 0.5rem;
-  }
-  .grid-team-name {
-    grid-template-columns: 1fr;
-  }
-  .team-label {
-    text-align: left;
-    margin-bottom: 0.25rem;
-  }
-  .form-grid-two,
-  .form-grid-email-phone {
-    grid-template-columns: 1fr;
-  }
-  .form-grid-email-phone > .form-field {
-    width: 100%;
-  }
-  .modal-footer.right-align {
-    justify-content: center;
-  }
+  .main-content { padding: 0.6rem 0.1rem; gap: 1rem; }
+  .details-athlete-container .details-athlete { gap: 1rem; }
+  .athlete__content, .eventdetails__content { flex-direction: column; gap: 1rem; }
+  .gallery__grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 90px; }
+  .sponsors__grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .sponsors__grid img, .prize-logo { max-width: 90px; max-height: 90px; }
+  .cta-card, .contest-card, .card.neumorphic { padding: 0.6rem; }
+  .modal-content.team-form, .modal-content.wide { padding: 0.7rem; }
+  .form-section.neumorphic { padding: 0.5rem; }
+  .hero-card, .hero-banner { padding: 0.4rem; width: 97vw; }
+  .site-header { padding: 0.5rem 0.3rem; }
+  .header__logo.company, .hero__logo.company { max-width: 70vw; }
+  .eventdetails__map-iframe { height: 120px; }
+  .cta-grid, .sponsor-tier-grid { gap: 0.6rem; }
 }
 
-@media (max-width: 400px) {
-  .modal-content, .modal-content.team-form, .modal-content.wide {
-    padding: 1rem !important;
-    max-width: 98vw;
-  }
-}
-
-@media (max-width: 480px) {
-  .modal-content,
-  .modal-content.wide {
-    padding-left: 0.5rem !important;
-    padding-right: 0.5rem !important;
-    box-sizing: border-box;
-    width: 98vw;
-    max-width: 98vw;
-  }
-}
-
+/* 6. SMALL MOBILE: 1-column layouts, tiny images/buttons */
 @media (max-width: 600px) {
-  .modal-content {
-    width: 99vw;
-    max-width: 99vw;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
-    border-radius: 1rem;
-    padding: 0.5rem;
-  }
-  .modal-content.wide {
-  width: 99vw;
-  max-width: 99vw;
-  min-width: unset;
-  box-sizing: border-box;
-  padding: 1rem 0.5rem;
-  }
-
+  .main-content, .section__title, .site-header, .cta-grid, .gallery__grid, .sponsors__grid { max-width: 100vw !important; }
+  .cta-grid, .sponsor-tier-grid, .gallery__grid, .sponsors__grid { grid-template-columns: 1fr !important; }
+  .details-athlete-container .details-athlete { grid-template-columns: 1fr; gap: 0.5rem; }
+  .hero-banner { flex-direction: column; align-items: stretch; }
+  .hero-card, .hero-banner, .modal-content, .modal-content.team-form, .modal-content.wide { padding: 0.2rem; }
+  .site-title, .section__title, .cta-title, .hero__text h1 { font-size: 1rem; }
+  .eventdetails__card, .contest-card, .cta-card, .card.neumorphic { padding: 0.4rem; }
+  .form-section, .form-section.neumorphic { padding: 0.2rem; }
+  .gallery__grid { gap: 0.3rem; grid-auto-rows: 60px; }
+  .sponsors__grid img, .prize-logo { max-width: 55px; max-height: 55px; }
+  .lightbox-content img { height: 40vh; }
 }
+
+/* 7. SMALLER MOBILE: Even smaller paddings & font sizes */
+@media (max-width: 480px) {
+  .main-content, .site-header, .modal-content, .modal-content.team-form, .modal-content.wide { padding: 0.08rem; }
+  .cta-title, .cta-price, .hero__text h1 { font-size: 0.75rem; }
+  .hero-card, .hero-banner { width: 100vw; }
+  .section__title { font-size: 0.85rem; }
+  .hero__text, .athlete__bio p, .eventdetails__bio p { font-size: 0.7rem; }
+  .eventdetails__card__header, .schedule__card__header { font-size: 0.82rem; }
+  .gallery__grid img, .sponsors__grid img { max-width: 40px; max-height: 40px; }
+  .btn, .cta-btn, .success-btn, .volunteer-btn { font-size: 0.75rem; padding: 0.3rem 0.8rem; }
+  .lightbox-content img { height: 32vh; }
+}
+
+/* 8. TINY MOBILE: Collapse gaps/padding, shrink everything */
+@media (max-width: 375px) {
+  .main-content, .site-header, .modal-content, .modal-content.team-form, .modal-content.wide { padding: 0.03rem !important; }
+  .site-title, .section__title, .cta-title { font-size: 0.65rem; }
+  .btn, .cta-btn, .success-btn, .volunteer-btn { font-size: 0.65rem; padding: 0.22rem 0.5rem; }
+  .lightbox-content img { height: 22vh; }
+  .gallery__grid img, .sponsors__grid img { max-width: 30px; max-height: 30px; }
+  .header__logo.company, .hero__logo.company { max-width: 95vw; }
+}
+
+/* GENERAL UTILITY: Remove some hover effects for touch devices */
+@media (hover: none) and (pointer: coarse) {
+  .btn:hover, .cta-btn:hover, .success-btn:hover, .volunteer-btn:hover, .gallery__toggle:hover,
+  .contest-card:hover, .sponsor-card:hover, .cta-card:hover {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+  .gallery__grid img:hover { scale: 1 !important; transform: none !important; }
+}
+

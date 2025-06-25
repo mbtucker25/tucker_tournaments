@@ -1,0 +1,5 @@
+// .vscode/settings.json
+{
+    "webhint.rules.meta-charset-utf-8": false,
+    "webhint.rules.meta-viewport": false
+  }
