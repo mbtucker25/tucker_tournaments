@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Registration Successful</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles-shared.css">
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="header__logo-title">
+            <a href="index.html">
+                <img src="images/TuckerTournaments-header.png" alt="Tucker Tournaments" class="header__logo company" />
+            </a>
+        </div>
+    </header>
+    <main class="confirmation-content">
+        <div class="card card--confirmation">
+            <h1 id="confirmation-title">Registration Successful</h1>
+            <p id="confirmation-message"></p>
+            <a class="btn" href="index.html">Return Home</a>
+        </div>
+    </main>
+<script>
+    // Basic message logic based on query string
+    const params = new URLSearchParams(window.location.search);
+    const messageBox = document.getElementById('confirmation-message');
+    const title = document.getElementById('confirmation-title');
+
+    if (params.has('sponsor')) {
+        title.innerHTML = "Thank You for Sponsoring the<br>David Tucker Memorial Golf Classic!";
+
+        messageBox.innerHTML = `
+          <strong>Your sponsorship registration was successful.</strong>
+          <br><br><br>
+          We sincerely appreciate your generous support!
+          <br><br>
+          <span class="sponsor-payment-instructions">
+            <strong>How to Submit Your Sponsorship Payment:</strong><br><br>
+            You may bring your check or cash to the event check-in table, or mail your check made payable to <b>Tucker Tournaments</b> to:
+            <span class="sponsor-payment-address">
+              <br>Tucker Tournaments<br>
+              c/o Debby Walker<br>
+              491 W Main St<br>
+              Jamestown, IN 46147
+            </span>
+          </span>
+          <br>
+          We will follow up by email with your sponsorship confirmation and next steps.
+          <br><br>
+          Thank you again for partnering with us to support our cause!
+        `;
+
+    } else if (params.has('golfer')) {
+        // Team info (for single golfer registrations)
+        const teamName = params.get('team');
+        title.innerHTML = "SUCCESS!<br><br>You are registered for the<br>David Tucker Memorial Golf Classic!<br><br>THANK YOU!";
+
+        let memberListHtml = "";
+
+        if (teamName && teamName !== "__free_agent__") {
+            memberListHtml = `
+                <div class="confirmation-teamname-card">
+                    <span class="teamname-value">${teamName}</span>
+                </div>
+                <div id="team-member-list-section">
+                    <div id="team-members-loading" style="color:var(--color-secondary);margin-bottom:1em;">Loading team members...</div>
+                    <div id="team-members-list" class="confirmation-team-members"></div>
+                </div>`;
+        }
+
+        messageBox.innerHTML = `
+          ${teamName === "__free_agent__"
+            ? `You have registered as a <strong>Free Agent</strong>. You will be informed of your assigned team at the check-in desk on the day of the event.`
+            : `You have successfully joined a team.`
+          }
+          <br><br>
+          <span class="confirmation-highlight">We can’t wait to see you there!<br></span>
+          ${memberListHtml}
+        `;
+
+        // Fetch and display team members as cards if on a team
+        if (teamName && teamName !== "__free_agent__") {
+            fetch(`https://bgarkbbnfdrvtjrtkiam.supabase.co/functions/v1/get-team-members?team=${encodeURIComponent(teamName)}`)
+                .then(res => res.json())
+                .then(data => {
+                    const container = document.getElementById('team-members-list');
+                    const loadingMsg = document.getElementById('team-members-loading');
+                    if (loadingMsg) loadingMsg.remove();
+                    if (container && data && data.golfers && data.golfers.length > 0) {
+                        container.innerHTML = data.golfers
+                            .map(g => `
+                                <div class="team-member-card">
+                                    ${g.first_name || ''} ${g.last_name || ''}
+                                </div>
+                            `).join('');
+                    } else if (container) {
+                        container.innerHTML = '<div class="team-member-card">No other team members yet.</div>';
+                    }
+                })
+                .catch(() => {
+                    const loadingMsg = document.getElementById('team-members-loading');
+                    if (loadingMsg) loadingMsg.textContent = "Could not load team members.";
+                });
+        }
+    } else if (params.has('team')) {
+        // Team registration confirmation (after registering a whole team)
+        const teamName = params.get('team');
+        title.innerHTML = "SUCCESS!<br><br>Your team is registered for the<br>David Tucker Memorial Golf Classic!<br><br>THANK YOU!";
+
+        // Show team name and member list (loading initially)
+        let memberListHtml = `
+            <div class="confirmation-teamname-card">
+                <span class="teamname-value">${teamName}</span>
+            </div>
+            <div id="team-member-list-section">
+                <div id="team-members-loading" style="color:var(--color-secondary);margin-bottom:1em;">Loading team members...</div>
+                <div id="team-members-list" class="confirmation-team-members"></div>
+            </div>
+        `;
+
+        messageBox.innerHTML = memberListHtml;
+
+        // Fetch and display team members as cards
+        if (teamName) {
+            fetch(`https://bgarkbbnfdrvtjrtkiam.supabase.co/functions/v1/get-team-members?team=${encodeURIComponent(teamName)}`)
+                .then(res => res.json())
+                .then(data => {
+                    const container = document.getElementById('team-members-list');
+                    const loadingMsg = document.getElementById('team-members-loading');
+                    if (loadingMsg) loadingMsg.remove();
+                    if (container && data && data.golfers && data.golfers.length > 0) {
+                        container.innerHTML = data.golfers
+                            .map(g => `
+                                <div class="team-member-card">
+                                    ${g.first_name || ''} ${g.last_name || ''}
+                                </div>
+                            `).join('');
+                    } else if (container) {
+                        container.innerHTML = '<div class="team-member-card">No team members found.</div>';
+                    }
+                })
+                .catch(() => {
+                    const loadingMsg = document.getElementById('team-members-loading');
+                    if (loadingMsg) loadingMsg.textContent = "Could not load team members.";
+                });
+        }
+    } else {
+        title.textContent = "Success!";
+        messageBox.textContent = "Your submission was successful.";
+    }
+</script>
+
+
+
+</body>
+
+</html>

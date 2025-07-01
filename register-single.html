@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Register as Single Golfer – Tucker Tournaments</title>
+    <link rel="stylesheet" href="CSS/styles-shared.css" />
+    <link rel="stylesheet" href="CSS/styles-reg-single.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="header__logo-title">
+            <a href="index.html">
+                <img src="images/TuckerTournaments-header.png" alt="Tucker Tournaments" class="header__logo company" />
+            </a>
+        </div>
+    </header>
+    <main class="main-content">
+        <form id="single-golfer-form" autocomplete="off">
+            <h2 class="page-title">Register as a Single Golfer</h2>
+            <div class="form-lead">
+                <p>
+                    Fill out the form below to register yourself as a single golfer. You may choose a specific team or
+                    register as a free agent.
+                </p>
+            </div>
+            <!-- TEAM DROPDOWN -->
+            <div class="card card--team-select">
+                <div class="card__heading-wrapper">
+                    <div class="card__heading">
+                        <span class="card__icon"><i class="fa-solid fa-users"></i></span>
+                        <span class="card__heading-title">Team Selection (Optional)</span>
+                    </div>
+                </div>
+                <div class="card__form-section">
+                    <div class="form-field select-wrapper">
+                        <label for="golfer-team">
+                            Choose a team to join<span class="required">*</span>
+                        </label>
+                        <select id="golfer-team" name="golfer-team" class="input" required>
+                            <option value="__free_agent__" selected>No Team (Free Agent)</option>
+                            <!-- Teams injected by JS -->
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <fieldset class="team-members-inline" id="team-members-inline-display" hidden>
+                <ul id="team-members-list" class="team-members-list clean"></ul>
+            </fieldset>
+            </div>
+            </div>
+            <!-- CONTACT INFORMATION CARD (identical to golfer card) -->
+            <div class="card card--golfer">
+                <div class="card__heading-wrapper">
+                    <div class="card__heading">
+                        <div class="card__heading-title">
+                            <i class="fa-solid fa-user card__icon"></i>
+                            Contact Information
+                        </div>
+                    </div>
+                </div>
+                <div class="card__form-section">
+                    <div class="form-fields form-fields--two">
+                        <div class="form-field">
+                            <label for="golfer-first">First Name <span class="required">*</span></label>
+                            <input type="text" id="golfer-first" class="input" placeholder="First Name" required />
+                        </div>
+                        <div class="form-field">
+                            <label for="golfer-last">Last Name <span class="required">*</span></label>
+                            <input type="text" id="golfer-last" class="input" placeholder="Last Name" required />
+                        </div>
+                    </div>
+                    <div class="form-fields form-fields--email-phone">
+                        <div class="form-field">
+                            <label for="golfer-email">Email <span class="required">*</span></label>
+                            <input type="email" id="golfer-email" class="input" placeholder="Email Address" required />
+                        </div>
+                        <div class="form-field">
+                            <label for="golfer-phone">Phone <span class="required">*</span></label>
+                            <input type="tel" id="golfer-phone" class="input" placeholder="Phone #" required />
+                        </div>
+                    </div>
+                    <div class="form-field select-wrapper">
+                        <label for="golfer-shirt-size">T-Shirt Size <span class="required">*</span></label>
+                        <select id="golfer-shirt-size" class="input" name="golfer-shirt-size" required>
+                            <option value="">-- T-Shirt Size --</option>
+                            <option value="Small">SMALL</option>
+                            <option value="Medium">MEDIUM</option>
+                            <option value="Large">LARGE</option>
+                            <option value="X-Large">X-LARGE</option>
+                            <option value="XX-Large">XX-LARGE</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!-- FORM MESSAGE + BUTTONS -->
+            <div class="modal-footer modal-footer--center">
+                <div id="single-form-message" class="form-message" hidden></div>
+                <button type="button" class="btn btn--cancel" id="cancel-single-form">Cancel</button>
+                <button type="submit" class="btn primary">Submit</button>
+            </div>
+        </form>
+        <!-- Success Overlay -->
+        <div id="success-overlay" class="modal-overlay neumorphic" hidden>
+            <div class="modal-content neumorphic">
+                <p id="success-message-text" class="success-message-text"></p>
+                <div class="success-btn-wrapper">
+                    <button id="success-ok-btn" class="success-btn">OK</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="js/register-single.js"></script>
+</body>
+
+</html>

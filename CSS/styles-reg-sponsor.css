@@ -1,0 +1,672 @@
+/*──────────────────────────────────────────────*/
+/*    Register Sponsor - Page Specific          */
+/*──────────────────────────────────────────────*/
+
+/* ========== 1. LAYOUT: Main Content ========== */
+html,
+body {
+    min-width: 375px;
+    overflow-x: auto;
+}
+
+.main-content {
+    margin: 2.5rem auto 1.5rem auto;
+    width: 100%;
+    max-width: 600px;
+    min-width: 375px;
+    padding: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background: transparent;
+    z-index: 1;
+    box-sizing: border-box;
+}
+
+/*──────────────────────────────────────────────*/
+/*          SPONSOR FORM PAGE GRID              */
+/*──────────────────────────────────────────────*/
+.sponsor-form__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    margin: 2rem auto;
+    align-items: flex-start;
+    max-width: 1100px;
+}
+
+.sponsor-form__options {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    align-items: stretch;
+    width: 100%;
+}
+
+/*──────────────────────────────────────────────*/
+/*            SPONSOR OPTION / TIERS            */
+/*──────────────────────────────────────────────*/
+.sponsor-option__heading {
+    font-family: var(--font-display);
+    font-size: var(--font-size-l);
+    padding: 0.5rem;
+    color: var(--color-light);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    border-radius: var(--radius) var(--radius) 0 0;
+}
+
+.sponsor-option__heading--platinum {
+    background: linear-gradient(90deg, #4d4d4d 10%, #a8ada9 65%, #7d7a7a 100%);
+}
+
+.sponsor-option__heading--gold {
+    background: linear-gradient(90deg, #ae7c2b 10%, #cebc63 65%, #ae7c2b 100%);
+}
+
+.sponsor-option__heading--silver {
+    background: linear-gradient(90deg, #9e9b9b 10%, #b8b8b8 65%, #9e9b9b 100%);
+    color: #333;
+}
+
+.sponsor-option__heading--bronze {
+    background: linear-gradient(90deg, #804a00 10%, #a88551 65%, #804a00 100%);
+}
+
+.sponsor-option__heading--hole {
+    background: linear-gradient(90deg, #057722 10%, #268d2f 65%, #057722 100%);
+}
+
+/* Tier price and check icon */
+.sponsor-option__price {
+    font-size: var(--font-size-m);
+    font-weight: 700;
+    margin-left: 1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.tier-check-icon {
+    color: var(--color-light);
+    font-size: 1rem;
+    margin-left: 0.2rem;
+    opacity: 0.7;
+}
+
+/* Sponsor option collapsible features */
+.sponsor-option__features {
+    list-style: none;
+    padding-left: 1rem;
+    background-color: var(--color-light);
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: max-height 0.4s cubic-bezier(.57, 0, .26, 1), opacity 0.3s;
+}
+
+.sponsor-option__features li {
+    font-size: var(--font-size-s);
+    color: var(--color-primary);
+    position: relative;
+    margin-bottom: 0.3rem;
+    line-height: 1.6;
+    padding-left: 2.1em;
+}
+
+.sponsor-option__features li::before {
+    content: '→';
+    color: var(--color-primary);
+    display: inline-block;
+    width: 2em;
+    margin-left: -2.1em;
+}
+
+/* Expanded when selected */
+.sponsor-option.active .sponsor-option__features {
+    max-height: 600px;
+    opacity: 1;
+    pointer-events: auto;
+    border: var(--color-primary) 1px solid;
+}
+
+/*──────────────────────────────────────────────*/
+/*            FORM SECTIONS & INPUTS            */
+/*──────────────────────────────────────────────*/
+/* Card for company form */
+.card,
+.card--contact {
+    width: 100%;
+    max-width: 1024px;
+    position: relative;
+    padding: var(--heading-offset, 2.2rem) 1.3rem 1.7rem 1.3rem;
+    background: var(--color-light, #fff);
+    border-radius: var(--radius, 0.8rem);
+    box-shadow: 4px 4px 8px var(--color-primary, #d9e1f2), -4px -4px 8px var(--color-secondary, #e9ecfa);
+    overflow: visible;
+    margin: 0 auto 1.3rem auto;
+    transition: box-shadow .2s;
+    box-sizing: border-box;
+    z-index: 3;
+}
+
+/* Card Heading */
+.card__heading-wrapper {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% + 2rem);
+    display: flex;
+    justify-content: center;
+    z-index: 2;
+}
+
+.card__heading {
+    display: flex;
+    position: relative;
+    background: linear-gradient(90deg, var(--color-primary, #2d395a) 10%, rgba(14, 20, 99, .75) 65%, var(--color-primary, #2d395a) 100%);
+    color: var(--color-light, #fff);
+    font-family: var(--font-display, 'Bebas Neue', sans-serif);
+    font-weight: 500;
+    padding: .25rem 1.5rem;
+    width: 100%;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
+    border-radius: .5rem .5rem 0 0;
+    text-align: left;
+    align-items: center;
+    gap: 0.7rem;
+    z-index: 2;
+}
+
+.card__heading-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: var(--font-size-xl, 1.35rem);
+    margin-bottom: .1rem;
+}
+
+.card__icon {
+    font-size: var(--font-size-xl, 1.2rem);
+}
+
+/* Decorative notches/wings */
+.card__heading::before,
+.card__heading::after {
+    content: '';
+    position: absolute;
+    bottom: -1rem;
+    width: 0;
+    height: 0;
+    border-top: 1rem solid var(--color-primary, #2d395a);
+    border-left: 1rem solid transparent;
+    border-right: 1rem solid transparent;
+    z-index: 1;
+}
+
+.card__heading::before {
+    left: 0;
+    border-style: solid;
+    border-width: 0 1rem 1rem 0;
+    border-color: transparent rgba(14, 20, 99, 0.60) transparent transparent;
+    transform: rotate(0deg);
+}
+
+.card__heading::after {
+    right: 0;
+    border-style: solid;
+    border-width: 0 1rem 1rem 0;
+    border-color: transparent rgba(14, 20, 99, 0.459) transparent transparent;
+    transform: rotate(270deg);
+}
+
+/* Card Form Section */
+.card__form-section {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    align-items: center;
+    background-color: var(--color-light, #fff);
+}
+
+/* ---- FORM FIELDS AND INPUTS ---- */
+.form-fields {
+    display: grid;
+    gap: 1.25rem 2rem;
+    width: 100%;
+}
+
+.form-fields--two {
+    grid-template-columns: 1fr 1fr;
+}
+
+.form-fields--email-phone {
+    grid-template-columns: 60% 35%;
+    gap: 2rem 1rem;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-field label {
+    font-weight: 600;
+    font-size: var(--font-size-m, 1rem);
+    color: var(--color-dark, #302E2C);
+    margin-bottom: 0.25rem;
+}
+
+.required {
+    color: #d32121;
+    margin-left: 0.15em;
+}
+
+/* Inputs */
+.input,
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="file"],
+select {
+    font-size: var(--font-size-s, 1rem);
+    font-family: var(--font-sans, 'Open Sans', sans-serif);
+    border: none;
+    border-top: 2px solid var(--color-secondary, #A2AAAD);
+    border-bottom: 2px solid var(--color-secondary, #A2AAAD);
+    border-radius: var(--radius, 0.8rem);
+    padding: 0.65rem 0.75rem;
+    width: 100%;
+    background-color: transparent;
+    color: var(--color-primary, #384360);
+    transition: border-color 0.3s, background-color 0.3s;
+    box-sizing: border-box;
+}
+
+.input:focus,
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+input[type="file"]:focus,
+select:focus {
+    border-top: 2px solid var(--color-primary, #384360);
+    border-bottom: 2px solid var(--color-primary, #384360);
+    outline: none;
+    background-color: #f1f3fa;
+}
+
+.input::placeholder,
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+input[type="tel"]::placeholder {
+    color: var(--color-secondary, #A2AAAD);
+    opacity: 1;
+}
+
+/* Select/File Field Wrapper */
+.select-wrapper {
+    width: 100%;
+}
+
+/*──────────────────────────────────────────────*/
+/*            BUTTONS & FORM MESSAGE            */
+/*──────────────────────────────────────────────*/
+.modal-footer {
+    display: flex;
+    gap: 1.2rem;
+    margin-top: 1.5rem;
+}
+
+.modal-footer--right {
+    justify-content: flex-end;
+}
+
+.modal-footer--center {
+    justify-content: center;
+}
+
+.btn {
+    background: var(--color-primary);
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    border-radius: var(--radius);
+    padding: 0.7rem 1.7rem;
+    cursor: pointer;
+    font-size: var(--font-size-s);
+    box-shadow: 0 2px 8px 0 rgba(44, 54, 80, 0.09);
+}
+
+.btn--primary {
+  background: var(--color-primary);
+  color: #fff;
+  font-weight: bold;
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.btn--primary:hover {
+  background: var(--color-secondary);
+  color: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+.btn--cancel {
+    background: #c0392b !important;
+    color: #fff !important;
+    border: none;
+    border-radius: var(--radius);
+    padding: 0.7rem 1.7rem;
+    cursor: pointer;
+    font-size: var(--font-size-s);
+    box-shadow: 0 2px 8px 0 rgba(44, 54, 80, 0.09);
+}
+
+.btn:hover {
+    background: var(--color-secondary, #bcc4e1);
+    color: var(--color-primary, #2d395a);
+    transform: translateY(-2px);
+}
+
+.btn--cancel {
+    background: #c0392b !important;
+    color: #fff !important;
+    border: none;
+}
+
+.btn--cancel:hover,
+.btn--cancel:focus {
+    background: #e74c3c !important;
+    color: #fff !important;
+}
+
+.form-message {
+    text-align: center;
+    font-weight: bold;
+    border-radius: var(--radius);
+    margin: 1rem auto 0 auto;
+    max-width: 95%;
+}
+
+.form-message.error {
+    color: #ac0101;
+    background: #f35d5d62;
+    border-left: 4px solid #ac0101;
+    border-right: 4px solid #ac0101;
+    padding: .7rem 1.5rem;
+    font-size: var(--font-size-s);
+}
+
+/* Sponsor logo upload field tweaks */
+input[type="file"] {
+    margin-top: 0.2rem;
+    font-size: var(--font-size-s);
+    color: var(--color-dark);
+}
+
+/*──────────────────────────────────────────────*/
+/*               SUCCESS OVERLAY                */
+/*──────────────────────────────────────────────*/
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center; /* 🛠️ align top so heading isn't clipped */
+  z-index: 9999;
+  padding: 2rem 1rem; /* ✅ add space around the content */
+  overflow-y: auto;    /* ✅ browser controls vertical scroll */
+}
+
+.modal-content {
+  margin: auto;
+  flex-grow: 1;
+  min-height: 0;
+  background: var(--color-light);
+  border-radius: var(--radius);
+  max-width: 90%;
+  width: 80vw;
+  overflow-y: visible;
+  overflow-x: hidden;
+  box-shadow:
+    8px 8px 16px var(--shadow-dark),
+   -8px -8px 16px var(--shadow-light);
+  position: relative;
+  justify-content: center;
+}
+
+#success-overlay {
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+}
+
+/* When inside #success-overlay, extra rules: */
+#success-overlay .modal-content {
+  position: relative;
+  background: var(--color-light);
+  border-radius: var(--radius);
+  padding-top: 4rem;
+  overflow: visible;
+  max-width: 500px; /* (400px for volunteer modal) */
+  width: auto;
+  box-shadow:
+    4px 4px 8px var(--color-primary),
+    -4px -4px 8px var(--color-secondary);
+  background: linear-gradient(90deg, var(--color-primary, #2d395a) 10%, rgba(14, 20, 99, .9) 65%, var(--color-primary, #2d395a) 100%);
+  animation: fadeInUp 0.5s ease-out;
+}
+
+/* Only show flex when NOT hidden */
+#success-overlay:not([hidden]) {
+  display: flex;
+}
+
+.success-message-text {
+  font-family: 'Open Sans', sans-serif;
+  color: var(--color-light);
+  line-height: 1.6;
+  white-space: normal;
+}
+
+.success-btn-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.success-btn {
+  color: var(--color-primary);
+  background: linear-gradient(to bottom, var(--color-secondary), #e6e5e7);
+  font-weight: bold;
+  padding: .75rem 2rem;
+  text-align: center;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+  text-align: center;
+  max-width: 80px;
+  width: auto;
+}
+
+/* Optional hover effect */
+.success-btn:hover {
+  transform: translateY(-3px) translateX(-1px);
+  background: linear-gradient(to bottom, #e6e5e7, var(--color-secondary));
+  box-shadow: 1px 2px 3px var(--color-light);
+}
+
+.success-icon-wrapper {
+  position: absolute;
+  top: -2rem; /* adjust how much it overlaps */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10001;
+  background: white; /* optional: circular backdrop */
+  border-radius: var(--radius);
+  padding: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.success-check-icon {
+  font-size: 4rem;
+  color: #03b103;
+}
+
+.success-message-icons {
+  margin-right: .5rem;
+}
+
+/* ✅ Heading */
+.success-message-text h2 {
+  font-size: var(--font-size-m);
+  color: var(--color-light);
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+/*──────────────────────────────────────────────*/
+/*            RESPONSIVE ADJUSTMENTS            */
+/*──────────────────────────────────────────────*/
+/* Tablet & below */
+@media (max-width: 992px) {
+    .main-content {
+        max-width: 98vw;
+        padding: 2rem 0.5rem;
+    }
+
+    .card,
+    .card--contact {
+        padding: 1rem;
+    }
+
+    .card__form-section {
+        margin-top: 3rem;
+    }
+}
+
+/* Medium devices */
+@media (max-width: 768px) {
+    .main-content {
+        padding: 0.6rem 0.1rem;
+        gap: 0.7rem;
+    }
+
+    .card,
+    .card--contact {
+        padding: 0.6rem;
+    }
+}
+
+/* Stack at 600px */
+@media (max-width: 600px) {
+    .modal-content { padding: 0.2rem; }
+    .main-content,
+    .card,
+    .card--contact {
+        max-width: 98vw;
+        width: 100%;
+        padding: 0.2rem;
+        margin-left: auto;
+        margin-right: auto;
+        box-sizing: border-box;
+    }
+
+    .card__form-section {
+        padding: 0.2rem !important;
+        box-sizing: border-box;
+        max-width: 100%;
+        margin: 0;
+    }
+
+    .card__heading-wrapper {
+        position: static;
+        width: 100%;
+        left: unset;
+        top: unset;
+        transform: none;
+        min-width: 0;
+        box-sizing: border-box;
+        margin-bottom: 0;
+        padding: 0;
+    }
+
+    .card__heading {
+        background: none !important;
+        color: var(--color-primary, #2d395a) !important;
+        font-family: var(--font-sans, 'Open Sans', sans-serif);
+        border-radius: 0.5rem 0.5rem 0 0;
+        font-size: 1.05rem;
+        padding: 0.4rem 1rem 0.3rem 1rem;
+        box-shadow: none;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+    }
+
+    .card__heading::before,
+    .card__heading::after {
+        display: none;
+    }
+
+    .card__icon {
+        color: var(--color-primary, #2d395a);
+        font-size: 1.1em;
+    }
+
+    .sponsor-form__grid {
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+        margin: 1rem 0.2rem;
+        max-width: 99vw;
+    }
+}
+
+/* Mobile tweaks at 480px & below */
+@media (max-width: 480px) {
+    .modal-content { padding: 0.08rem; }
+    .main-content {
+        padding: 0.2rem;
+        min-width: 0;
+        box-sizing: border-box;
+    }
+
+    .card,
+    .card--contact {
+        max-width: 98vw;
+        width: 100%;
+        padding: 0.2rem;
+        margin: 0 auto 1rem auto;
+        box-sizing: border-box;
+    }
+
+    .card__form-section {
+        padding: 0.2rem !important;
+        max-width: 100%;
+        margin: 0;
+    }
+
+    .card__heading {
+        font-size: 1rem;
+        padding: 0.2rem 0.5rem 0.15rem 0.5rem;
+        border-bottom-width: 1px;
+    }
+}

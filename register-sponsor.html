@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Register as Sponsor – Tucker Tournaments</title>
+    <link rel="stylesheet" href="CSS/styles-shared.css" />
+    <link rel="stylesheet" href="CSS/styles-reg-sponsor.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="header__logo-title">
+            <a href="index.html">
+                <img src="images/TuckerTournaments-header.png" alt="Tucker Tournaments" class="header__logo company" />
+            </a>
+        </div>
+    </header>
+    <main class="main-content">
+        <form id="sponsor-form" autocomplete="off" enctype="multipart/form-data" method="POST">
+            <h2 class="page-title">Sponsor the Event</h2>
+            <div class="form-lead">
+                <p>
+                    Choose your sponsorship tier and upload your company logo.<br><br>
+                    Your logo will be featured on event materials, shirts, and signage based on your selection.
+                </p>
+            </div>
+
+            <!-- SPONSORSHIP TIERS CARD -->
+            <div class="card card--tiers">
+                <div class="card__heading-wrapper">
+                    <div class="card__heading">
+                        <span class="card__icon"><i class="fa-solid fa-hand-holding-heart"></i></span>
+                        <span class="card__heading-title">Sponsorship Tiers & Features</span>
+                    </div>
+                </div>
+                <div class="card__form-section">
+                    <section class="sponsor-form__options">
+                        <!-- Platinum -->
+                        <div class="sponsor-option" data-tier="Platinum">
+                            <div class="sponsor-option__heading sponsor-option__heading--platinum">
+                                <span><i class="fa-solid fa-star icon-spacing"></i> Platinum Sponsor</span>
+                                <span class="sponsor-option__price">$550 <i
+                                        class="fa-solid fa-circle tier-check-icon"></i></span>
+                            </div>
+                            <ul class="sponsor-option__features">
+                                <li>Logo on promo material</li>
+                                <li>Awards ceremony recognition</li>
+                                <li>Signage at two tee boxes</li>
+                                <li>Foursome team entry</li>
+                                <li>Social media x5</li>
+                                <li>Logo on shirt</li>
+                            </ul>
+                        </div>
+                        <!-- Gold -->
+                        <div class="sponsor-option" data-tier="Gold">
+                            <div class="sponsor-option__heading sponsor-option__heading--gold">
+                                <span><i class="fa-solid fa-medal icon-spacing"></i> Gold Sponsor</span>
+                                <span class="sponsor-option__price">$350 <i
+                                        class="fa-solid fa-circle tier-check-icon"></i></span>
+                            </div>
+                            <ul class="sponsor-option__features">
+                                <li>Logo on promo material</li>
+                                <li>Awards ceremony recognition</li>
+                                <li>Signage at one tee box</li>
+                                <li>Twosome team entry</li>
+                                <li>Social media x3</li>
+                                <li>Logo on shirt</li>
+                            </ul>
+                        </div>
+                        <!-- Silver -->
+                        <div class="sponsor-option" data-tier="Silver">
+                            <div class="sponsor-option__heading sponsor-option__heading--silver">
+                                <span><i class="fa-solid fa-award icon-spacing"></i> Silver Sponsor</span>
+                                <span class="sponsor-option__price">$150 <i
+                                        class="fa-solid fa-circle tier-check-icon"></i></span>
+                            </div>
+                            <ul class="sponsor-option__features">
+                                <li>Logo on promo material</li>
+                                <li>Awards ceremony recognition</li>
+                                <li>Signage at one tee box</li>
+                                <li>1 golfer entry</li>
+                                <li>Social media x3</li>
+                                <li>Logo on shirt</li>
+                            </ul>
+                        </div>
+                        <!-- Bronze -->
+                        <div class="sponsor-option" data-tier="Bronze">
+                            <div class="sponsor-option__heading sponsor-option__heading--bronze">
+                                <span><i class="fa-solid fa-ribbon icon-spacing"></i> Bronze Sponsor</span>
+                                <span class="sponsor-option__price">$50 <i
+                                        class="fa-solid fa-circle tier-check-icon"></i></span>
+                            </div>
+                            <ul class="sponsor-option__features">
+                                <li>Logo on promo material</li>
+                                <li>Awards ceremony recognition</li>
+                            </ul>
+                        </div>
+                        <!-- Hole -->
+                        <div class="sponsor-option" data-tier="Hole">
+                            <div class="sponsor-option__heading sponsor-option__heading--hole">
+                                <span><i class="fa-solid fa-golf-ball-tee icon-spacing"></i> Hole Sponsor</span>
+                                <span class="sponsor-option__price">$75 <i
+                                        class="fa-solid fa-circle tier-check-icon"></i></span>
+                            </div>
+                            <ul class="sponsor-option__features">
+                                <li>Logo on promo material</li>
+                                <li>Awards ceremony recognition</li>
+                                <li>Signage at one tee box</li>
+                            </ul>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+            <!-- COMPANY CONTACT CARD -->
+            <div class="card card--contact">
+                <div class="card__heading-wrapper">
+                    <div class="card__heading">
+                        <div class="card__heading-title">
+                            <i class="fa-solid fa-user card__icon"></i>
+                            Company Contact
+                        </div>
+                    </div>
+                </div>
+                <div class="card__form-section">
+                    <div class="form-field">
+                        <label for="company-name">Company Name <span class="required">*</span></label>
+                        <input type="text" id="company-name" class="input" name="company-name"
+                            placeholder="Company Name" required>
+                    </div>
+                    <div class="form-fields form-fields--two">
+                        <div class="form-field">
+                            <label for="sponsor-first-name">First Name <span class="required">*</span></label>
+                            <input type="text" id="sponsor-first-name" name="sponsor-first-name" class="input"
+                                placeholder="First Name" required />
+                        </div>
+                        <div class="form-field">
+                            <label for="sponsor-last-name">Last Name <span class="required">*</span></label>
+                            <input type="text" id="sponsor-last-name" name="sponsor-last-name" class="input"
+                                placeholder="Last Name" required />
+                        </div>
+                    </div>
+                    <div class="form-fields form-fields--email-phone">
+                        <div class="form-field">
+                            <label for="sponsor-email">Email <span class="required">*</span></label>
+                            <input type="email" id="sponsor-email" name="sponsor-email" class="input"
+                                placeholder="Email Address" required />
+                        </div>
+                        <div class="form-field">
+                            <label for="sponsor-phone">Phone <span class="required">*</span></label>
+                            <input type="tel" id="sponsor-phone" name="sponsor-phone" class="input"
+                                placeholder="Phone #" required />
+                        </div>
+                    </div>
+                    <div class="form-field">
+                        <label for="sponsor-logo">Upload Company Logo (optional)</label>
+                        <input type="file" id="sponsor-logo" name="sponsor-logo" accept="image/png, image/jpeg" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- FORM MESSAGE + BUTTONS -->
+            <div class="modal-footer modal-footer--center">
+                <div id="sponsor-form-message" class="form-message" hidden></div>
+                <button type="button" class="btn btn--cancel" id="sponsor-cancel-btn">Cancel</button>
+                <button type="submit" class="btn btn--primary" id="sponsor-submit-btn">Register as Sponsor!</button>
+            </div>
+        </form>
+    </main>
+    <script src="js/register-sponsor.js"></script>
+</body>
+
+</html>
