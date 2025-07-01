@@ -1584,7 +1584,7 @@ label {
   display: grid;
   grid-template-columns: repeat(4, 1fr); /* 💥 Force 4 columns */
   gap: 1rem;
-  margin: auto;
+  margin: 2rem auto;
   max-width: 1400px;
   padding: 0 .1rem;
   justify-items: center;
@@ -1594,11 +1594,11 @@ label {
   .cta-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 0.25rem;
+    gap: 1rem;
   }
   .cta-card {
     width: 100%;
-    max-width: 90vw;
+    max-width: 100%;
     margin: 0;
     font-size: var(--font-size-m);
   }
@@ -1626,6 +1626,8 @@ label {
   flex-direction: column;
   justify-content: space-between;
   transition: transform 0.2s, box-shadow 0.2s;
+  width: 100%;
+  max-width: 100%;
 }
 
 .cta-card:hover {
