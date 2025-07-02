@@ -2,33 +2,51 @@
 /*            VARIABLES & BASE TYPOGRAPHY       */
 /*──────────────────────────────────────────────*/
 :root {
-  --color-primary:   #384360;
+  --color-primary: #384360;
   --color-secondary: #A2AAAD;
-  --color-dark:      #302E2C;
-  --color-light:     #F7F5F2;
+  --color-dark: #302E2C;
+  --color-light: #F7F5F2;
 
-  --font-sans:       'Open Sans', sans-serif;
-  --font-display:    'Oswald', sans-serif;
+  --font-sans: 'Open Sans', sans-serif;
+  --font-display: 'Oswald', sans-serif;
 
-  --font-size-xxl: clamp(1.75rem, 5vw, 2rem);     /* 28–32px */
-  --font-size-xl:  clamp(1.5rem, 4vw, 1.75rem);   /* 24–28px */
-  --font-size-l:   clamp(1.25rem, 3vw, 1.5rem);   /* 20–24px */
-  --font-size-m:   clamp(1rem, 2vw, 1.25rem);     /* 16–20px */
-  --font-size-s:   clamp(0.85rem, 1.5vw, 1rem);   /* 13.6–16px */
-  --font-size-xs:  clamp(0.7rem, 1vw, 0.85rem);   /* 11.2–13.6px */
+  --font-size-xxl: clamp(1.75rem, 5vw, 2rem);
+  /* 28–32px */
+  --font-size-xl: clamp(1.5rem, 4vw, 1.75rem);
+  /* 24–28px */
+  --font-size-l: clamp(1.25rem, 3vw, 1.5rem);
+  /* 20–24px */
+  --font-size-m: clamp(1rem, 2vw, 1.25rem);
+  /* 16–20px */
+  --font-size-s: clamp(0.85rem, 1.5vw, 1rem);
+  /* 13.6–16px */
+  --font-size-xs: clamp(0.7rem, 1vw, 0.85rem);
+  /* 11.2–13.6px */
 
-  --shadow-dark:     rgba(0,0,0,0.2);
-  --shadow-light:    rgba(255,255,255,0.7);
+  --shadow-dark: rgba(0, 0, 0, 0.2);
+  --shadow-light: rgba(255, 255, 255, 0.7);
 
-  --radius:          0.5rem;
-  --heading-offset:  3.5rem;
+  --radius: 0.5rem;
+  --heading-offset: 3.5rem;
 }
 
 /*──────────────────────────────────────────────*/
 /*                 RESET & BASE                 */
 /*──────────────────────────────────────────────*/
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { overflow-x: hidden; overflow-y: auto; }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
 body {
   background: var(--color-light);
   color: var(--color-dark);
@@ -36,13 +54,13 @@ body {
   line-height: 1.6;
 }
 
-.page-footer{
-    width: 100%;
-    margin-top: 1.5rem;
-    padding: 0.5rem;
-    text-align: left;
-    font-size: var(--font-size-xs);
-    color: var(--color-dark);
+.page-footer {
+  width: 100%;
+  margin-top: 1.5rem;
+  padding: 0.5rem;
+  text-align: left;
+  font-size: var(--font-size-xs);
+  color: var(--color-dark);
 }
 
 /*──────────────────────────────────────────────*/
@@ -55,13 +73,15 @@ body {
   background: var(--color-primary);
   color: var(--color-light);
   padding: clamp(0.5rem, 2vw, 1rem) clamp(0.5rem, 4vw, 2rem);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
+
 .header__logo-title {
   display: flex;
   align-items: center;
   gap: 1rem;
 }
+
 .header__logo.company {
   max-width: 480px;
   width: 100%;
@@ -84,6 +104,7 @@ body {
   margin-bottom: 0.5rem;
   font-weight: bold;
 }
+
 .form-lead {
   background: #d6d6d6;
   border-left: 4px solid var(--color-primary);
@@ -97,36 +118,41 @@ body {
   margin-bottom: 0.75rem;
 }
 
-.form__lead p{
-  line-height: normal; 
+.form__lead p {
+  line-height: normal;
   padding-bottom: .5rem;
 }
 
 .highlight-note {
-    background: #fff7e6;
-    color: #d19b4b;
-    border-top: 4px solid #ee9d06;
-    border-bottom: 4px solid #ee9d06;
-    border-radius: 8px;
-    padding: .5rem;
-    margin-top: 0;
-    margin-bottom: 0.5rem;
-    font-weight: 500;
-    display: flex;
-    align-items: center; /* For top-align icon with multiline */
-    font-size: var(--font-size-s);
-    box-shadow: 0 2px 12px #0001;
-    animation: fadeIn 0.5s;
-    /* Hanging indent effect */
-    gap: .5rem;
-    line-height: 1.3;
+  background: #fff7e6;
+  color: #d19b4b;
+  border-top: 4px solid #ee9d06;
+  border-bottom: 4px solid #ee9d06;
+  border-radius: 8px;
+  padding: .5rem;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  /* For top-align icon with multiline */
+  font-size: var(--font-size-s);
+  box-shadow: 0 2px 12px #0001;
+  animation: fadeIn 0.5s;
+  /* Hanging indent effect */
+  gap: .5rem;
+  line-height: 1.3;
 }
+
 .highlight-note i {
   color: rgb(253, 111, 29);
-    flex-shrink: 0;      /* Prevents icon from shrinking */
-    margin-top: 0.13em;  /* Vertically aligns icon with text */
-    font-size: var(--font-size-l);   /* Makes icon slightly larger than text */
-    line-height: 1.3;
+  flex-shrink: 0;
+  /* Prevents icon from shrinking */
+  margin-top: 0.13em;
+  /* Vertically aligns icon with text */
+  font-size: var(--font-size-l);
+  /* Makes icon slightly larger than text */
+  line-height: 1.3;
 }
 
 
@@ -137,75 +163,75 @@ body {
 /* Page wrapper for centering */
 .confirmation-content {
   color: var(--color-primary);
-    min-height: 85vh;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: transparent;
-    padding: 0 0.5rem;
-    box-sizing: border-box;
+  min-height: 85vh;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  padding: 0 0.5rem;
+  box-sizing: border-box;
 }
 
 /* Confirmation card style (reuses card visual language) */
 .card--confirmation {
   color: var(--color-primary);
-    background: var(--color-light, #fff);
-    border-radius: var(--radius, 18px);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.07), 0 1.5px 8px rgba(60,60,90,0.05);
-    max-width: 420px;
-    width: 100%;
-    padding: 2.2rem 1.4rem 2rem 1.4rem;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  background: var(--color-light, #fff);
+  border-radius: var(--radius, 18px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.07), 0 1.5px 8px rgba(60, 60, 90, 0.05);
+  max-width: 420px;
+  width: 100%;
+  padding: 2.2rem 1.4rem 2rem 1.4rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-    gap: 1rem;
+  gap: 1rem;
 }
 
 /* Heading styles */
 .card--confirmation h1 {
-    font-family: var(--font-display, 'Bebas Neue', cursive);
-    font-size: 2rem;
-    font-weight: 650;
-    color: var(--color-primary);
-    margin-bottom: 0.2em;
-    letter-spacing: .04em;
-    text-align: center;
+  font-family: var(--font-display, 'Bebas Neue', cursive);
+  font-size: 2rem;
+  font-weight: 650;
+  color: var(--color-primary);
+  margin-bottom: 0.2em;
+  letter-spacing: .04em;
+  text-align: center;
 }
 
 /* Confirmation message */
 #confirmation-message {
-    font-family: var(--font-sans, 'Open Sans', sans-serif);
-    font-size: 1.15rem;
-    color: var(--color-primary);
-    line-height: 1.5;
-    margin-bottom: 0.7em;
-    text-align: center;
+  font-family: var(--font-sans, 'Open Sans', sans-serif);
+  font-size: 1.15rem;
+  color: var(--color-primary);
+  line-height: 1.5;
+  margin-bottom: 0.7em;
+  text-align: center;
 }
 
 /* Return button */
 .card--confirmation .btn {
-    margin-top: 1.5rem;
-    background: var(--color-primary, #384360);
-    color: #fff;
-    border-radius: var(--radius, 18px);
-    padding: 0.9rem 2.2rem;
-    font-size: 1.15rem;
-    font-weight: bold;
-    letter-spacing: 0.01em;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 2px 8px rgba(56, 67, 96, 0.10);
-    transition: background 0.18s, color 0.18s, transform 0.18s;
-    display: inline-block;
+  margin-top: 1.5rem;
+  background: var(--color-primary, #384360);
+  color: #fff;
+  border-radius: var(--radius, 18px);
+  padding: 0.9rem 2.2rem;
+  font-size: 1.15rem;
+  font-weight: bold;
+  letter-spacing: 0.01em;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(56, 67, 96, 0.10);
+  transition: background 0.18s, color 0.18s, transform 0.18s;
+  display: inline-block;
 }
 
 .card--confirmation .btn:hover {
-    background: var(--color-secondary, #A2AAAD);
-    color: var(--color-primary, #384360);
-    transform: translateY(-2px);
+  background: var(--color-secondary, #A2AAAD);
+  color: var(--color-primary, #384360);
+  transform: translateY(-2px);
 }
 
 .sponsor-payment-instructions {
@@ -216,6 +242,7 @@ body {
   font-size: 1rem;
   line-height: 1.5;
 }
+
 .sponsor-payment-address {
   display: block;
   margin-left: 1.1em;
@@ -229,100 +256,116 @@ body {
 }
 
 .confirmation-teamname-card {
-    width: auto;
-    max-width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: var(--color-primary);
-    border-top: 3px solid var(--color-dark);
-    border-bottom: 3px solid var(--color-dark);
-    border-radius: 1rem;
-    padding: 1em 1.5em 0.9em 1.5em;
-    margin: 1em;
-    box-shadow: 0 4px 18px rgba(60,80,130,0.07);
+  width: auto;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--color-primary);
+  border-top: 3px solid var(--color-dark);
+  border-bottom: 3px solid var(--color-dark);
+  border-radius: 1rem;
+  padding: 1em 1.5em 0.9em 1.5em;
+  margin: 1em;
+  box-shadow: 0 4px 18px rgba(60, 80, 130, 0.07);
 }
 
 .teamname-value {
-    color: var(--color-light);
-    font-size: clamp(1.1rem, 4vw, 2.5rem);  /* Grows/shrinks as needed */;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    margin-top: 0.07em;
-    text-transform: uppercase;
+  color: var(--color-light);
+  font-size: clamp(1.1rem, 4vw, 2.5rem);
+  /* Grows/shrinks as needed */
+  ;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  margin-top: 0.07em;
+  text-transform: uppercase;
 }
+
 .confirmation-team-members {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-content: center;
-    gap: 0.8em 0.6em;
-    margin: 1em 0 1.5em 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  gap: 0.8em 0.6em;
+  margin: 1em 0 1.5em 0;
 }
 
 .team-member-card {
 
-    padding: 0.5em 1.2em;
-    background: var(--color-secondary, #f9fafb);
-    border-top: 2px solid var(--color-primary, #384360);
-    border-bottom: 2px solid var(--color-primary, #384360);
-    border-radius: 1rem;
-    font-weight: 600;
-    color: var(--color-primary, #384360);
-    font-size: var(--font-size-m);
-    text-align: center;
-    box-shadow: 0 2px 8px 0 rgba(50,70,110,0.06);
-    transition: transform 0.14s;
-    margin: 0.2em 0;
+  padding: 0.5em 1.2em;
+  background: var(--color-secondary, #f9fafb);
+  border-top: 2px solid var(--color-primary, #384360);
+  border-bottom: 2px solid var(--color-primary, #384360);
+  border-radius: 1rem;
+  font-weight: 600;
+  color: var(--color-primary, #384360);
+  font-size: var(--font-size-m);
+  text-align: center;
+  box-shadow: 0 2px 8px 0 rgba(50, 70, 110, 0.06);
+  transition: transform 0.14s;
+  margin: 0.2em 0;
 }
 
 @media (max-width: 500px) {
-    .confirmation-team-members {
-        flex-direction: column;
-        align-items: center;
-        gap: 0.5em;
-    }
-    .team-member-card {
-        width: 80vw;
-        min-width: 140px;
-        max-width: 95vw;
-    }
+  .confirmation-team-members {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5em;
+  }
 
-    .highlight-note {
+  .team-member-card {
+    width: 80vw;
+    min-width: 140px;
+    max-width: 95vw;
+  }
+
+  .highlight-note {
     padding: 0.25rem;
     margin: 0.2rem;
     font-weight: 500;
     gap: 0.05rem;
     font-size: var(--font-size-xs);
-}
-.highlight-note i {
+  }
+
+  .highlight-note i {
     font-size: var(--font-size-m);
     margin-right: 0.5rem;
-}
+  }
 }
 
 
 /* Responsive: compress card at small screens */
 @media (max-width: 600px) {
-    .confirmation-content {
-        padding: 1.2rem 0.1rem;
-    }
-    .card--confirmation {
-        max-width: 98vw;
-        padding: 1rem 0.4rem 1rem 0.4rem;
-    }
-    .card--confirmation h1 {
-        font-size: 1.15rem;
-    }
-    #confirmation-message {
-        font-size: 1rem;
-    }
-    .card--confirmation .btn {
-        font-size: 1rem;
-        padding: 0.65rem 1.2rem;
-    }
+  .confirmation-content {
+    padding: 1.2rem 0.1rem;
+  }
+
+  .card--confirmation {
+    max-width: 98vw;
+    padding: 1rem 0.4rem 1rem 0.4rem;
+  }
+
+  .card--confirmation h1 {
+    font-size: 1.15rem;
+  }
+
+  #confirmation-message {
+    font-size: 1rem;
+  }
+
+  .card--confirmation .btn {
+    font-size: 1rem;
+    padding: 0.65rem 1.2rem;
+  }
+
+  .page-footer {
+    width: 100%;
+    margin-top: 0.5rem;
+    padding: 0.25rem;
+    text-align: center;
+  }
 }
 
 

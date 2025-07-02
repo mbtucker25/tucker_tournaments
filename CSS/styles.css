@@ -54,13 +54,13 @@ body {
 
 }
 
-.page-footer{
-    width: 100%;
-    margin-top: 1.5rem;
-    padding: 0.5rem;
-    text-align: left;
-    font-size: var(--font-size-xs);
-    color: var(--color-dark);
+.page-footer {
+  width: 100%;
+  margin-top: 1.5rem;
+  padding: 0.5rem;
+  text-align: left;
+  font-size: var(--font-size-xs);
+  color: var(--color-dark);
 }
 
 /*──────────────────────────────────────────────────────────────────────────*/
@@ -438,6 +438,13 @@ body {
     max-width: 100%;
     font-size: 0.95rem;
     padding: 0.25rem;
+  }
+
+  .page-footer {
+    width: 100%;
+    margin-top: 0.5rem;
+    padding: 0.25rem;
+    text-align: center;
   }
 }
 
@@ -983,7 +990,7 @@ body {
   max-width: 160px;
   max-height: 160px;
   width: 160px;
-height: 160px;
+  height: 160px;
   object-fit: contain;
   transition: transform .2s;
 }
@@ -1808,15 +1815,17 @@ label {
   }
 
   .cta-title {
-  font-size: var(--font-size-l);
-  font-weight: 700;
-  margin-bottom: 1rem;
-}
+    font-size: var(--font-size-l);
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
   .cta-price {
-  font-size: var(--font-size-m);
-  font-weight: 750;
-  margin-bottom: 1rem;
-}
+    font-size: var(--font-size-m);
+    font-weight: 750;
+    margin-bottom: 1rem;
+  }
+
   .cta-btn {
     padding: 0.5rem;
     font-size: var(--font-size-s);
