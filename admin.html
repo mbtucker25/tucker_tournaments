@@ -1,102 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Admin - Team & Sponsor List</title>
-  <link rel="stylesheet" href="CSS/admin-styles.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <title>Golf Outing Admin Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="CSS/admin-styles.css">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
-<a href="index.html" class="back-to-home">&larr; Back to Home Page</a>
-<a href="checkin.html" class="back-to-home" style="top: 50px;">Event Check-in</a>
-  <main class="main-content">
-    <h1>Complete Foursomes</h1>
-    <div class="table-actions">
-      <button class="edit-table-btn" id="edit-full-teams">Edit</button>
-      <button class="save-table-btn" id="save-full-teams" disabled>Save Changes</button>
-    </div>
-    <table class="admin-table full-teams-table" id="full-teams-table">
-    <thead>
-        <tr>
-          <th>Team Name</th>
-          <th>Golfer (Last)</th>
-          <th>Golfer (First)</th>
-          <th>Email</th>
-          <th>Phone</th>
-          <th>T-Shirt Size</th>
-          <th>Payment Status</th>
-        </tr>
-    </thead>
-    <tbody></tbody>
-    </table>
+  <div class="main-content">
+    <h1>Golf Outing Registrants – Admin Panel</h1>
+<div class="admin-summary-cards">
+  <div class="summary-card">
+    <div class="summary-title">Teams Registered</div>
+    <div class="summary-value" id="summary-total-teams">0</div>
+  </div>
+  <div class="summary-card">
+    <div class="summary-title">Full Teams</div>
+    <div class="summary-value" id="summary-full-teams">0</div>
+  </div>
+  <div class="summary-card">
+    <div class="summary-title">Partial Teams</div>
+    <div class="summary-value" id="summary-partial-teams">0</div>
+  </div>
+  <div class="summary-card">
+    <div class="summary-title">Free Agents</div>
+    <div class="summary-value" id="summary-free-agents">0</div>
+  </div>
+  <div class="summary-card">
+    <div class="summary-title">Sponsors</div>
+    <div class="summary-value" id="summary-sponsors">0</div>
+  </div>
+  <div class="summary-card">
+    <div class="summary-title">Amount Raised</div>
+    <div class="summary-value" id="summary-total-raised">$0.00</div>
+  </div>
+</div>
 
-    <h1>Partial Teams (&lt;4 Golfers)</h1>
-    <div class="table-actions">
-      <button class="edit-table-btn" id="edit-partial-teams">Edit</button>
-      <button class="save-table-btn" id="save-partial-teams" disabled>Save Changes</button>
-    </div>
-    <table class="admin-table partial-teams-table" id="partial-teams-table">
-    <thead>
-        <tr>   
-          <th>Team Name</th>
-          <th>Golfer Name</th>
-          <th>Email</th>
-          <th>Phone</th>
-          <th>T-Shirt Size</th>
-          <th>Payment Status</th>
-        </tr>
-    </thead>
-    <tbody></tbody>
-    </table>
+    <!-- Partial Teams Section -->
+    <section>
+      <h2>Partial Teams <span id="partial-teams-count" class="count"></span></h2>
+      <table class="admin-table partial-teams-table" id="partial-teams-table">
+        <thead>
+          <tr>
+            <th>Team Name</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Shirt Size</th>
+            <th>Payment Status</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <div class="table-actions">
+        <button id="edit-partial-teams" class="edit-btn">Edit</button>
+        <button id="save-partial-teams" class="save-table-btn" disabled>Save</button>
+      </div>
+    </section>
 
-    <h1>Free Agents</h1>
-    <div class="table-actions">
-      <button class="edit-table-btn" id="edit-free-agents">Edit</button>
-      <button class="save-table-btn" id="save-free-agents" disabled>Save Changes</button>
-    </div>
-    <table class="admin-table free-agents-table" id="free-agents-table">
-    <thead>
-        <tr>      
-          <th>Golfer Name</th>
-          <th>Email</th>
-          <th>Phone</th>
-          <th>T-Shirt Size</th>
-          <th>Payment Status</th>
-        </tr>
-    </thead>
-    <tbody></tbody>
-    </table>
+    <!-- Full Teams Section -->
+    <section>
+      <h2>Full Teams <span id="full-teams-count" class="count"></span></h2>
+      <table class="admin-table full-teams-table" id="full-teams-table">
+        <thead>
+          <tr>
+            <th>Team Name</th>
+            <th>Last Name</th>
+            <th>First Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Shirt Size</th>
+            <th>Payment Status</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <div class="table-actions">
+        <button id="edit-full-teams" class="edit-btn">Edit</button>
+        <button id="save-full-teams" class="save-table-btn" disabled>Save</button>
+      </div>
+    </section>
 
-    <h1>Sponsors</h1>
-    <div class="table-actions">
-      <button class="edit-table-btn" id="edit-sponsors">Edit</button>
-      <button class="save-table-btn" id="save-sponsors" disabled>Save Changes</button>
-    </div>    
-    <table class="admin-table sponsors-table" id="sponsors-table">
-    <thead>
-        <tr>
-          <th>Company Name</th>
-          <th>Contact Name</th>
-          <th>Email</th>
-          <th>Phone</th>
-          <th>Tier</th>
-          <th>Payment Status</th>
-          <th>Tier Amount</th>
-          <th>Amount Raised</th>
-        </tr>
-    </thead>
-    <tbody></tbody>
-    <tfoot>
-        <tr>
-          <th colspan="6">Totals:</th>
-          <th id="total-tier-amount"></th>
-          <th id="total-amount-paid"></th>
-        </tr>
-    </tfoot>
-    </table>
-  </main>
+    <!-- Free Agents Section -->
+    <section>
+      <h2>Free Agents <span id="free-agents-count" class="count"></span></h2>
+      <table class="admin-table free-agents-table" id="free-agents-table">
+        <thead>
+          <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Shirt Size</th>
+            <th>Payment Status</th>
+            <th>Assign to Team</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <div class="table-actions">
+        <button id="edit-free-agents" class="edit-btn">Edit</button>
+        <button id="save-free-agents" class="save-table-btn" disabled>Save</button>
+      </div>
+    </section>
+
+    <!-- Sponsors Section -->
+    <section>
+      <h2>Sponsors</h2>
+      <table class="admin-table sponsors-table" id="sponsors-table">
+        <thead>
+          <tr>
+            <th>Company Name</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Tier</th>
+            <th>Pay Status</th>
+            <th>Tier Amount</th>
+            <th>Amount Paid</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+        <tfoot>
+          <tr>
+            <td colspan="7" style="text-align:right;font-weight:bold;">Total:</td>
+            <td id="total-tier-amount" class="currency-cell"></td>
+            <td id="total-amount-paid" class="currency-cell"></td>
+          </tr>
+        </tfoot>
+      </table>
+      <div class="table-actions">
+        <button id="edit-sponsors" class="edit-btn">Edit</button>
+        <button id="save-sponsors" class="save-table-btn" disabled>Save</button>
+      </div>
+    </section>
+  </div>
   <script src="js/admin.js"></script>
 </body>
 </html>

@@ -81,7 +81,6 @@ async function populateTeamDropdown() {
   }
 }
 
-
 // Show team members when team is selected
 async function showTeamMembers(teamName) {
   const teamList = document.getElementById('team-members-list');
@@ -156,7 +155,8 @@ function handleSingleGolferFormSubmit() {
 
       if (res.ok) {
         form.reset();
-        showSingleFormMessage("✅ Registration complete!", true);
+        // REDIRECT TO CONFIRMATION PAGE
+        window.location.href = `confirmation.html?golfer=1&team=${encodeURIComponent(teamName)}`;
       } else {
         const errorText = await res.text();
         throw new Error(errorText);
