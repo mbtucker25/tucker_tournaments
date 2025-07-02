@@ -202,10 +202,8 @@
       <div class="gallery__grid" id="js-gallery">
         {% for file in site.static_files %}
         {% if file.path contains 'images/gallery/' %}
-            <img
-              src="{{ file.path | relative_url }}"
-              alt="{{ file.name | split:'.' | first | replace:'-',' ' | replace:'_',' ' }}"
-            />
+        <img src="{{ file.path | relative_url }}"
+          alt="{{ file.name | split:'.' | first | replace:'-',' ' | replace:'_',' ' }}" />
         {% endif %}
         {% endfor %}
       </div>
@@ -235,6 +233,9 @@
       <button class="lightbox-nav right" id="lightbox-next">&#10095;</button>
     </div>
   </div>
+  <footer class="page-footer">
+    Page Last Modified:  <span id="last-modified"></span>
+  </footer>
 </body>
 
 </html>

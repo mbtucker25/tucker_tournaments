@@ -159,12 +159,26 @@ document.addEventListener('DOMContentLoaded', () => {
   loadSponsors();
   initGalleryFeatures();
 
-  // Example: Reveal admin link on "ctrl+shift+a"
-document.addEventListener('keydown', function (e) {
-  if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'z') {
-    const adminLink = document.getElementById('admin-link');
-    if (adminLink) adminLink.style.display = 'block';
-  }
-});
+      // Set last updated date in footer
+    const lastModifiedSpan = document.getElementById('last-modified');
+    if (lastModifiedSpan) {
+      // Example: July 2, 2025, 1:25 PM
+      lastModifiedSpan.textContent = new Date(document.lastModified)
+        .toLocaleString(undefined, {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          hour: 'numeric',
+          minute: '2-digit',
+          hour12: true
+        })
+    }
 
+  // Example: Reveal admin link on "ctrl+shift+a"
+  document.addEventListener('keydown', function (e) {
+    if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'z') {
+      const adminLink = document.getElementById('admin-link');
+      if (adminLink) adminLink.style.display = 'block';
+    }
+  });
 });

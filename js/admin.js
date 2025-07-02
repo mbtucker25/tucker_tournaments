@@ -161,5 +161,18 @@ async function loadSponsors() {
 document.addEventListener('DOMContentLoaded', () => {
   loadTeams();
   loadSponsors();
-  // If you add table editing, init your setupEditableTable here as before
+        // Set last updated date in footer
+    const lastModifiedSpan = document.getElementById('last-modified');
+    if (lastModifiedSpan) {
+      // Example: July 2, 2025, 1:25 PM
+      lastModifiedSpan.textContent = new Date(document.lastModified)
+        .toLocaleString(undefined, {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          hour: 'numeric',
+          minute: '2-digit',
+          hour12: true
+        })
+    }
 });

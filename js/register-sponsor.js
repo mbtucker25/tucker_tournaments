@@ -242,6 +242,21 @@ document.addEventListener('DOMContentLoaded', () => {
     setupSponsorTierSelection();
     handleSponsorFormSubmit();
 
+          // Set last updated date in footer
+    const lastModifiedSpan = document.getElementById('last-modified');
+    if (lastModifiedSpan) {
+      // Example: July 2, 2025, 1:25 PM
+      lastModifiedSpan.textContent = new Date(document.lastModified)
+        .toLocaleString(undefined, {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          hour: 'numeric',
+          minute: '2-digit',
+          hour12: true
+        })
+    }
+
     // Add this inside your DOMContentLoaded block:
 const cancelBtn = document.getElementById('sponsor-cancel-btn');
 if (cancelBtn) {

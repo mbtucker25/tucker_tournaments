@@ -156,6 +156,21 @@ document.addEventListener('DOMContentLoaded', () => {
     handleFormSubmit();
     clearPlaceholderOnFocus();
 
+          // Set last updated date in footer
+    const lastModifiedSpan = document.getElementById('last-modified');
+    if (lastModifiedSpan) {
+      // Example: July 2, 2025, 1:25 PM
+      lastModifiedSpan.textContent = new Date(document.lastModified)
+        .toLocaleString(undefined, {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          hour: 'numeric',
+          minute: '2-digit',
+          hour12: true
+        })
+    }
+
     // For selects: show placeholder style when empty
     document.querySelectorAll('select').forEach(function (sel) {
         function updateStyle() {

@@ -54,6 +54,15 @@ body {
 
 }
 
+.page-footer{
+    width: 100%;
+    margin-top: 1.5rem;
+    padding: 0.5rem;
+    text-align: left;
+    font-size: var(--font-size-xs);
+    color: var(--color-dark);
+}
+
 /*──────────────────────────────────────────────────────────────────────────*/
 /*                             HEADER                                       */
 /*──────────────────────────────────────────────────────────────────────────*/
