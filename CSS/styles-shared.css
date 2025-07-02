@@ -10,12 +10,12 @@
   --font-sans:       'Open Sans', sans-serif;
   --font-display:    'Oswald', sans-serif;
 
-  --font-size-xxl:   clamp(1.7rem, 4vw, 2.4rem);
-  --font-size-xl:    clamp(1.25rem, 3vw, 1.7rem);
-  --font-size-l:     clamp(1rem, 2vw, 1.2rem);
-  --font-size-m:     clamp(0.95rem, 1.6vw, 1rem);
-  --font-size-s:     clamp(0.8rem, 1.2vw, 0.85rem);
-  --font-size-xs:    clamp(0.5rem, 0.9vw, 0.7rem);
+  --font-size-xxl: clamp(1.75rem, 5vw, 2rem);     /* 28–32px */
+  --font-size-xl:  clamp(1.5rem, 4vw, 1.75rem);   /* 24–28px */
+  --font-size-l:   clamp(1.25rem, 3vw, 1.5rem);   /* 20–24px */
+  --font-size-m:   clamp(1rem, 2vw, 1.25rem);     /* 16–20px */
+  --font-size-s:   clamp(0.85rem, 1.5vw, 1rem);   /* 13.6–16px */
+  --font-size-xs:  clamp(0.7rem, 1vw, 0.85rem);   /* 11.2–13.6px */
 
   --shadow-dark:     rgba(0,0,0,0.2);
   --shadow-light:    rgba(255,255,255,0.7);
@@ -85,13 +85,41 @@ body {
   font-size: var(--font-size-s);
   color: var(--color-primary);
   margin-top: 0;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
 }
 
 .form__lead p{
   line-height: normal; 
   padding-bottom: .5rem;
 }
+
+.highlight-note {
+    background: #fff7e6;
+    color: #d19b4b;
+    border-top: 4px solid #ee9d06;
+    border-bottom: 4px solid #ee9d06;
+    border-radius: 8px;
+    padding: .5rem;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center; /* For top-align icon with multiline */
+    font-size: var(--font-size-s);
+    box-shadow: 0 2px 12px #0001;
+    animation: fadeIn 0.5s;
+    /* Hanging indent effect */
+    gap: .5rem;
+    line-height: 1.3;
+}
+.highlight-note i {
+  color: rgb(253, 111, 29);
+    flex-shrink: 0;      /* Prevents icon from shrinking */
+    margin-top: 0.13em;  /* Vertically aligns icon with text */
+    font-size: var(--font-size-l);   /* Makes icon slightly larger than text */
+    line-height: 1.3;
+}
+
 
 /*──────────────────────────────────────────────*/
 /*          Confirmation Page Styles            */
@@ -252,6 +280,18 @@ body {
         min-width: 140px;
         max-width: 95vw;
     }
+
+    .highlight-note {
+    padding: 0.25rem;
+    margin: 0.2rem;
+    font-weight: 500;
+    gap: 0.05rem;
+    font-size: var(--font-size-xs);
+}
+.highlight-note i {
+    font-size: var(--font-size-m);
+    margin-right: 0.5rem;
+}
 }
 
 

@@ -50,6 +50,8 @@
             <fieldset class="team-members-inline" id="team-members-inline-display" hidden>
                 <ul id="team-members-list" class="team-members-list clean"></ul>
             </fieldset>
+            </div>
+            </div>
             <!-- CONTACT INFORMATION CARD (identical to golfer card) -->
             <div class="card card--golfer">
                 <div class="card__heading-wrapper">
@@ -92,6 +94,10 @@
                             <option value="XX-Large">XX-LARGE</option>
                         </select>
                     </div>
+                    <div class="highlight-note">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                        T-shirts will be included for all those registered by July 13, 2025.
+                    </div>
                 </div>
             </div>
             <!-- FORM MESSAGE + BUTTONS -->
@@ -101,6 +107,15 @@
                 <button type="submit" class="btn primary">Submit</button>
             </div>
         </form>
+        <!-- Success Overlay -->
+        <div id="success-overlay" class="modal-overlay neumorphic" hidden>
+            <div class="modal-content neumorphic">
+                <p id="success-message-text" class="success-message-text"></p>
+                <div class="success-btn-wrapper">
+                    <button id="success-ok-btn" class="success-btn">OK</button>
+                </div>
+            </div>
+        </div>
     </main>
     <script src="js/register-single.js"></script>
 </body>

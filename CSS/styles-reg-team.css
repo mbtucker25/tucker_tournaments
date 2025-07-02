@@ -228,7 +228,7 @@ select.placeholder-visible {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2rem 3rem;
-    margin: 0 auto 1.5rem auto;
+    margin: auto;
 }
 .golfers-grid > .card--golfer {
     max-width: 480px;

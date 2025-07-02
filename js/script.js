@@ -159,8 +159,12 @@ document.addEventListener('DOMContentLoaded', () => {
   loadSponsors();
   initGalleryFeatures();
 
-  // Volunteer modal close
-  document.getElementById('volunteer-ok-btn')?.addEventListener('click', () => {
-    document.getElementById('modal-volunteer')?.setAttribute('hidden', true);
-  });
+  // Example: Reveal admin link on "ctrl+shift+a"
+document.addEventListener('keydown', function (e) {
+  if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'z') {
+    const adminLink = document.getElementById('admin-link');
+    if (adminLink) adminLink.style.display = 'block';
+  }
+});
+
 });
