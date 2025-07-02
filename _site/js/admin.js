@@ -161,18 +161,22 @@ async function loadSponsors() {
 document.addEventListener('DOMContentLoaded', () => {
   loadTeams();
   loadSponsors();
-        // Set last updated date in footer
-    const lastModifiedSpan = document.getElementById('last-modified');
-    if (lastModifiedSpan) {
-      // Example: July 2, 2025, 1:25 PM
-      lastModifiedSpan.textContent = new Date(document.lastModified)
-        .toLocaleString(undefined, {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
-          hour: 'numeric',
-          minute: '2-digit',
-          hour12: true
-        })
-    }
+  // Set last updated date in footer
+  const lastModifiedSpan = document.getElementById('last-modified');
+  if (lastModifiedSpan) {
+    const formattedDate = new Date(document.lastModified).toLocaleString(undefined, {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: '2-digit',
+      hour12: true
+    });
+    lastModifiedSpan.textContent = formattedDate;
+
+    // Console log for testing
+    console.log('[Footer] Set last modified date to:', formattedDate);
+  } else {
+    console.log('[Footer] last-modified span NOT found on page.');
+  }
 });
