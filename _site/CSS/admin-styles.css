@@ -3,59 +3,80 @@
 ────────────────────────────────────────────────────────────────────────── */
 :root {
   /* SURFACES & BACKGROUNDS */
-  --color-surface-100: #dcdfe9;  /* page & card backgrounds */
-  --color-surface-200: #A4AFD0;  /* borders, dividers, disabled states */
-  --color-surface-300: #7688B9;  /* panels, hover/focus fills */
+  --color-surface-100: #dcdfe9;
+  /* page & card backgrounds */
+  --color-surface-200: #A4AFD0;
+  /* borders, dividers, disabled states */
+  --color-surface-300: #7688B9;
+  /* panels, hover/focus fills */
 
   /* CORE BRAND */
-  --color-primary:      #384360;  /* brand blue */
-  --color-on-primary:   #F7F5F2;  /* text/icons on primary */
+  --color-primary: #384360;
+  /* brand blue */
+  --color-on-primary: #F7F5F2;
+  /* text/icons on primary */
 
   /* TEXT */
-  --color-text-primary:   #1D2436; /* main copy */
-  --color-text-secondary: #55658E; /* captions, placeholders */
+  --color-text-primary: #1D2436;
+  /* main copy */
+  --color-text-secondary: #55658E;
+  /* captions, placeholders */
 
   /* DARK & REVERSE */
-  --color-surface-700: #0C111C;    /* footers, ultra-dark panels */
+  --color-surface-700: #0C111C;
+  /* footers, ultra-dark panels */
 
   /* ACCENTS & INTERACTIVE */
-  --color-accent:       #55658E;  /* buttons, links, CTAs */
-  --color-accent-hover: #7688B9;  /* hover/active states */
-  --color-accent-alt:   #A4AFD0;  /* alternate accent backgrounds */
+  --color-accent: #55658E;
+  /* buttons, links, CTAs */
+  --color-accent-hover: #7688B9;
+  /* hover/active states */
+  --color-accent-alt: #A4AFD0;
+  /* alternate accent backgrounds */
 
   /* HIGHLIGHTS */
-  --color-edited-cell:  #FFF4D6;  /* gentle highlight */
+  --color-edited-cell: #FFF4D6;
+  /* gentle highlight */
+  --color-checkin-highlight: #96f79e;
+  /* checked-in highlight */
 
   --color-disabled-btn: #b1b1b1;
+  --color-attention-reqd-highlight: #f74040;
+  --color-attention-reqd-text: #f3f0f0;
 
   /* FONTS & SIZING */
-  --font-sans:      'Roboto','Open Sans',Arial,sans-serif;
-  --font-display:   'Roboto','Open Sans',Arial,sans-serif;
+  --font-sans: 'Roboto', 'Open Sans', Arial, sans-serif;
+  --font-display: 'Roboto', 'Open Sans', Arial, sans-serif;
 
   --font-size-xxl: clamp(2rem, 4vw, 2.5rem);
-  --font-size-xl:  clamp(1.5rem, 3vw, 2rem);
-  --font-size-l:   clamp(1.25rem, 2.2vw, 1.5rem);
-  --font-size-m:   clamp(1rem, 1.5vw, 1.125rem);
-  --font-size-s:   clamp(0.875rem, 1vw, 1rem);
-  --font-size-xs:  clamp(0.75rem, 0.8vw, 0.875rem);
+  --font-size-xl: clamp(1.5rem, 3vw, 2rem);
+  --font-size-l: clamp(1.25rem, 2.2vw, 1.5rem);
+  --font-size-m: clamp(1rem, 1.5vw, 1.125rem);
+  --font-size-s: clamp(0.875rem, 1vw, 1rem);
+  --font-size-xs: clamp(0.75rem, 0.8vw, 0.875rem);
 
   /* SHADOWS */
-  --shadow-dark:  rgba(0, 0, 0, 0.2);
+  --shadow-dark: rgba(0, 0, 0, 0.2);
   --shadow-light: rgba(255, 255, 255, 0.7);
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
    Base Reset & Global Styles
 ────────────────────────────────────────────────────────────────────────── */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
-html, body {
+
+html,
+body {
   overflow-x: hidden;
   overflow-y: auto;
 }
+
 body {
   background: var(--color-surface-100);
   color: var(--color-text-primary);
@@ -79,6 +100,112 @@ body {
   z-index: 1;
 }
 
+/* ───────────────────────────────────────────────────────────────
+   Tab Navigation for Admin Panel
+─────────────────────────────────────────────────────────────── */
+
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid var(--color-surface-300);
+  background: none;
+  padding-left: 0.5rem;
+  overflow-x: auto;
+}
+
+.tab {
+  appearance: none;
+  border: none;
+  outline: 1px solid transparent;
+  background: var(--color-on-primary);
+  font-family: var(--font-display);
+  font-size: var(--font-size-m);
+  color: var(--color-primary);
+  font-weight: 500;
+  padding: 0.75rem 1.25rem 0.65rem 1.25rem;
+  cursor: pointer;
+  border-radius: 0.5rem 0.5rem 0 0;
+  transition: background 0.18s, color 0.18s, box-shadow 0.18s;
+  border-bottom: 3px solid transparent;
+  position: relative;
+}
+
+.tab:not(.active):hover,
+.tab:focus-visible {
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+}
+
+.tab.active {
+  background: var(--color-surface-200);
+  color: var(--color-on-primary);
+  border-bottom: 3px solid var(--color-accent);
+  font-weight: 700;
+  box-shadow: 0 2px 8px -4px var(--shadow-dark);
+  z-index: 2;
+}
+
+/* ───────────────────────────────────────────────
+   Tab Content
+─────────────────────────────────────────────── */
+.tab-content {
+  display: none;
+  animation: fadeIn 0.25s;
+}
+
+.tab-content:target,
+.tab-content.active,
+.tab-content[style*="display: block"] {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ───────────────────────────────────────────────
+   Footer (Page Footer)
+─────────────────────────────────────────────── */
+.page-footer {
+  width: 100%;
+  max-width: 900px;
+  margin: 2rem auto 1rem auto;
+  padding: 1rem 0;
+  text-align: left;
+  font-size: var(--font-size-xs);
+  color: var(--color-primary);
+  background: none;
+  border-top: 1px solid var(--color-surface-300);
+  opacity: 0.85;
+}
+
+@media (max-width: 700px) {
+  .tabs {
+    flex-wrap: wrap;
+    padding-left: 0;
+  }
+
+  .tab {
+    font-size: var(--font-size-s);
+    padding: 0.5rem 1rem 0.4rem 1rem;
+  }
+
+  .page-footer {
+    font-size: var(--font-size-xs);
+    padding: 0.5rem 0;
+  }
+}
+
+
 /* ──────────────────────────────────────────────────────────────────────────
    Headings
 ────────────────────────────────────────────────────────────────────────── */
@@ -90,10 +217,11 @@ h1 {
   text-align: center;
   letter-spacing: 1px;
 }
+
 h2 {
   margin: 1rem;
   color: var(--color-primary);
-  font-size: var(--font-size-l);
+  font-size: var(--font-size-xl);
   vertical-align: middle;
 }
 
@@ -127,16 +255,18 @@ h2 {
   border-spacing: 3px;
   box-shadow: 0 2px 4px var(--shadow-dark), 0 -2px 4px var(--shadow-light);
   overflow: hidden;
-  font-size: var(--font-size-m);
+  font-size: var(--font-size-s);
   margin-bottom: 2rem;
 }
+
 .admin-table th,
 .admin-table td {
   text-align: left;
   vertical-align: middle;
-  padding: 0.5rem;
+  padding: .25rem .25rem;
   font-weight: 500;
 }
+
 .admin-table th {
   background: var(--color-surface-300);
   color: var(--color-on-primary);
@@ -146,32 +276,221 @@ h2 {
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
+
 .admin-table td {
   border: 2px solid var(--color-surface-200);
 }
+
 .currency-cell {
   text-align: right;
   font-family: monospace;
 }
-.admin-table td.edited-cell {
-  background-color: var(--color-edited-cell) !important;
-  transition: background-color 0.2s;
-}
-.admin-table select {
-  padding: 0.3rem;
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Generic table dropdown styling
+────────────────────────────────────────────────────────────────────────── */
+
+/* 1) Static (read-only) selects look just like cells */
+.admin-table select{
+  appearance: menulist-button;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.25rem;
   font-size: var(--font-size-s);
-  border: 1px solid var(--color-surface-200);
-  border-radius: 0.3rem;
   background: var(--color-surface-100);
   color: var(--color-text-primary);
-  appearance: none;
-  cursor: pointer;
-  width: auto;
-  transition: border-color 0.2s;
+  border: none;
+  cursor: default;
+  pointer-events: none;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
 }
-.admin-table select:focus {
+
+/* 2) When the table is in edit-mode, re-enable them */
+.admin-table.edit-mode select {
+  background-color: var(--color-on-primary) !important;
+  color: var(--color-primary) !important;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+/* 3) Focus state (only in edit-mode) */
+.admin-table.edit-mode select:focus {
   outline: none;
   border-color: var(--color-accent);
+}
+
+/* 4) Options themselves */
+.admin-table select option {
+  background: var(--color-surface-100);
+  color: var(--color-text-primary);
+}
+
+/* when in edit mode, hovered options get accent-alt */
+.admin-table.edit-mode select option:hover {
+  background: var(--color-accent-alt);
+  color: var(--color-on-primary);
+}
+
+.admin-table select option:checked {
+  background: var(--color-edited-cell);
+  color: var(--color-text-primary);
+}
+
+/* 5) When a cell is genuinely changed, override everything */
+.admin-table select.edited-cell,
+.admin-table td.edited-cell select {
+  background: var(--color-edited-cell) !important;
+  color: var(--color-text-primary) !important;
+  border-color: var(--color-accent) !important;
+}
+
+/* 6) Edit-mode: all cells get on-primary look */
+.admin-table.edit-mode td {
+  background: var(--color-on-primary) !important;
+  color: var(--color-primary) !important;
+}
+
+/* 7) Edited cells in edit-mode keep their highlight */
+.admin-table.edit-mode td.edited-cell {
+  background: var(--color-edited-cell) !important;
+  color: var(--color-text-primary) !important;
+}
+
+/* ─── Check-In Table: fixed layout at 75% of its parent ─── */
+#checkin-table {
+  table-layout: fixed;
+  width: 65%;
+  justify-self: center;
+}
+
+/* ─── Base styling for all cells ─── */
+#checkin-table th,
+#checkin-table td {
+  font-size: var(--font-size-s);
+  vertical-align: middle;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+/* ─── Column widths ─── */
+/* 1. Checked-In (small) */
+#checkin-table th:nth-child(1),
+#checkin-table td:nth-child(1) {
+  width: 5%;
+  text-align: center;
+}
+
+/* 2. Golfer (Last) */
+#checkin-table th:nth-child(2),
+#checkin-table td:nth-child(2) {
+  width: 20%;
+}
+
+/* 3. Golfer (First) */
+#checkin-table th:nth-child(3),
+#checkin-table td:nth-child(3) {
+  width: 20%;
+}
+
+/* 4. Team (largest) */
+#checkin-table th:nth-child(4),
+#checkin-table td:nth-child(4) {
+  width: 32.5%;
+}
+
+/* 5. T-Shirt Size */
+#checkin-table th:nth-child(5),
+#checkin-table td:nth-child(5) {
+  width: 15%;
+}
+
+
+/* ─── Highlight checked-in row ─── */
+#checkin-table tr.checked-in-row {
+  background-color: var(--color-checkin-highlight) !important;
+  transition: background-color 0.3s ease !important;
+}
+
+/* Highlight tables rows requiring attention */
+.attention-reqd {
+  background-color: var(--color-attention-reqd-highlight) !important;
+  color: var(--color-attention-reqd-text) !important;
+  transition: background-color 0.3s ease !important;
+}
+
+/* ─── Enlarge the checkbox itself ─── */
+#checkin-table .checked-in-checkbox {
+  transform: scale(1.5);
+  display: inline-block;
+  vertical-align: middle;
+  accent-color: var(--color-primary);
+  cursor: pointer;
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Team Scores: Column Sizing & Alignment
+────────────────────────────────────────────────────────────────────────── */
+#team-scores-table {
+  width: 100%;
+  /* fill its container */
+  table-layout: fixed;
+  /* obey our width rules exactly */
+}
+
+#team-scores-table th {
+  font-size: var(--font-size-s);
+}
+
+#team-scores-table td {
+  font-size: var(--font-size-xs);
+}
+
+/* Team Name: fill remaining space, no wrap */
+#team-scores-table th:nth-child(1),
+#team-scores-table td:nth-child(1) {
+  width: 15%;
+  white-space: nowrap;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Hole 1–18 + FR + BK: each only as wide as 2 digits */
+#team-scores-table th:nth-child(n+2):nth-child(-n+21),
+#team-scores-table td:nth-child(n+2):nth-child(-n+21) {
+  width: 3ch;
+  /* 2 digits (2ch) + padding/spacing */
+  text-align: center;
+}
+
+/* TOT: only as wide as “TOT” (3 letters) */
+#team-scores-table th:nth-child(22),
+#team-scores-table td:nth-child(22) {
+  width: 4ch;
+  white-space: nowrap;
+  text-align: center;
+}
+
+/* ─── Score Inputs: text‐box style ─── */
+#team-scores-table .score-input {
+  font-size: var(--font-size-s);
+  width: 4ch;
+  /* exactly enough for two digits */
+  box-sizing: border-box;
+  text-align: center;
+  padding: 0.25rem;
+  /* comfortable click‐area */
+  border: 1px solid var(--color-surface-200);
+  border-radius: 0.25rem;
+  background: var(--color-on-primary);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+#team-scores-table .score-input:focus {
+  background-color: var(--color-edited-cell);
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
@@ -198,6 +517,7 @@ h2 {
   box-shadow: 0 2px 4px var(--shadow-dark);
   transition: background 0.2s, transform 0.2s;
 }
+
 .save-table-btn:hover:enabled,
 .edit-table-btn:hover:enabled,
 .edit-btn:hover:enabled,
@@ -205,6 +525,7 @@ h2 {
   background: var(--color-accent-hover);
   transform: translateY(-2px);
 }
+
 .save-table-btn:disabled,
 .edit-table-btn:disabled {
   opacity: 0.4;
@@ -212,8 +533,31 @@ h2 {
   color: var(--color-disabled-btn);
   color: var(--color-on-primary);
 }
+
 .assign-btn {
   font-size: var(--font-size-s);
+}
+
+.cancel-btn {
+  align-items: center;
+  justify-content: center;
+  background: #d10000;
+  color: var(--color-on-primary);
+  width: 8rem;
+  height: 2.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  padding: .25rem;
+  margin: 0.5rem;
+  font-size: var(--font-size-m);
+  cursor: pointer;
+  box-shadow: 0 2px 4px var(--shadow-dark);
+  transition: background 0.2s, transform 0.2s;
+}
+
+.cancel-btn:hover:enabled {
+  background: #f73636;
+  transform: translateY(-2px);
 }
 
 .table-actions {
@@ -232,6 +576,7 @@ h2 {
   gap: 1rem;
   margin-bottom: 2rem;
 }
+
 .summary-card {
   background: var(--color-surface-200);
   color: var(--color-on-primary);
@@ -244,12 +589,14 @@ h2 {
   text-align: center;
   box-shadow: 0 1px 3px var(--shadow-dark);
 }
+
 .summary-title {
   font-size: var(--font-size-l);
   color: var(--color-primary);
   margin-bottom: 1rem;
   letter-spacing: 1px;
 }
+
 .summary-value {
   font-size: var(--font-size-xl);
   font-weight: bold;
@@ -260,13 +607,29 @@ h2 {
    Responsive
 ────────────────────────────────────────────────────────────────────────── */
 @media (max-width: 900px) {
-  .main-content { padding: 1rem; }
+  .main-content {
+    padding: 1rem;
+  }
+
   .admin-table th,
-  .admin-table td { font-size: var(--font-size-s); padding: 0.4rem; }
+  .admin-table td {
+    font-size: var(--font-size-s);
+    padding: 0.4rem;
+  }
 }
+
 @media (max-width: 600px) {
-  .main-content { padding: 0.5rem; }
+  .main-content {
+    padding: 0.5rem;
+  }
+
   .admin-table th,
-  .admin-table td { font-size: var(--font-size-xs); padding: 0.25rem; }
-  h1 { font-size: var(--font-size-l); }
+  .admin-table td {
+    font-size: var(--font-size-xs);
+    padding: 0.25rem;
+  }
+
+  h1 {
+    font-size: var(--font-size-l);
+  }
 }

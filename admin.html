@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Golf Outing Admin Dashboard</title>
@@ -7,140 +8,227 @@
   <link rel="stylesheet" href="CSS/admin-styles.css">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
+
 <body>
   <div class="main-content">
-    <h1>Golf Outing Registrants – Admin Panel</h1>
-<div class="admin-summary-cards">
-  <div class="summary-card">
-    <div class="summary-title">Teams Registered</div>
-    <div class="summary-value" id="summary-total-teams">0</div>
-  </div>
-  <div class="summary-card">
-    <div class="summary-title">Full Teams</div>
-    <div class="summary-value" id="summary-full-teams">0</div>
-  </div>
-  <div class="summary-card">
-    <div class="summary-title">Partial Teams</div>
-    <div class="summary-value" id="summary-partial-teams">0</div>
-  </div>
-  <div class="summary-card">
-    <div class="summary-title">Free Agents</div>
-    <div class="summary-value" id="summary-free-agents">0</div>
-  </div>
-  <div class="summary-card">
-    <div class="summary-title">Sponsors</div>
-    <div class="summary-value" id="summary-sponsors">0</div>
-  </div>
-  <div class="summary-card">
-    <div class="summary-title">Amount Raised</div>
-    <div class="summary-value" id="summary-total-raised">$0.00</div>
-  </div>
-</div>
-
-    <!-- Partial Teams Section -->
-    <section>
-      <h2>Partial Teams <span id="partial-teams-count" class="count"></span></h2>
-      <table class="admin-table partial-teams-table" id="partial-teams-table">
-        <thead>
-          <tr>
-            <th>Team Name</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Shirt Size</th>
-            <th>Payment Status</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-      <div class="table-actions">
-        <button id="edit-partial-teams" class="edit-btn">Edit</button>
-        <button id="save-partial-teams" class="save-table-btn" disabled>Save</button>
+    <h1>Site Admin Portal</h1>
+    <div class="admin-summary-cards">
+      <div class="summary-card">
+        <div class="summary-title">Teams Registered</div>
+        <div class="summary-value" id="summary-total-teams">0</div>
       </div>
-    </section>
-
-    <!-- Full Teams Section -->
-    <section>
-      <h2>Full Teams <span id="full-teams-count" class="count"></span></h2>
-      <table class="admin-table full-teams-table" id="full-teams-table">
-        <thead>
-          <tr>
-            <th>Team Name</th>
-            <th>Last Name</th>
-            <th>First Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Shirt Size</th>
-            <th>Payment Status</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-      <div class="table-actions">
-        <button id="edit-full-teams" class="edit-btn">Edit</button>
-        <button id="save-full-teams" class="save-table-btn" disabled>Save</button>
+      <div class="summary-card">
+        <div class="summary-title">Full Teams</div>
+        <div class="summary-value" id="summary-full-teams">0</div>
       </div>
-    </section>
-
-    <!-- Free Agents Section -->
-    <section>
-      <h2>Free Agents <span id="free-agents-count" class="count"></span></h2>
-      <table class="admin-table free-agents-table" id="free-agents-table">
-        <thead>
-          <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Shirt Size</th>
-            <th>Payment Status</th>
-            <th>Assign to Team</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-      <div class="table-actions">
-        <button id="edit-free-agents" class="edit-btn">Edit</button>
-        <button id="save-free-agents" class="save-table-btn" disabled>Save</button>
+      <div class="summary-card">
+        <div class="summary-title">Partial Teams</div>
+        <div class="summary-value" id="summary-partial-teams">0</div>
       </div>
-    </section>
-
-    <!-- Sponsors Section -->
-    <section>
-      <h2>Sponsors</h2>
-      <table class="admin-table sponsors-table" id="sponsors-table">
-        <thead>
-          <tr>
-            <th>Company Name</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Tier</th>
-            <th>Pay Status</th>
-            <th>Tier Amount</th>
-            <th>Amount Paid</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-        <tfoot>
-          <tr>
-            <td colspan="7" style="text-align:right;font-weight:bold;">Total:</td>
-            <td id="total-tier-amount" class="currency-cell"></td>
-            <td id="total-amount-paid" class="currency-cell"></td>
-          </tr>
-        </tfoot>
-      </table>
-      <div class="table-actions">
-        <button id="edit-sponsors" class="edit-btn">Edit</button>
-        <button id="save-sponsors" class="save-table-btn" disabled>Save</button>
+      <div class="summary-card">
+        <div class="summary-title">Free Agents</div>
+        <div class="summary-value" id="summary-free-agents">0</div>
       </div>
-    </section>
+      <div class="summary-card">
+        <div class="summary-title">Sponsors</div>
+        <div class="summary-value" id="summary-sponsors">0</div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-title">Amount Raised</div>
+        <div class="summary-value" id="summary-total-raised">$0.00</div>
+      </div>
+    </div>
+
+    <!-- Tab Navigation -->
+    <nav class="tabs">
+      <button class="tab active" data-tab="registrants">Registrations</button>
+      <button class="tab" data-tab="sponsors">Sponsors</button>
+      <button class="tab" data-tab="checkin">Check-Ins</button>
+      <button class="tab" data-tab="scores">Team Scores</button>
+      <button class="tab" data-tab="scores">T-Shirts Summary</button>
+    </nav>
+
+    <!-- TAB CONTENTS -->
+    <div class="tab-content" id="tab-registrants">
+      <!-- Partial Teams Section -->
+      <section>
+        <h2>Partial Teams <span id="partial-teams-count" class="count"></span></h2>
+        <table class="admin-table partial-teams-table" id="partial-teams-table">
+          <thead>
+            <tr>
+              <th>Team Name</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Shirt Size</th>
+              <th>Payment Status</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        <div class="table-actions">
+          <button id="edit-partial-teams" class="edit-btn">Edit</button>
+          <button id="cancel-partial-teams" class="cancel-btn" hidden>Cancel</button>
+          <button id="save-partial-teams" class="save-table-btn" disabled>Save</button>
+        </div>
+      </section>
+      <!-- Full Teams Section -->
+      <section>
+        <h2>Full Teams <span id="full-teams-count" class="count"></span></h2>
+        <table class="admin-table full-teams-table" id="full-teams-table">
+          <thead>
+            <tr>
+              <th>Team Name</th>
+              <th>Last Name</th>
+              <th>First Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Shirt Size</th>
+              <th>Payment Status</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        <div class="table-actions">
+          <button id="edit-full-teams" class="edit-btn">Edit</button>
+          <button id="cancel-full-teams" class="cancel-btn" hidden>Cancel</button>
+          <button id="save-full-teams" class="save-table-btn" disabled>Save</button>
+        </div>
+      </section>
+      <!-- Free Agents Section -->
+      <section>
+        <h2>Free Agents <span id="free-agents-count" class="count"></span></h2>
+        <table class="admin-table free-agents-table" id="free-agents-table">
+          <thead>
+            <tr>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Shirt Size</th>
+              <th>Payment Status</th>
+              <th>Assign to Team</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        <div class="table-actions">
+          <button id="edit-free-agents" class="edit-btn">Edit</button>
+          <button id="cancel-free-agents" class="cancel-btn" hidden>Cancel</button>
+          <button id="save-free-agents" class="save-table-btn" disabled>Save</button>
+        </div>
+      </section>
+    </div>
+
+    <!-- Check-Ins Tab -->
+    <div class="tab-content" id="tab-checkin">
+      <section>
+        <h2>Check-In Desk</h2>
+        <div id="checkin-table-container">
+          <table class="admin-table" id="checkin-table">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Golfer (Last)</th>
+                <th>Golfer (First)</th>
+                <th>Team</th>
+                <th>T-Shirt Size</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- rows will be injected by admin.js -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+
+    <!-- Team Scores Tab -->
+    <div class="tab-content" id="tab-scores">
+      <section>
+        <h2>Team Scores</h2>
+        <div id="scores-table-container">
+          <table class="admin-table" id="team-scores-table">
+            <thead>
+              <tr>
+                <th>Team</th>
+                <!-- Holes 1–18 -->
+                <th>1</th>
+                <th>2</th>
+                <th>3</th>
+                <th>4</th>
+                <th>5</th>
+                <th>6</th>
+                <th>7</th>
+                <th>8</th>
+                <th>9</th>
+                <!-- Subtotals -->
+                <th>FR</th>
+                <th>10</th>
+                <th>11</th>
+                <th>12</th>
+                <th>13</th>
+                <th>14</th>
+                <th>15</th>
+                <th>16</th>
+                <th>17</th>
+                <th>18</th>
+                <th>BK</th>
+                <!-- Total -->
+                <th>TOT</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- rows injected by admin.js -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+
+    <!-- Sponsors Tab -->
+    <div class="tab-content" id="tab-sponsors">
+      <section>
+        <h2>Sponsors</h2>
+        <table class="admin-table sponsors-table" id="sponsors-table">
+          <thead>
+            <tr>
+              <th>Company Name</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Tier</th>
+              <th>Pay Status</th>
+              <th>Tier Amount</th>
+              <th>Amount Paid</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+          <tfoot>
+            <tr>
+              <td colspan="7" style="text-align:right;font-weight:bold;">Total:</td>
+              <td id="total-tier-amount" class="currency-cell"></td>
+              <td id="total-amount-paid" class="currency-cell"></td>
+            </tr>
+          </tfoot>
+        </table>
+        <div class="table-actions">
+          <button id="edit-sponsors" class="edit-btn">Edit</button>
+          <button id="cancel-sponsors" class="cancel-btn" hidden>Cancel</button>
+          <button id="save-sponsors" class="save-table-btn" disabled>Save</button>
+        </div>
+      </section>
+    </div>
   </div>
-  <script src="js/admin.js"></script>
-    <footer class="page-footer">
-    Page Last Modified:  <span id="last-modified"></span>
+
+  <footer class="page-footer">
+    Page Last Modified: <span id="last-modified"></span>
   </footer>
+
+  <script src="js/admin.js"></script>
+
 </body>
+
 </html>
