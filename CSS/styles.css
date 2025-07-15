@@ -1015,6 +1015,15 @@ body {
   box-shadow: 2px 2px 6px var(--shadow-dark), -2px -2px 6px var(--shadow-light);
 }
 
+.section__subtitle {
+  font-size: var(--font-size-m);
+  color: var(--color-text-secondary);
+  text-align: center;
+  margin-bottom: 1.5rem;
+  line-height: 1.4;
+}
+
+
 @media (max-width: 900px) {
   .sponsors__grid {
     grid-template-columns: repeat(2, 1fr);
