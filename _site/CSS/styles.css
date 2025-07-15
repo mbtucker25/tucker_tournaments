@@ -996,7 +996,7 @@ body {
 }
 
 .sponsors__grid img:hover {
-  transform: scale(1.05);
+  transform: scale(1.75);
 }
 
 /* Only style tier labels inside the sponsors grid */

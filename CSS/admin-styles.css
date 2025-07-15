@@ -282,8 +282,14 @@ h2 {
 }
 
 .currency-cell {
-  text-align: right;
+  text-align: right !important;
   font-family: monospace;
+}
+
+/* Footer “Total:” label in the Sponsors table */
+.sponsors-table tfoot .sponsors-total {
+  text-align: right !important;
+  font-weight: 750 !important;
 }
 
 /* ──────────────────────────────────────────────────────────────────────────

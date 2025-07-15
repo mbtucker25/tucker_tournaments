@@ -53,6 +53,8 @@ async function loadSponsors() {
     const label = document.createElement('div');
     label.textContent = sponsor.company_name;
     label.style.marginTop = '0.5rem';
+    label.style.textWrap = 'nowrap';
+    label.style.fontSize = 'var(--font-size-xs)';
     label.style.fontWeight = 'bold';
     label.style.color = 'var(--color-primary)';
     label.style.textAlign = 'center';
@@ -60,7 +62,7 @@ async function loadSponsors() {
     const tierLabel = document.createElement('div');
     tierLabel.textContent = sponsor.tier ? sponsor.tier + ' Sponsor' : '';
     tierLabel.className = 'sponsor-tier-label sponsor-tier-' + tier;
-    tierLabel.style.fontSize = '0.95rem';
+    tierLabel.style.fontSize = 'var(--font-size-s)';
     tierLabel.style.fontWeight = '600';
     tierLabel.style.marginTop = '0.25rem';
     tierLabel.style.textTransform = 'uppercase';
