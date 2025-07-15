@@ -45,7 +45,7 @@
       <button class="tab" data-tab="sponsors">Sponsors</button>
       <button class="tab" data-tab="checkin">Check-Ins</button>
       <button class="tab" data-tab="scores">Team Scores</button>
-      <button class="tab" data-tab="scores">T-Shirts Summary</button>
+      <button class="tab" data-tab="tshirts">T-Shirts Summary</button>
     </nav>
 
     <!-- TAB CONTENTS -->
@@ -221,6 +221,43 @@
           <button id="cancel-sponsors" class="cancel-btn" hidden>Cancel</button>
           <button id="save-sponsors" class="save-table-btn" disabled>Save</button>
         </div>
+      </section>
+    </div>
+
+    <!-- T-Shirts Summary Tab -->
+    <div class="tab-content" id="tab-tshirts">
+      <section>
+        <h2>T-Shirts Summary</h2>
+        <table class="admin-table" id="tshirts-table">
+          <thead>
+            <tr>
+              <th>Size</th>
+              <th>Count</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>SMALL</td>
+              <td id="count-SMALL">0</td>
+            </tr>
+            <tr>
+              <td>MEDIUM</td>
+              <td id="count-MEDIUM">0</td>
+            </tr>
+            <tr>
+              <td>LARGE</td>
+              <td id="count-LARGE">0</td>
+            </tr>
+            <tr>
+              <td>X-LARGE</td>
+              <td id="count-X-LARGE">0</td>
+            </tr>
+            <tr>
+              <td>XX-LARGE</td>
+              <td id="count-XX-LARGE">0</td>
+            </tr>
+          </tbody>
+        </table>
       </section>
     </div>
   </div>

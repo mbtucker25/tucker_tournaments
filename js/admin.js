@@ -547,25 +547,69 @@ document.getElementById('team-scores-table')?.addEventListener('input', e => {
 });
 
 // ──────────────────────────────
+// T-shirt Summary Loading
+// ──────────────────────────────
+async function loadShirtSummary() {
+  // Fetch all registrations
+  const { data, error } = await supabase
+    .from('registrations')
+    .select('shirt_size');
+  if (error) return console.error(error);
+
+  // Initialize counts
+  const sizes = ['SMALL','MEDIUM','LARGE','X-LARGE','XX-LARGE'];
+  const counts = sizes.reduce((acc, s) => (acc[s] = 0, acc), {});
+
+  // Tally
+  data.forEach(r => {
+    const sz = (r.shirt_size || '').toUpperCase();
+    if (counts[sz] != null) counts[sz]++;
+  });
+
+  // Inject into the table
+  sizes.forEach(s => {
+    document.getElementById(`count-${s}`).textContent = counts[s];
+  });
+}
+
+// ──────────────────────────────
 // Tab Switching & Page Init
 // ──────────────────────────────
 function setupTabNavigation() {
   document.querySelectorAll('.tab').forEach(tab => {
     tab.addEventListener('click', () => {
+      // clear out all “active” marks
       document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
       document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+      // show the one you clicked
       tab.classList.add('active');
       document.getElementById('tab-' + tab.dataset.tab)?.classList.add('active');
-      if (tab.dataset.tab === 'checkin') loadGolfersForCheckin();
-      if (tab.dataset.tab === 'scores') loadTeamScores();
+
+      // lazy-load data for the tab
+      switch(tab.dataset.tab) {
+        case 'registrations':
+          loadTeams();
+          break;
+        case 'sponsors':
+          loadSponsors();
+          break;
+        case 'checkin':
+          loadGolfersForCheckin();
+          break;
+        case 'scores':
+          loadTeamScores();
+          break;
+        case 'tshirts':
+          loadShirtSummary();
+          break;
+      }
     });
   });
-  const first = document.querySelector('.tab');
-  if (first) {
-    first.classList.add('active');
-    document.getElementById('tab-' + first.dataset.tab)?.classList.add('active');
-  }
+
+  document.querySelector('.tab')?.click();
 }
+
 
 function setFooterLastModified() {
   const el = document.getElementById('last-modified');

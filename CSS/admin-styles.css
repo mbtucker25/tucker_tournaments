@@ -500,6 +500,42 @@ h2 {
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
+   T-Shirts Table: Column Sizing & Alignment
+────────────────────────────────────────────────────────────────────────── */
+#tshirts-table {
+  table-layout: fixed;
+  width: 15%;
+  justify-self: center !important;
+}
+
+#tshirts-table th,
+#tshirts-table td {
+  font-size: var(--font-size-m);
+  font-weight: bold;
+  vertical-align: middle;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 1st column: Sizes */
+#tshirts-table th:nth-child(1),
+#tshirts-table td:nth-child(1) {
+  width: 60%;
+  text-align: left;
+  /* left-align by default */
+}
+
+/* 2nd column: Counts */
+#tshirts-table th:nth-child(2),
+#tshirts-table td:nth-child(2) {
+  width: 40%;
+  text-align: center;  /* numbers aligned to the right */
+}
+
+
+
+/* ──────────────────────────────────────────────────────────────────────────
    Buttons
 ────────────────────────────────────────────────────────────────────────── */
 .save-table-btn,
