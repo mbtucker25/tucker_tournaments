@@ -1016,11 +1016,11 @@ body {
 }
 
 .section__subtitle {
-  font-size: var(--font-size-m);
-  color: var(--color-text-secondary);
-  text-align: center;
-  margin-bottom: 1.5rem;
-  line-height: 1.4;
+  font-size: var(--font-size-m) !important;
+  color: var(--color-text-secondary) !important;
+  text-align: center !important;
+  margin-bottom: 1.5rem !important;
+  line-height: 1.4 !important;
 }
 
 
