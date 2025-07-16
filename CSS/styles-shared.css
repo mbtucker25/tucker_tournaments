@@ -2,10 +2,47 @@
 /*            VARIABLES & BASE TYPOGRAPHY       */
 /*──────────────────────────────────────────────*/
 :root {
+  /* SURFACES & BACKGROUNDS */
+  --color-surface-100: #dcdfe9;
+  /* page & card backgrounds */
+  --color-surface-200: #A4AFD0;
+  /* borders, dividers, disabled states */
+  --color-surface-300: #7688B9;
+  /* panels, hover/focus fills */
+
+  /* CORE BRAND */
   --color-primary: #384360;
-  --color-secondary: #A2AAAD;
-  --color-dark: #302E2C;
-  --color-light: #F7F5F2;
+  /* brand blue */
+  --color-on-primary: #F7F5F2;
+  /* text/icons on primary */
+
+  /* TEXT */
+  --color-text-primary: #1D2436;
+  /* main copy */
+  --color-text-secondary: #55658E;
+  /* captions, placeholders */
+
+  /* DARK & REVERSE */
+  --color-surface-700: #0C111C;
+  /* footers, ultra-dark panels */
+
+  /* ACCENTS & INTERACTIVE */
+  --color-accent: #55658E;
+  /* buttons, links, CTAs */
+  --color-accent-hover: #7688B9;
+  /* hover/active states */
+  --color-accent-alt: #A4AFD0;
+  /* alternate accent backgrounds */
+
+  /* HIGHLIGHTS */
+  --color-edited-cell: #FFF4D6;
+  /* gentle highlight */
+  --color-checkin-highlight: #96f79e;
+  /* checked-in highlight */
+
+  --color-disabled-btn: #b1b1b1;
+  --color-attention-reqd-highlight: #f74040;
+  --color-attention-reqd-text: #f3f0f0;
 
   --font-sans: 'Open Sans', sans-serif;
   --font-display: 'Oswald', sans-serif;

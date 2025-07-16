@@ -8,6 +8,13 @@
   --color-secondary: #A2AAAD;
   --color-dark: #302E2C;
   --color-light: #F7F5F2;
+    /* ACCENTS & INTERACTIVE */
+  --color-accent: #55658E;
+  /* buttons, links, CTAs */
+  --color-accent-hover: #7688B9;
+  /* hover/active states */
+  --color-accent-alt: #A4AFD0;
+  /* alternate accent backgrounds */
   --font-sans: 'Open Sans', sans-serif;
   --font-display: 'Bebas Neue', cursive;
 
@@ -831,10 +838,10 @@ body {
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   grid-auto-rows: 180px;
   gap: 1rem;
-  max-height: calc((185px*2) + 1rem);
+  max-height: calc((180px*2) + 1rem);
   overflow: hidden;
   transition: max-height 0.3s ease;
-  position: relative;
+
   z-index: 0;
 }
 
@@ -842,17 +849,16 @@ body {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  /* <-- ensures full image is shown, scaled down */
   transition: transform 0.3s ease, z-index 0.3s;
-  z-index: 0;
 }
 
 .gallery__grid img:hover {
-  scale: 1.1;
-  transform: translateY(-3px);
-  box-shadow:
-    0 6px 12px rgba(0, 0, 0, 0.15),
-    0 4px 10px rgba(0, 0, 0, 0.1);
+  display: block !important;
+  object-fit: contain !important;
+  object-position: center !important;
+  transition: transform 0.3s ease, z-index 0.3s;
+  transform: scale(1.3);
+  z-index: 1;
 }
 
 .gallery__grid.expanded {
@@ -1066,6 +1072,11 @@ body {
 
 .sponsors__grid .sponsor-tier-hole {
   background: linear-gradient(90deg, rgb(5, 119, 34) 10%, rgb(38, 141, 47) 65%, rgb(5, 119, 34) 100%);
+  color: #fff;
+}
+
+.sponsors__grid .sponsor-tier-in-kind {
+  background: linear-gradient(90deg, var(--color-primary) 10%, var(--color-accent-hover) 65%, var(--color-accent) 100%);
   color: #fff;
 }
 
@@ -1782,7 +1793,7 @@ label {
 }
 
 .cta-price {
-  font-size: var(--font-size-l);
+  font-size: var(--font-size-xl);
   font-weight: 800;
   color: var(--color-dark);
   margin-bottom: 1rem;

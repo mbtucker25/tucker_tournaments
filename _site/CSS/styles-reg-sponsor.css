@@ -50,7 +50,7 @@ body {
     font-family: var(--font-display);
     font-size: var(--font-size-l);
     padding: 0.5rem;
-    color: var(--color-light);
+    color: var(--color-on-primary);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -77,6 +77,10 @@ body {
 
 .sponsor-option__heading--hole {
     background: linear-gradient(90deg, #057722 10%, #268d2f 65%, #057722 100%);
+}
+
+.sponsor-option__heading--inkind {
+    background: linear-gradient(90deg, var(--color-primary) 10%, var(--color-accent-hover) 65%, var(--color-accent) 100%);
 }
 
 /* Tier price and check icon */

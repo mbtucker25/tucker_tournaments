@@ -35,10 +35,15 @@ function setupEditableTable({
     tbody.querySelectorAll('tr').forEach(row => {
       columns.forEach(col => {
         const td = row.children[col.cellIndex];
-        // read the original from data-*
-        const origVal = row.getAttribute(`data-${col.origKey}`);
-        let opts = null;
 
+        // If there’s already a <select> in this cell (from loadSponsors), grab its value,
+        // otherwise grab the plain-text
+        const displayed = td.querySelector('select')
+          ? td.querySelector('select').value
+          : td.textContent.trim();
+
+        // Figure out if this is a dropdown
+        let opts = null;
         if (col.field === 'shirt_size') {
           opts = ['SMALL', 'MEDIUM', 'LARGE', 'X-LARGE', 'XX-LARGE'];
         } else if (col.field === 'payment_status' || col.field === 'pay_status') {
@@ -46,29 +51,46 @@ function setupEditableTable({
         }
 
         if (opts) {
+          // build a new <select>, pre-selecting based on the *displayed* value
           const sel = document.createElement('select');
           opts.forEach(v => {
             const o = document.createElement('option');
             o.value = o.textContent = v;
-            if (td.textContent.trim() === v) o.selected = true;
+            if (displayed.toUpperCase() === v) {
+              o.selected = true;
+            }
             sel.appendChild(o);
           });
           sel.classList.add('edit-mode');
+
+          // replace whatever was in the cell
           td.innerHTML = '';
           td.appendChild(sel);
+
+          // highlight if changed from the original data-* attribute
+          const origVal = row.getAttribute(`data-${col.origKey}`) || '';
           sel.addEventListener('change', () => {
-            td.classList.toggle('edited-cell', sel.value !== origVal);
+            td.classList.toggle(
+              'edited-cell',
+              sel.value.toUpperCase() !== origVal.toUpperCase()
+            );
           });
+
         } else {
+          // plain-text cell → make editable
           td.contentEditable = 'true';
           td.classList.add('edit-mode');
           td.addEventListener('input', () => {
-            td.classList.toggle('edited-cell', td.innerText.trim() !== origVal);
+            const origVal = row.getAttribute(`data-${col.origKey}`) || '';
+            td.classList.toggle(
+              'edited-cell',
+              td.innerText.trim() !== origVal
+            );
           });
         }
       });
 
-      // pre-rendered “assign to team”
+      // “assign to team” selects get re-enabled
       const assignSel = row.querySelector('select[name="team_id"]');
       if (assignSel) {
         assignSel.disabled = false;
@@ -81,48 +103,57 @@ function setupEditableTable({
     saveBtn.disabled = true;
     const updates = [];
 
-    // 1) gather all changed rows
+    // gather all changed rows
     tbody.querySelectorAll('tr').forEach(row => {
       const id = row.dataset.id;
       const changes = {};
       columns.forEach(col => {
         const cell = row.children[col.cellIndex];
-        const newVal = cell.querySelector('select')
+        let newVal = cell.querySelector('select')
           ? cell.querySelector('select').value
           : cell.innerText.trim();
-        const orig = row.getAttribute(`data-${col.origKey}`);
-        if (newVal !== orig) changes[col.field] = newVal;
+
+        // for pay_status we send lowercase to Supabase
+        if (col.field === 'pay_status') {
+          newVal = newVal.toLowerCase();
+        }
+
+        const orig = row.getAttribute(`data-${col.origKey}`) || '';
+        if (newVal.toUpperCase() !== orig.toUpperCase()) {
+          changes[col.field] = newVal;
+        }
       });
       if (Object.keys(changes).length) {
         updates.push({ id, changes });
       }
     });
 
-    console.log('🛠  Collected updates:', updates);
+    console.log('🛠 Collected updates:', updates);
 
-    // 2) optional hook
-    if (extraBeforeSave) await extraBeforeSave();
+    if (extraBeforeSave) {
+      await extraBeforeSave();
+    }
 
-    // 3) send to Supabase with logging
+    // send each update
     for (const { id, changes } of updates) {
-      console.log(`➡️  Saving row ${id}:`, changes);
+      console.log(`➡️ Saving row ${id}:`, changes);
       const { data, error } = await supabase
         .from(supabaseTable)
         .update(changes)
         .eq('id', id);
-      console.log(`🔄  Response for ${id}:`, { data, error });
+      console.log(`🔄 Response for ${id}:`, { data, error });
       if (error) {
-        console.error(`❌  Supabase error for ${id}:`, error);
+        console.error(`❌ Supabase error for ${id}:`, error);
         alert(`Failed to save row ${id}: ${error.message}`);
       }
     }
 
-    // 4) exit edit‐mode
+    // exit edit-mode
     table.classList.remove('edit-mode');
     document.querySelectorAll('.edit-btn').forEach(b => b.disabled = false);
     saveBtn.disabled = true;
 
-    // 5) re-fetch + re-render fresh data
+    // re-fetch the fresh data
     await loadTeams();
     await loadSponsors();
   });
@@ -557,7 +588,7 @@ async function loadShirtSummary() {
   if (error) return console.error(error);
 
   // Initialize counts
-  const sizes = ['SMALL','MEDIUM','LARGE','X-LARGE','XX-LARGE'];
+  const sizes = ['SMALL', 'MEDIUM', 'LARGE', 'X-LARGE', 'XX-LARGE'];
   const counts = sizes.reduce((acc, s) => (acc[s] = 0, acc), {});
 
   // Tally
@@ -587,7 +618,7 @@ function setupTabNavigation() {
       document.getElementById('tab-' + tab.dataset.tab)?.classList.add('active');
 
       // lazy-load data for the tab
-      switch(tab.dataset.tab) {
+      switch (tab.dataset.tab) {
         case 'registrations':
           loadTeams();
           break;

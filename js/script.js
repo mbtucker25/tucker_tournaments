@@ -16,7 +16,7 @@ async function loadSponsors() {
     return;
   }
 
-  const tierOrder = ['Platinum', 'Gold', 'Silver', 'Bronze', 'Hole'];
+  const tierOrder = ['Platinum', 'Gold', 'Silver', 'Bronze', 'Hole', 'In-Kind'];
   data.sort((a, b) => {
     const aIdx = tierOrder.indexOf(a.tier);
     const bIdx = tierOrder.indexOf(b.tier);
