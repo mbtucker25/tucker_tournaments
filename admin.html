@@ -4,14 +4,19 @@
 <head>
   <meta charset="UTF-8">
   <title>Golf Outing Admin Dashboard</title>
+  <link rel="icon" href="images/favicon-admin.png" type="image/x-icon" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="CSS/admin-styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 
 <body>
   <div class="main-content">
     <h1>Site Admin Portal</h1>
+    <div class="back-home">
+      <button id="btn-home" class="btn btn--secondary"><i class="fa-solid fa-house"></i> Return to Home Page</button>
+    </div>
     <div class="admin-summary-cards">
       <div class="summary-card">
         <div class="summary-title">Teams Registered</div>
@@ -183,6 +188,12 @@
               <!-- rows injected by admin.js -->
             </tbody>
           </table>
+        </div>
+        <div class="table-actions">
+          <a href="leader-board.html" target="_blank" rel="noopener noreferrer" class="btn btn--secondary">
+            <i class="fa-solid fa-chart-line icon-spacing"></i>
+            View Leader Board
+          </a>
         </div>
       </section>
     </div>

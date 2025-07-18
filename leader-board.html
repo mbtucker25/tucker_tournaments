@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Leader Board – Tucker Tournaments</title>
+  <!-- reuse your admin stylesheet for table styling -->
+  <link rel="stylesheet" href="CSS/admin-styles.css" />
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-…" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="header__logo-title">
+      <a href="admin.html">
+        <img src="images/TuckerTournaments-header.png"
+             alt="Tucker Tournaments"
+             class="header__logo company" />
+      </a>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <h1 class="section__title">Leader Board</h1>
+
+    <div id="scores-table-container">
+      <table class="admin-table" id="leader-board-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th></th>
+            <!-- Holes 1–9 -->
+            <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th>
+            <th>6</th><th>7</th><th>8</th><th>9</th>
+            <!-- Front‑9 total -->
+            <th>OUT</th>
+            <!-- Holes 10–18 -->
+            <th>10</th><th>11</th><th>12</th><th>13</th><th>14</th>
+            <th>15</th><th>16</th><th>17</th><th>18</th>
+            <!-- Back‑9 total & overall total -->
+            <th>IN</th>
+            <th>TOT</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- JS will populate rows here -->
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <footer class="page-footer">
+    Page Last Modified: <span id="last-modified"></span>
+  </footer>
+
+  <script src="js/leader-board.js" defer></script>
+</body>
+</html>

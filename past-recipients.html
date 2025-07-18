@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Past Recipients – Tucker Tournaments</title>
+  <!-- page‐specific plaque & grid layout -->
+  <link rel="stylesheet" href="CSS/styles-past-recipients.css" />
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-…" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="header__logo-title">
+      <a href="index.html">
+        <img src="images/TuckerTournaments-header.png"
+             alt="Tucker Tournaments"
+             class="header__logo company" />
+      </a>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <h1 class="section__title">Past Recipients</h1>
+    <div class="honorees__grid">
+      <!-- past-recipients.js will inject .honoree__cell items here -->
+    </div>
+
+    <p class="honorees__back-link">
+      <a href="index.html" class="btn btn--secondary">
+        <i class="fa-solid fa-house icon-spacing"></i>
+        Back to Home
+      </a>
+    </p>
+  </main>
+
+  <footer class="page-footer">
+    Page Last Modified: <span id="last-modified"></span>
+  </footer>
+
+  <script src="js/past-recipients.js" defer></script>
+</body>
+</html>

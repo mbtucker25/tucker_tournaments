@@ -6,6 +6,12 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 // end of Supabase Config
 
+// Button: Return to Home Page
+document.getElementById('btn-home').addEventListener('click', () => {
+  window.location.href = 'index.html';
+});
+// end of Button: Return to Home Page
+
 // ──────────────────────────────
 // Helpers: make a table editable, diff & save
 // ──────────────────────────────
@@ -564,18 +570,41 @@ function renderTeamScoresTable(rows) {
     i.dispatchEvent(new Event('input'))
   );
 }
-document.getElementById('team-scores-table')?.addEventListener('input', e => {
+document.getElementById('team-scores-table')?.addEventListener('input', async e => {
   if (!e.target.classList.contains('score-input')) return;
-  const row = e.target.closest('tr');
+
+  const input = e.target;
+  const row   = input.closest('tr');
+  const teamId = row.dataset.teamId;
+  const hole   = input.dataset.hole;
+  const newVal = parseInt(input.value) || 0;
+
+  // 1) recalc UI totals (you already have this)
   let f = 0, b = 0;
   row.querySelectorAll('.score-input').forEach(inp => {
-    const h = +inp.dataset.hole, v = parseInt(inp.value) || 0;
-    h <= 9 ? f += v : b += v;
+    const h = +inp.dataset.hole;
+    const v = parseInt(inp.value) || 0;
+    if (h <= 9) f += v; else b += v;
   });
   row.querySelector('.front9-total').textContent = f;
-  row.querySelector('.back9-total').textContent = b;
-  row.querySelector('.round-total').textContent = f + b;
+  row.querySelector('.back9-total').textContent  = b;
+  row.querySelector('.round-total').textContent  = f + b;
+
+  // 2) persist to Supabase
+  try {
+    const { error } = await supabase
+      .from('team_scores')
+      .update({ [`hole${hole}`]: newVal })
+      .eq('team_id', teamId);
+
+    if (error) throw error;
+    console.log(`✅ Saved hole${hole}=${newVal} for team ${teamId}`);
+  } catch (err) {
+    console.error('❌ Failed to save score:', err);
+    alert(`Could not save score: ${err.message}`);
+  }
 });
+
 
 // ──────────────────────────────
 // T-shirt Summary Loading

@@ -100,6 +100,49 @@ body {
   z-index: 1;
 }
 
+/*──────────────────────────────────────────────────────────────────────────*/
+/*                             HEADER                                       */
+/*──────────────────────────────────────────────────────────────────────────*/
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-primary);
+  color: var(--color-light);
+  padding: 1rem 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.header__logo-title {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header__logo-small {
+  height: auto;
+  width: auto;
+  border-radius: 0.5rem;
+}
+
+.header__logo.company {
+  max-width: 480px;
+  /* Adjust as needed for your layout */
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: 0.5rem;
+  background: transparent;
+  box-shadow: none;
+}
+
+.site-title {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: bold;
+}
+
 /* ───────────────────────────────────────────────────────────────
    Tab Navigation for Admin Panel
 ─────────────────────────────────────────────────────────────── */
@@ -297,7 +340,7 @@ h2 {
 ────────────────────────────────────────────────────────────────────────── */
 
 /* 1) Static (read-only) selects look just like cells */
-.admin-table select{
+.admin-table select {
   appearance: menulist-button;
   width: 100%;
   box-sizing: border-box;
@@ -500,6 +543,127 @@ h2 {
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
+   Leader Board: Column Sizing & Alignment (same as Team Scores, + “Pos”)
+────────────────────────────────────────────────────────────────────────── */
+#leader-board-table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+#leader-board-table th {
+  font-size: var(--font-size-s);
+}
+
+#leader-board-table td {
+  font-size: var(--font-size-xs);
+}
+
+#leader-board-table td:nth-child(12),
+#leader-board-table td:nth-child(22) {
+  font-weight: bold;
+  font-size: var(--font-size-s);
+  background-color: var(--color-surface-300);
+  color: var(--color-on-primary)
+}
+
+/* Team name is now the 2nd column (after Pos) */
+#leader-board-table th:nth-child(1),
+#leader-board-table td:nth-child(1) {
+  font-size: var(--font-size-s);
+  width: 4ch;
+  /* exactly enough for two digits */
+  box-sizing: border-box;
+  text-align: center;
+  padding: 0.25rem;
+  /* comfortable click‐area */
+  border-radius: 0.25rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+/* Team name is now the 2nd column (after Pos) */
+#leader-board-table th:nth-child(2),
+#leader-board-table td:nth-child(2) {
+  width: 15%;
+  white-space: nowrap;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Holes 1–18 + FR + BK each only as wide as 2 digits.
+   They start at column 3 and run through column 22 (3..22) */
+#leader-board-table th:nth-child(n+3):nth-child(-n+22),
+#leader-board-table td:nth-child(n+3):nth-child(-n+22) {
+  width: 4ch;
+  text-align: center;
+}
+
+/* TOT (overall total) sits in column 23 now */
+#leader-board-table th:nth-child(1),
+#leader-board-table td:nth-child(1),
+#leader-board-table th:nth-child(23),
+#leader-board-table td:nth-child(23) {
+  width: 4ch;
+  white-space: nowrap;
+  text-align: center;
+  font-weight: bold;
+  font-size: var(--font-size-s);
+  background-color: var(--color-primary);
+  color: var(--color-on-primary)
+}
+
+/* Tee‑color row backgrounds */
+#leader-board-table .leaderboard-blue td {
+    font-size: var(--font-size-s);
+  background-color: rgba(70, 130, 180, 0.1);   /* steelblue tint */
+  color: #27496d;
+}
+#leader-board-table .leaderboard-white td {
+  font-size: var(--font-size-s);
+  background-color: rgba(255, 255, 255, 0.8);   /* almost white */
+  color: #1d2436; /* dark text for contrast */
+}
+#leader-board-table .leaderboard-red td {
+  font-size: var(--font-size-s);
+  background-color: rgba(212, 6, 6, 0.9);     /* firebrick tint */
+color: whitesmoke;
+}
+#leader-board-table .leaderboard-yellow td {
+  font-size: var(--font-size-s);
+  background-color: rgba(255, 215, 0, 0.1);     /* gold tint */
+  color: #8b6d00; 
+}
+
+#leader-board-table tr.leaderboard-par td {
+  font-size: var(--font-size-s);
+  background-color: rgb(1, 236, 1, .2) !important;  /* or pick any hex/rgba you like */
+  color: var(--color-text-primary) !important;              /* ensure good contrast */
+}
+
+/*───────────────────────────────────────────────────────────────────────────
+   Leader Board: clear formatting on Par row cols 1&2 + tee rows col 1
+───────────────────────────────────────────────────────────────────────────*/
+
+#leader-board-table thead th:nth-child(1),
+#leader-board-table thead th:nth-child(2),
+#leader-board-table tr.leaderboard-blue   td:nth-child(1),
+#leader-board-table tr.leaderboard-white  td:nth-child(1),
+#leader-board-table tr.leaderboard-red    td:nth-child(1),
+#leader-board-table tr.leaderboard-yellow td:nth-child(1)
+{
+  background: transparent !important;
+  color: inherit       !important;
+  font-weight: normal  !important;
+  border: none        !important;
+}
+
+#leader-board-table tr.leaderboard-par td:nth-child(1){
+  background-color: var(--color-primary) !important;
+  color: var(--color-on-primary) !important;
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
    T-Shirts Table: Column Sizing & Alignment
 ────────────────────────────────────────────────────────────────────────── */
 #tshirts-table {
@@ -530,7 +694,8 @@ h2 {
 #tshirts-table th:nth-child(2),
 #tshirts-table td:nth-child(2) {
   width: 40%;
-  text-align: center;  /* numbers aligned to the right */
+  text-align: center;
+  /* numbers aligned to the right */
 }
 
 
@@ -538,10 +703,12 @@ h2 {
 /* ──────────────────────────────────────────────────────────────────────────
    Buttons
 ────────────────────────────────────────────────────────────────────────── */
+.btn,
 .save-table-btn,
 .edit-table-btn,
 .edit-btn,
-.assign-btn {
+.assign-btn,
+.back-home .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -554,16 +721,26 @@ h2 {
   padding: .25rem;
   margin: 0.5rem;
   font-size: var(--font-size-m);
-
   cursor: pointer;
   box-shadow: 0 2px 4px var(--shadow-dark);
   transition: background 0.2s, transform 0.2s;
 }
 
+.btn-leaderboard,
+.back-home .btn {
+  width: auto;
+  padding: 0.5rem 1rem;
+  margin: none !important;
+  font-size: var(--font-size-m);
+  line-height: 1;
+  gap: 0.75rem;
+}
+
 .save-table-btn:hover:enabled,
 .edit-table-btn:hover:enabled,
 .edit-btn:hover:enabled,
-.assign-btn:hover:enabled {
+.assign-btn:hover:enabled,
+.back-home .btn:hover:enabled {
   background: var(--color-accent-hover);
   transform: translateY(-2px);
 }
